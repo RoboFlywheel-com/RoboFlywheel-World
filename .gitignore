@@ -1,0 +1,8 @@
+# Drafts and paper PDFs are not part of this repository
+*.pdf
+
+# Editor and OS cruft
+.DS_Store
+*.swp
+.idea/
+.vscode/
