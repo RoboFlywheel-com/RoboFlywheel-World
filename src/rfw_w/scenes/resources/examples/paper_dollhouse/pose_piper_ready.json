@@ -1,0 +1,15 @@
+{
+  "robot": "piper",
+  "why": "A working pose rather than a parked one: the tool point sits 0.257 m above its own base plane and 0.500 m out, i.e. just above a desk top and about a mug's distance away, with the gripper open. Chosen by sweeping joint2/3/5 through the URDF's FK (rfw_w.scenes.visualization.robot_asset) for a TCP in that band -- authored, not solved. No IK ran and none is claimed.",
+  "tcp_in_baked_frame_m": [0.492, -0.089, 0.257],
+  "joint_degrees": {
+    "joint1": 0,
+    "joint2": 85,
+    "joint3": -60,
+    "joint4": 0,
+    "joint5": 30,
+    "joint6": 0,
+    "joint7": 0.035,
+    "joint8": -0.035
+  }
+}

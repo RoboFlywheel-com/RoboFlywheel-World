@@ -1,0 +1,71 @@
+{
+  "comment": "SPEC-016 office dressing layout: layout_office.json plus re-seating. The delivered desk's geometry is replaced by the shared 1.20 x 0.70 m work table, so everything that stood on the old 1.35 x 0.74 m top is re-placed inside the new one (free cells read off rfw_w.scenes.visualization.show_free_surface). The cup's origin is its centre (bounds_min_m z = -0.046), so it rests at 0.796, not at the table top: seating it at 0.752 buried it 46 mm into the table and SUPPORT_TABLE_ORPHANED_ITEM now says so.",
+  "overrides": {
+    "ceiling_light": {
+      "remove": true
+    },
+    "wall_art": {
+      "remove": true
+    },
+    "chair": {
+      "translation": [
+        4.35,
+        3.05,
+        0.0
+      ],
+      "yaw_deg": 180.0
+    },
+    "rug": {
+      "remove": true
+    },
+    "plant": {
+      "translation": [
+        2.75,
+        3.0,
+        0.0
+      ]
+    },
+    "floor_lamp": {
+      "translation": [
+        1.15,
+        1.35,
+        0.0
+      ]
+    },
+    "book_01": {
+      "translation": [
+        4.62,
+        4.2,
+        0.752
+      ],
+      "on": "desk"
+    },
+    "pen_holder": {
+      "translation": [
+        4.92,
+        3.68,
+        0.752
+      ],
+      "on": "desk"
+    },
+    "cup": {
+      "translation": [
+        4.242,
+        3.72,
+        0.796
+      ],
+      "on": "desk"
+    },
+    "notebook": {
+      "translation": [
+        4.95,
+        4.2,
+        0.752
+      ],
+      "on": "desk"
+    },
+    "book_02": {
+      "remove": true
+    }
+  }
+}

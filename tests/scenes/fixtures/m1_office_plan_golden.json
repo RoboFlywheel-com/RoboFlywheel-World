@@ -1,0 +1,153 @@
+{
+  "appearance": {
+    "ceiling_fill_intensity": 500.0,
+    "dome_color": [
+      0.92,
+      0.94,
+      1.0
+    ],
+    "dome_intensity": 650.0,
+    "sun_color": [
+      1.0,
+      0.96,
+      0.88
+    ],
+    "sun_intensity": 650.0
+  },
+  "ceiling_clearance_m": 0.05,
+  "furniture": [
+    {
+      "asset_index": 0,
+      "entity_id": "chair",
+      "faces_entity": "desk",
+      "hard_required": false,
+      "kind": "beside",
+      "optional": true,
+      "orientation": "faces_toward",
+      "skip_candidates": 0,
+      "synset": "chair.n.01",
+      "target_extent_m": 0.55,
+      "zone_kind": "seating"
+    },
+    {
+      "asset_index": 0,
+      "entity_id": "storage",
+      "faces_entity": null,
+      "hard_required": false,
+      "kind": "against_wall",
+      "optional": true,
+      "orientation": "front_to_room",
+      "skip_candidates": 0,
+      "synset": "cabinet.n.01",
+      "target_extent_m": 0.95,
+      "zone_kind": "storage"
+    },
+    {
+      "asset_index": 0,
+      "entity_id": "side_table",
+      "faces_entity": null,
+      "hard_required": false,
+      "kind": "against_wall",
+      "optional": true,
+      "orientation": "front_to_room",
+      "skip_candidates": 0,
+      "synset": "end_table.n.01",
+      "target_extent_m": 0.55,
+      "zone_kind": "storage"
+    },
+    {
+      "asset_index": 0,
+      "entity_id": "floor_lamp",
+      "faces_entity": null,
+      "hard_required": false,
+      "kind": "corner",
+      "optional": true,
+      "orientation": "symmetric",
+      "skip_candidates": 0,
+      "synset": "floor_lamp.n.01",
+      "target_extent_m": 0.4,
+      "zone_kind": "display"
+    },
+    {
+      "asset_index": 0,
+      "entity_id": "plant",
+      "faces_entity": null,
+      "hard_required": false,
+      "kind": "corner",
+      "optional": true,
+      "orientation": "symmetric",
+      "skip_candidates": 0,
+      "synset": "potted_plant.n.01",
+      "target_extent_m": 0.45,
+      "zone_kind": "display"
+    },
+    {
+      "asset_index": 0,
+      "entity_id": "wall_art",
+      "faces_entity": null,
+      "hard_required": false,
+      "kind": "wall_hung",
+      "optional": true,
+      "orientation": "front_to_room",
+      "skip_candidates": 0,
+      "synset": "wall_art.n.01",
+      "target_extent_m": 0.7,
+      "zone_kind": "display"
+    },
+    {
+      "asset_index": 0,
+      "entity_id": "ceiling_light",
+      "faces_entity": null,
+      "hard_required": false,
+      "kind": "ceiling",
+      "optional": true,
+      "orientation": "symmetric",
+      "skip_candidates": 0,
+      "synset": "ceiling_lamp.n.01",
+      "target_extent_m": 0.45,
+      "zone_kind": "ambient"
+    },
+    {
+      "asset_index": 0,
+      "entity_id": "rug",
+      "faces_entity": null,
+      "hard_required": false,
+      "kind": "floor_covering",
+      "optional": true,
+      "orientation": "symmetric",
+      "skip_candidates": 0,
+      "synset": "rug.n.01",
+      "target_extent_m": 2.2,
+      "zone_kind": "ambient"
+    }
+  ],
+  "mount_height_m": 1.45,
+  "object_gap_m": 0.12,
+  "supports": [
+    {
+      "entity_id": "desk",
+      "kind": "against_wall",
+      "orientation": "front_to_room",
+      "shape": "slab_legs",
+      "target_extent_m": 1.35
+    }
+  ],
+  "surfaces": [
+    {
+      "asset_index": 0,
+      "entity_id": "notebook",
+      "support_entity": "desk",
+      "synset": "notebook.n.01",
+      "target_width_m": 0.2
+    },
+    {
+      "asset_index": 0,
+      "entity_id": "pen_holder",
+      "support_entity": "desk",
+      "synset": "pen_holder",
+      "target_width_m": 0.1
+    }
+  ],
+  "wall_face_offset_m": 0.0,
+  "wall_hang_gap_m": 0.02
+}

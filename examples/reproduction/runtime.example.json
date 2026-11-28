@@ -1,0 +1,21 @@
+{
+  "geometry_python": "/path/to/rfw-geometry/bin/python",
+  "backends": {
+    "mujoco": "/path/to/rfw-geometry/bin/python",
+    "pybullet": "/path/to/rfw-geometry/bin/python",
+    "sapien": "/path/to/rfw-geometry/bin/python",
+    "genesis": "/path/to/rfw-genesis/bin/python",
+    "isaac": "/path/to/isaac-env/bin/python"
+  },
+  "backend_env": {
+    "genesis": {"CUDA_VISIBLE_DEVICES": "0", "PYOPENGL_PLATFORM": "egl"}
+  },
+  "asset_request": "/path/to/real-input/request.json",
+  "asset_runtime": "/path/to/local/asset-runtime.json",
+  "scene_spec": "/path/to/real-input/two-entity-task.json",
+  "scene_entity": "block",
+  "asset_license": "unrecorded",
+  "release_root": "/path/to/release/v1.3",
+  "release_keys": ["0_0_0000"],
+  "steps": 240
+}

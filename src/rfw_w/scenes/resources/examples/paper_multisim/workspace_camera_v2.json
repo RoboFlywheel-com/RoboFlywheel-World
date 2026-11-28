@@ -1,0 +1,115 @@
+{
+  "name": "paper_multisim_workspace_v2",
+  "eye": [
+    1.7127700325925925,
+    3.5363,
+    2.110570546339428
+  ],
+  "target": [
+    0.8710267899999999,
+    2.34013855,
+    0.8088154300000001
+  ],
+  "width": 1600,
+  "height": 1000,
+  "focal_length_mm": 11.6,
+  "horizontal_aperture_mm": 20.955,
+  "comment": "Fitted by rfw_w.scenes.visualization.fit_workspace_camera, not hand-written. Target is the centre of the 3 manipulable task objects' combined box, not one member of it. The eye is as far back along the previous camera's bearing as the room allows (0.15 m clearance, stopped by ymax=3.536), and the focal length is the longest at which cup, notebook, pen holder and the desk top all stay inside a 4% margin. Square-pixel publication intrinsics.",
+  "fit_evidence": {
+    "rule": "eye as far back along the reference bearing as the room allows, then the longest focal length at which every required box is inside a 4% margin",
+    "required_boxes": {
+      "cup": {
+        "lo_m": [
+          0.9937520599999999,
+          2.0008774999999996,
+          0.7517390300000001
+        ],
+        "hi_m": [
+          1.09334337,
+          2.10220027,
+          0.8435461900000001
+        ]
+      },
+      "notebook": {
+        "lo_m": [
+          0.6487106,
+          2.4693924000000003,
+          0.752
+        ],
+        "hi_m": [
+          0.8078254,
+          2.6793996,
+          0.77567299
+        ]
+      },
+      "pen_holder": {
+        "lo_m": [
+          0.6487102100000001,
+          2.05691212,
+          0.75199849
+        ],
+        "hi_m": [
+          0.7283108,
+          2.1365222299999997,
+          0.86589183
+        ]
+      },
+      "desk_top": {
+        "lo_m": [
+          0.5887100000000001,
+          1.9969,
+          0.75
+        ],
+        "hi_m": [
+          1.9387100000000002,
+          2.7394,
+          0.75
+        ]
+      }
+    },
+    "task_cluster_box": {
+      "lo_m": [
+        0.6487102100000001,
+        2.0008774999999996,
+        0.7517390300000001
+      ],
+      "hi_m": [
+        1.09334337,
+        2.6793996,
+        0.86589183
+      ]
+    },
+    "target_m": [
+      0.8710267899999999,
+      2.34013855,
+      0.8088154300000001
+    ],
+    "bearing_unit": [
+      0.4298918701309899,
+      0.6108989733440385,
+      0.6648273643303799
+    ],
+    "distance_m": 1.9580348014864988,
+    "distance_limited_by": "ymax=3.536",
+    "wall_clearance_m": 0.15,
+    "chosen_focal_length_mm": 11.6,
+    "focal_ceiling_mm": 20.0,
+    "margin": 0.04,
+    "previous_camera": {
+      "path": "examples/paper_dollhouse/multisim_workspace_camera.json",
+      "target_m": [
+        1.04371,
+        2.0519,
+        0.78
+      ],
+      "distance_m": 1.3386933928274987,
+      "focal_length_mm": 20.0,
+      "aimed_at": "the cup's own position, i.e. the edge of the task cluster",
+      "boxes_outside_frame": [
+        "notebook",
+        "desk_top"
+      ]
+    },
+    "scene_version": "d3c4e3f1f9c6b076b082c8c997df0723f4bd1cf4d8b4d5ef4f408741cb3196f3"
+  }
+}

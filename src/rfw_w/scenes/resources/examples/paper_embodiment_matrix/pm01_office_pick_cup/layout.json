@@ -1,0 +1,43 @@
+{
+  "comment": "SPEC-016 dressing layout for pm01_office_pick_cup: the delivered desk becomes the shared work table, so everything that stood on its old top is re-seated on the new one (or removed when the smaller top has no free cell for it).",
+  "overrides": {
+    "cup": {
+      "translation": [
+        2.368,
+        2.7807,
+        0.8251
+      ],
+      "on": "desk"
+    },
+    "notebook": {
+      "remove": true
+    },
+    "pen_holder": {
+      "translation": [
+        2.3467,
+        2.5307,
+        0.75
+      ],
+      "on": "desk"
+    },
+    "book": {
+      "remove": true
+    },
+    "toy_car": {
+      "translation": [
+        2.5067,
+        2.5507,
+        0.75
+      ],
+      "on": "desk"
+    },
+    "can": {
+      "translation": [
+        2.6667,
+        2.5307,
+        0.75
+      ],
+      "on": "desk"
+    }
+  }
+}

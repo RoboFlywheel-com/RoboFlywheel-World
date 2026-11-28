@@ -1,0 +1,35 @@
+{
+  "comment": "SPEC-016 dressing layout for pm02_office_stow_box: the delivered desk becomes the shared work table, so everything that stood on its old top is re-seated on the new one (or removed when the smaller top has no free cell for it).",
+  "overrides": {
+    "jewelry_box": {
+      "translation": [
+        2.56,
+        1.5463,
+        0.8091
+      ],
+      "on": "desk"
+    },
+    "cup": {
+      "translation": [
+        2.5605,
+        1.2963,
+        0.75
+      ],
+      "on": "desk"
+    },
+    "notebook": {
+      "remove": true
+    },
+    "book": {
+      "remove": true
+    },
+    "pen_holder": {
+      "translation": [
+        2.7205,
+        1.2963,
+        0.75
+      ],
+      "on": "desk"
+    }
+  }
+}

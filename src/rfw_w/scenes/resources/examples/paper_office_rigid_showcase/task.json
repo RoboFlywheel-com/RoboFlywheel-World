@@ -1,0 +1,418 @@
+{
+  "schema_version": "pvscene.scene-spec/v3",
+  "scene_id": "paper_office_rigid_showcase",
+  "seed": 31,
+  "prompt": "生成一间有生活感的木色办公室：靠墙书桌与面向桌面的办公椅；桌面放可拿取的马克杯、笔记本、笔筒和两本书；房间另有储物柜、书架、边桌、落地灯、绿植、地毯及墙面装饰。所有家具朝向工作区或房间内侧，保留从门口到座位的通路。机器人任务是从桌面拿起马克杯。",
+  "room": {
+    "size_bounds_m": [
+      [
+        5.5,
+        6.0
+      ],
+      [
+        4.5,
+        5.0
+      ],
+      [
+        2.7,
+        3.0
+      ]
+    ],
+    "room_kind": "office",
+    "size_policy": "explicit"
+  },
+  "style": {
+    "theme": "warm_wood_office",
+    "palette": [
+      "oak",
+      "off_white",
+      "muted_green",
+      "brass"
+    ],
+    "density": "dense"
+  },
+  "requested_backends": [
+    "isaac"
+  ],
+  "requested_readiness": "functional_scene_ready",
+  "entities": [
+    {
+      "id": "desk",
+      "category": "desk",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": true,
+      "role": "support",
+      "notes": "against a wall, front to the room"
+    },
+    {
+      "id": "cup",
+      "category": "cup",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": true,
+      "role": "task_target",
+      "size_bounds_m": [
+        [
+          0.06,
+          0.12
+        ],
+        [
+          0.06,
+          0.12
+        ],
+        [
+          0.07,
+          0.14
+        ]
+      ],
+      "notes": "the grasp target; must sit on the desk, clear of the desk edge"
+    },
+    {
+      "id": "notebook",
+      "category": "notebook",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.12,
+          0.25
+        ],
+        [
+          0.15,
+          0.3
+        ],
+        [
+          0.01,
+          0.05
+        ]
+      ]
+    },
+    {
+      "id": "pen_holder",
+      "category": "pen_holder",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.06,
+          0.12
+        ],
+        [
+          0.06,
+          0.12
+        ],
+        [
+          0.08,
+          0.14
+        ]
+      ]
+    },
+    {
+      "id": "chair",
+      "category": "chair",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.4,
+          0.62
+        ],
+        [
+          0.4,
+          0.62
+        ],
+        [
+          0.75,
+          1.05
+        ]
+      ],
+      "notes": "faces the desk"
+    },
+    {
+      "id": "storage",
+      "category": "cabinet",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.7,
+          1.3
+        ],
+        [
+          0.35,
+          0.6
+        ],
+        [
+          0.7,
+          1.2
+        ]
+      ],
+      "notes": "back to a wall"
+    },
+    {
+      "id": "side_table",
+      "category": "side_table",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.4,
+          0.65
+        ],
+        [
+          0.4,
+          0.65
+        ],
+        [
+          0.45,
+          0.68
+        ]
+      ]
+    },
+    {
+      "id": "floor_lamp",
+      "category": "floor_lamp",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.25,
+          0.5
+        ],
+        [
+          0.25,
+          0.5
+        ],
+        [
+          1.4,
+          1.85
+        ]
+      ],
+      "notes": "in a corner"
+    },
+    {
+      "id": "plant",
+      "category": "plant",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.5,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "rug",
+      "category": "rug",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          1.4,
+          2.6
+        ],
+        [
+          1.0,
+          2.0
+        ],
+        [
+          0.005,
+          0.02
+        ]
+      ],
+      "notes": "thin covering on the floor, must not lift the desk or block the doorway"
+    },
+    {
+      "id": "wall_art",
+      "category": "wall_art",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          0.4,
+          0.9
+        ],
+        [
+          0.02,
+          0.06
+        ],
+        [
+          0.3,
+          0.7
+        ]
+      ],
+      "notes": "hung on a wall away from any opening, at eye level"
+    },
+    {
+      "id": "ceiling_light",
+      "category": "ceiling_light",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.12,
+          0.35
+        ]
+      ]
+    },
+    {
+      "id": "book_01",
+      "category": "book",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.12,
+          0.25
+        ],
+        [
+          0.12,
+          0.28
+        ],
+        [
+          0.01,
+          0.06
+        ]
+      ],
+      "notes": "closed book lying flat on the desk"
+    },
+    {
+      "id": "book_02",
+      "category": "book",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.12,
+          0.25
+        ],
+        [
+          0.12,
+          0.28
+        ],
+        [
+          0.01,
+          0.06
+        ]
+      ],
+      "notes": "second book lying flat on the desk"
+    },
+    {
+      "id": "bookcase",
+      "category": "bookcase",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.8,
+          1.4
+        ],
+        [
+          0.3,
+          0.6
+        ],
+        [
+          1.1,
+          2.0
+        ]
+      ],
+      "notes": "back to a wall, front toward the room"
+    }
+  ],
+  "initial_relations": [
+    {
+      "id": "r1",
+      "subject": "cup",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": true
+    },
+    {
+      "id": "r2",
+      "subject": "notebook",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    },
+    {
+      "id": "r3",
+      "subject": "pen_holder",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    },
+    {
+      "id": "r4",
+      "subject": "chair",
+      "predicate": "NEAR",
+      "object": "desk",
+      "hard": false
+    },
+    {
+      "id": "r5",
+      "subject": "book_01",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    },
+    {
+      "id": "r6",
+      "subject": "book_02",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    }
+  ],
+  "task": {
+    "action": "pick_place",
+    "robot_profile": "franka_panda",
+    "targets": [
+      "cup"
+    ],
+    "goal_predicates": []
+  }
+}

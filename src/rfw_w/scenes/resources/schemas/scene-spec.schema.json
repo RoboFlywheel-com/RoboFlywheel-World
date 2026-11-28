@@ -1,0 +1,490 @@
+{
+  "$id": "pvscene.v3/scene-spec",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The frozen request. Everything downstream is derived from this plus the seed.",
+  "properties": {
+    "entities": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "category": {
+            "type": "string"
+          },
+          "hard_required": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string"
+          },
+          "material_tokens": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "mobility": {
+            "enum": [
+              "fixed",
+              "dynamic"
+            ],
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "physics_type": {
+            "enum": [
+              "rigid",
+              "articulated",
+              "deformable"
+            ],
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer"
+          },
+          "requires_support_surface": {
+            "type": "boolean"
+          },
+          "role": {
+            "enum": [
+              "task_target",
+              "support",
+              "context",
+              "decoration"
+            ],
+            "type": "string"
+          },
+          "size_bounds_m": {
+            "anyOf": [
+              {
+                "items": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "maximum": {
+                        "type": "number"
+                      },
+                      "minimum": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "maximum",
+                      "minimum"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "maximum": {
+                        "type": "number"
+                      },
+                      "minimum": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "maximum",
+                      "minimum"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "maximum": {
+                        "type": "number"
+                      },
+                      "minimum": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "maximum",
+                      "minimum"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "support_shape": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "category",
+          "hard_required",
+          "id",
+          "mobility",
+          "physics_type",
+          "role"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "initial_relations": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "hard": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string"
+          },
+          "object": {
+            "type": "string"
+          },
+          "predicate": {
+            "enum": [
+              "ON",
+              "INSIDE",
+              "AGAINST_WALL",
+              "FACING",
+              "NEAR",
+              "OPENABLE",
+              "CLOSABLE",
+              "CAPPING",
+              "SLOTTING",
+              "HOOKING",
+              "PEGGING",
+              "SOFT_INSIDE",
+              "DRAPED_ON"
+            ],
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "tolerance_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "object",
+          "predicate",
+          "subject"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "requested_backends": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "requested_readiness": {
+      "type": "string"
+    },
+    "room": {
+      "additionalProperties": false,
+      "properties": {
+        "room_kind": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "scale_class": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "size_bounds_m": {
+          "items": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "maximum": {
+                  "type": "number"
+                },
+                "minimum": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "maximum",
+                "minimum"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "maximum": {
+                  "type": "number"
+                },
+                "minimum": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "maximum",
+                "minimum"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "maximum": {
+                  "type": "number"
+                },
+                "minimum": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "maximum",
+                "minimum"
+              ],
+              "type": "object"
+            }
+          ],
+          "type": "array"
+        },
+        "size_policy": {
+          "type": "string"
+        },
+        "size_policy_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "size_bounds_m"
+      ],
+      "type": "object"
+    },
+    "scene_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "pvscene.scene-spec/v3",
+      "type": "string"
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "style": {
+      "additionalProperties": false,
+      "properties": {
+        "coverage_target": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "density": {
+          "enum": [
+            "sparse",
+            "medium",
+            "dense"
+          ],
+          "type": "string"
+        },
+        "families": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "hierarchy": {
+          "additionalProperties": {
+            "enum": [
+              "primary",
+              "secondary",
+              "accent"
+            ],
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "materials": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "palette": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "theme": {
+          "type": "string"
+        },
+        "zone_density": {
+          "additionalProperties": {
+            "enum": [
+              "sparse",
+              "medium",
+              "dense"
+            ],
+            "type": "string"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "palette",
+        "theme"
+      ],
+      "type": "object"
+    },
+    "task": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "goal_predicates": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "object": {
+                "type": "string"
+              },
+              "predicate": {
+                "enum": [
+                  "ON",
+                  "INSIDE",
+                  "AGAINST_WALL",
+                  "FACING",
+                  "NEAR",
+                  "OPENABLE",
+                  "CLOSABLE",
+                  "CAPPING",
+                  "SLOTTING",
+                  "HOOKING",
+                  "PEGGING",
+                  "SOFT_INSIDE",
+                  "DRAPED_ON"
+                ],
+                "type": "string"
+              },
+              "subject": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "object",
+              "predicate",
+              "subject"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "joint_task": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "goal_q": {
+                  "type": "number"
+                },
+                "initial_q": {
+                  "type": "number"
+                },
+                "joint_id": {
+                  "type": "string"
+                },
+                "test_q_schedule": {
+                  "items": {
+                    "type": "number"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "goal_q",
+                "initial_q",
+                "joint_id"
+              ],
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "robot_profile": {
+          "type": "string"
+        },
+        "targets": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "action",
+        "robot_profile",
+        "targets"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "entities",
+    "initial_relations",
+    "prompt",
+    "requested_backends",
+    "requested_readiness",
+    "room",
+    "scene_id",
+    "seed",
+    "style",
+    "task"
+  ],
+  "title": "SceneSpec",
+  "type": "object"
+}

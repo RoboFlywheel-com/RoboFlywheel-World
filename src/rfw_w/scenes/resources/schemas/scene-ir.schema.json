@@ -1,0 +1,651 @@
+{
+  "$id": "pvscene.v3/scene-ir",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The whole scene state: the single fact source every backend is derived from.",
+  "properties": {
+    "cameras": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "camera_id": {
+            "type": "string"
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "require_target_visible": {
+            "type": "boolean"
+          },
+          "save_depth": {
+            "type": "boolean"
+          },
+          "target_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "camera_id",
+          "purpose"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "hashes": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "appearance_hash": {
+              "type": "string"
+            },
+            "assets_hash": {
+              "type": "string"
+            },
+            "geometry_hash": {
+              "type": "string"
+            },
+            "physics_hash": {
+              "type": "string"
+            },
+            "spec_hash": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "appearance_hash",
+            "assets_hash",
+            "geometry_hash",
+            "physics_hash",
+            "spec_hash",
+            "version"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "instances": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "asset_ref": {
+            "type": "string"
+          },
+          "bounds_max_m": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ],
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "bounds_min_m": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ],
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "entity_id": {
+            "type": "string"
+          },
+          "instance_id": {
+            "type": "string"
+          },
+          "joints": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "joint_id": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "number"
+                },
+                "velocity": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "joint_id",
+                "position"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "local_transform": {
+            "additionalProperties": false,
+            "properties": {
+              "child_frame": {
+                "type": "string"
+              },
+              "parent_frame": {
+                "type": "string"
+              },
+              "rotation": {
+                "additionalProperties": false,
+                "properties": {
+                  "w": {
+                    "type": "number"
+                  },
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "w",
+                  "x",
+                  "y",
+                  "z"
+                ],
+                "type": "object"
+              },
+              "translation": {
+                "additionalProperties": false,
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "child_frame",
+              "parent_frame",
+              "rotation",
+              "translation"
+            ],
+            "type": "object"
+          },
+          "mass_kg": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mobility": {
+            "enum": [
+              "fixed",
+              "dynamic"
+            ],
+            "type": "string"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "physics_type": {
+            "enum": [
+              "rigid",
+              "articulated",
+              "deformable"
+            ],
+            "type": "string"
+          },
+          "prepared_version": {
+            "type": "string"
+          },
+          "scale": {
+            "type": "number"
+          },
+          "world_transform": {
+            "additionalProperties": false,
+            "properties": {
+              "child_frame": {
+                "type": "string"
+              },
+              "parent_frame": {
+                "type": "string"
+              },
+              "rotation": {
+                "additionalProperties": false,
+                "properties": {
+                  "w": {
+                    "type": "number"
+                  },
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "w",
+                  "x",
+                  "y",
+                  "z"
+                ],
+                "type": "object"
+              },
+              "translation": {
+                "additionalProperties": false,
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "child_frame",
+              "parent_frame",
+              "rotation",
+              "translation"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "asset_ref",
+          "entity_id",
+          "instance_id",
+          "local_transform",
+          "mobility",
+          "physics_type",
+          "world_transform"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "randomization": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "appearance": {
+              "anyOf": [
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "ceiling_fill_intensity": {
+                      "type": "number"
+                    },
+                    "dome_intensity": {
+                      "type": "number"
+                    },
+                    "sun_intensity": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "ceiling_fill_intensity",
+                    "dome_intensity",
+                    "sun_intensity"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "enabled": {
+              "type": "boolean"
+            },
+            "entity_choices": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "asset_candidate_index": {
+                    "type": "integer"
+                  },
+                  "entity_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "asset_candidate_index",
+                  "entity_id"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "invariant_entity_ids": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "invariant_relation_ids": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "invariant_spec_hash": {
+              "type": "string"
+            },
+            "policy_version": {
+              "type": "string"
+            },
+            "rejected_attempts": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "room_seed": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "room_seed_attempts": {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            "variant_seed": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "invariant_entity_ids",
+            "invariant_relation_ids",
+            "invariant_spec_hash",
+            "variant_seed"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "relations": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "hard": {
+            "type": "boolean"
+          },
+          "object": {
+            "type": "string"
+          },
+          "predicate": {
+            "enum": [
+              "ON",
+              "INSIDE",
+              "AGAINST_WALL",
+              "FACING",
+              "NEAR",
+              "OPENABLE",
+              "CLOSABLE",
+              "CAPPING",
+              "SLOTTING",
+              "HOOKING",
+              "PEGGING",
+              "SOFT_INSIDE",
+              "DRAPED_ON"
+            ],
+            "type": "string"
+          },
+          "relation_id": {
+            "type": "string"
+          },
+          "satisfied": {
+            "type": "boolean"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "witness_refs": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "hard",
+          "object",
+          "predicate",
+          "relation_id",
+          "satisfied",
+          "subject"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "revision": {
+      "type": "integer"
+    },
+    "room": {
+      "additionalProperties": false,
+      "properties": {
+        "floor_z_m": {
+          "type": "number"
+        },
+        "height_m": {
+          "type": "number"
+        },
+        "holes_xy": {
+          "items": {
+            "items": {
+              "items": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            "type": "array"
+          },
+          "type": "array"
+        },
+        "openings": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "center_xy": {
+                "items": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "array"
+              },
+              "height_m": {
+                "type": "number"
+              },
+              "kind": {
+                "enum": [
+                  "door",
+                  "window"
+                ],
+                "type": "string"
+              },
+              "opening_id": {
+                "type": "string"
+              },
+              "sill_z_m": {
+                "type": "number"
+              },
+              "width_m": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "center_xy",
+              "height_m",
+              "kind",
+              "opening_id",
+              "width_m"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "polygon_xy": {
+          "items": {
+            "items": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "type": "array"
+          },
+          "type": "array"
+        },
+        "source": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "polygon_xy"
+      ],
+      "type": "object"
+    },
+    "scene_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "pvscene.scene-ir/v3",
+      "type": "string"
+    },
+    "spec_hash": {
+      "type": "string"
+    },
+    "supports": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "child_id": {
+            "type": "string"
+          },
+          "contact_polygon_area_m2": {
+            "type": "number"
+          },
+          "parent_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "child_id",
+          "parent_id"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "instances",
+    "room",
+    "scene_id"
+  ],
+  "title": "SceneIR",
+  "type": "object"
+}

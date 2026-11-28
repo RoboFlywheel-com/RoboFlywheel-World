@@ -1,0 +1,78 @@
+{
+  "$id": "pvscene.v3/tool-request",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "A unit of work handed to a tool service.",
+  "properties": {
+    "constraints_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "deadline_s": {
+      "type": "number"
+    },
+    "idempotency_key": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "input_refs": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "max_candidates": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "request_id": {
+      "type": "string"
+    },
+    "scene_version": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "pvscene.tool/v3",
+      "type": "string"
+    },
+    "scope_ids": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "tool_version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "deadline_s",
+    "request_id",
+    "scene_version",
+    "seed",
+    "tool_version"
+  ],
+  "title": "ToolRequest",
+  "type": "object"
+}

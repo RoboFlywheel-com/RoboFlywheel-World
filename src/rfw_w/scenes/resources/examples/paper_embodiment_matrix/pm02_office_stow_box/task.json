@@ -1,0 +1,336 @@
+{
+  "schema_version": "pvscene.scene-spec/v3",
+  "scene_id": "pm02_office_stow_box",
+  "seed": 42,
+  "prompt": "生成一间安静的书房式办公室：靠墙一张书桌，桌面上有一个可拿取的收纳盒，旁边有杯子、笔记本、一本书、一个首饰盒和笔筒；另配椅子、书架、边桌、绿植和落地灯。机器人需要把收纳盒从桌面收走。",
+  "room": {
+    "size_bounds_m": [
+      [
+        4.2,
+        5.2
+      ],
+      [
+        3.2,
+        4.2
+      ],
+      [
+        2.7,
+        3.0
+      ]
+    ],
+    "room_kind": "office",
+    "size_policy": "explicit"
+  },
+  "style": {
+    "theme": "quiet_study",
+    "palette": [
+      "walnut",
+      "cream",
+      "olive",
+      "brass"
+    ],
+    "density": "dense"
+  },
+  "requested_backends": [
+    "isaac"
+  ],
+  "requested_readiness": "functional_scene_ready",
+  "entities": [
+    {
+      "id": "desk",
+      "category": "desk",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": true,
+      "role": "support",
+      "size_bounds_m": [
+        [
+          1.1,
+          1.6
+        ],
+        [
+          0.6,
+          0.8
+        ],
+        [
+          0.72,
+          0.78
+        ]
+      ],
+      "notes": "the work surface the task happens on; front to the room"
+    },
+    {
+      "id": "jewelry_box",
+      "category": "jewelry_box",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": true,
+      "role": "task_target",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ],
+      "notes": "the grasp target; on the work surface, clear of its edge"
+    },
+    {
+      "id": "cup",
+      "category": "cup",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "notebook",
+      "category": "notebook",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "book",
+      "category": "book",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "pen_holder",
+      "category": "pen_holder",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "chair",
+      "category": "chair",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.4,
+          0.7
+        ],
+        [
+          0.4,
+          0.7
+        ],
+        [
+          0.7,
+          1.1
+        ]
+      ]
+    },
+    {
+      "id": "bookcase",
+      "category": "bookcase",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.6,
+          1.4
+        ],
+        [
+          0.3,
+          0.5
+        ],
+        [
+          1.2,
+          2.0
+        ]
+      ]
+    },
+    {
+      "id": "side_table",
+      "category": "side_table",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.4,
+          0.7
+        ],
+        [
+          0.4,
+          0.7
+        ],
+        [
+          0.4,
+          0.6
+        ]
+      ]
+    },
+    {
+      "id": "plant",
+      "category": "plant",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.5,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "floor_lamp",
+      "category": "floor_lamp",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.3,
+          0.5
+        ],
+        [
+          0.3,
+          0.5
+        ],
+        [
+          1.4,
+          1.8
+        ]
+      ]
+    }
+  ],
+  "initial_relations": [
+    {
+      "id": "r1",
+      "subject": "jewelry_box",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": true
+    },
+    {
+      "id": "r2",
+      "subject": "cup",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    },
+    {
+      "id": "r3",
+      "subject": "notebook",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    },
+    {
+      "id": "r4",
+      "subject": "book",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    },
+    {
+      "id": "r5",
+      "subject": "jewelry_box",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    },
+    {
+      "id": "r6",
+      "subject": "pen_holder",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    }
+  ],
+  "task": {
+    "action": "pick_place",
+    "robot_profile": "piper_x",
+    "targets": [
+      "jewelry_box"
+    ],
+    "goal_predicates": []
+  }
+}

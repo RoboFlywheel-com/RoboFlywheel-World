@@ -1,0 +1,69 @@
+{
+  "schema_version": "pvscene.required-categories/v1",
+  "note": "Category spellings differ per provider: simready uses vendor super_categories, HSSD uses WordNet synsets. Both are listed so that a vocabulary difference is not mistaken for an empty library. This file records what the M1 office task requires; it is not a claim that every entry is available.",
+  "requirements": [
+    {
+      "id": "desk",
+      "role": "support",
+      "hard_required": true,
+      "candidates": {
+        "simready": ["Desk"],
+        "hssd": ["desk.n.01"]
+      }
+    },
+    {
+      "id": "cup",
+      "role": "task_target",
+      "hard_required": true,
+      "candidates": {
+        "simready": ["Mug", "Coffee Cup", "Cup"],
+        "hssd": ["cup.n.01", "mug.n.04"]
+      }
+    },
+    {
+      "id": "chair",
+      "role": "context",
+      "hard_required": false,
+      "candidates": {
+        "simready": ["Chair"],
+        "hssd": ["chair.n.01", "armchair.n.01", "swivel_chair.n.01"]
+      }
+    },
+    {
+      "id": "storage",
+      "role": "context",
+      "hard_required": false,
+      "candidates": {
+        "simready": ["Cabinet", "Bookshelf"],
+        "hssd": ["cabinet.n.01", "chest_of_drawers.n.01"]
+      }
+    },
+    {
+      "id": "floor_lamp",
+      "role": "context",
+      "hard_required": false,
+      "candidates": {
+        "simready": ["Lamp", "Floor Lamp"],
+        "hssd": ["floor_lamp.n.01", "table_lamp.n.01"]
+      }
+    },
+    {
+      "id": "notebook",
+      "role": "context",
+      "hard_required": false,
+      "candidates": {
+        "simready": ["Notebook", "Book"],
+        "hssd": ["notebook.n.01", "book.n.01"]
+      }
+    },
+    {
+      "id": "pen_holder",
+      "role": "context",
+      "hard_required": false,
+      "candidates": {
+        "simready": ["Pen Holder", "Desk Organizer"],
+        "hssd": ["desk_organizer.n.01"]
+      }
+    }
+  ]
+}

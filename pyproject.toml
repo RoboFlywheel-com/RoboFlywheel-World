@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rfw-w"
+version = "0.1.0.dev0"
+description = "Rigid asset and task scene generation for simulation worlds"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE", "THIRD_PARTY.md"]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+asset-geometry = ["numpy", "scipy", "trimesh", "psutil", "pillow", "coacd"]
+asset-annotation = ["openai", "json-repair", "pillow", "numpy", "trimesh"]
+asset-image = ["torch", "transformers", "diffusers", "pillow", "torchvision"]
+asset-catalog = ["numpy", "fastapi", "uvicorn", "transformers", "torch"]
+scene-geometry = ["numpy", "trimesh", "fast-simplification", "pillow"]
+scene-retrieval = ["numpy", "transformers", "torch"]
+scene-vlm = ["requests"]
+usd = ["usd-core", "numpy", "scipy", "trimesh"]
+mujoco = ["mujoco", "numpy", "pillow", "imageio"]
+tools = ["numpy", "pillow", "matplotlib", "scipy", "trimesh", "usd-core", "imageio"]
+test = ["pytest", "numpy", "pillow", "matplotlib", "scipy", "trimesh", "shapely", "usd-core", "fast-simplification", "coacd", "psutil", "mujoco"]
+
+[project.scripts]
+rfw-w = "rfw_w.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"rfw_w.assets" = ["simulation/tasks/*.yaml"]
+"rfw_w.scenes" = ["resources/**/*", "visualization/**/*.html"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "scripts/tests"]
+addopts = "-q -p no:cacheprovider --import-mode=importlib"
+markers = [
+  "delivery: requires generated delivery manifests; enable with --delivery",
+  "assets: requires configured real asset roots; skips when unset unless required",
+  "isaac: requires a live Isaac Sim process; opt-in only",
+  "vlm: requires model credentials and network; opt-in only",
+  "slow: long-running checks",
+]

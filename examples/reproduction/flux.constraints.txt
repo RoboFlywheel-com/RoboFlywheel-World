@@ -1,0 +1,11 @@
+# Linux x86_64 / Python 3.11; Torch and torchvision from the official cu128 index.
+torch==2.7.0+cu128
+torchvision==0.22.0+cu128
+diffusers==0.40.0
+transformers==5.16.0
+huggingface-hub==1.33.0
+accelerate==1.15.0
+modelscope==1.40.2
+modelscope-hub==0.5.1
+numpy==2.4.6
+Pillow==13.0.0

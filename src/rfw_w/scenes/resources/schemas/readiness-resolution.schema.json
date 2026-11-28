@@ -1,0 +1,123 @@
+{
+  "$id": "pvscene.v3/readiness-resolution",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The outcome of resolving a ledger against a requested level.",
+  "properties": {
+    "achieved": {
+      "enum": [
+        "draft",
+        "simready_scene_ready",
+        "functional_scene_ready",
+        "robot_feasible_scene_ready",
+        "task_verified"
+      ],
+      "type": "string"
+    },
+    "blockers": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "gate_id": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "pass",
+              "fail",
+              "not_run",
+              "unsupported"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "gate_id",
+          "reason",
+          "status"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "failed_gates": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "meets_request": {
+      "type": "boolean"
+    },
+    "not_run_gates": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "outcome": {
+      "anyOf": [
+        {
+          "enum": [
+            "failed",
+            "unsupported",
+            "budget_exhausted"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "requested": {
+      "enum": [
+        "draft",
+        "simready_scene_ready",
+        "functional_scene_ready",
+        "robot_feasible_scene_ready",
+        "task_verified"
+      ],
+      "type": "string"
+    },
+    "requested_backends": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "scene_version": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "pvscene.readiness/v3",
+      "type": "string"
+    },
+    "stale_gates": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "unsupported_gates": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "achieved",
+    "blockers",
+    "meets_request",
+    "outcome",
+    "requested",
+    "requested_backends",
+    "scene_version"
+  ],
+  "title": "ReadinessResolution",
+  "type": "object"
+}

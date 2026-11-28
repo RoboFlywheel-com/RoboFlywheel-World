@@ -1,0 +1,21 @@
+{
+  "title": "Tasks and the scenes generated for them",
+  "subtitle": "Each panel: one SceneSpec, built end to end, with the task's own arm placed on the shared figure work table (1.20 x 0.70 x 0.75 m). The caption is derived from the spec's task and relations, not written by hand. Robot physics and IK are not_run.",
+  "rows": [
+    {
+      "scene_id": "office_pick_cup",
+      "spec": "examples/office_pick_cup/task.json",
+      "render_dir": "outputs/_paper/office_rgb_20260926_01"
+    },
+    {
+      "scene_id": "kitchen_fetch_jar",
+      "spec": "examples/kitchen_fetch_jar/task.json",
+      "render_dir": "outputs/_paper/kitchen_rgb_20260926_01"
+    },
+    {
+      "scene_id": "bedroom_pick_alarm_clock",
+      "spec": "examples/bedroom_pick_alarm_clock/task.json",
+      "render_dir": "outputs/_paper/bedroom_rgb_20260926_01"
+    }
+  ]
+}

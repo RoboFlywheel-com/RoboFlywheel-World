@@ -1,0 +1,335 @@
+{
+  "schema_version": "pvscene.task-world-graph/v1",
+  "graph_id": "synthetic_garden",
+  "revision": 0,
+  "parent_hash": null,
+  "units": "m",
+  "up_axis": "Z",
+  "nodes": [
+    {
+      "id": "house",
+      "kind": "house",
+      "label": "house",
+      "source": "user"
+    },
+    {
+      "id": "room",
+      "kind": "room",
+      "room_kind": "utility",
+      "label": "room",
+      "source": "user"
+    },
+    {
+      "id": "robot",
+      "kind": "robot",
+      "mobility": "mobile_manipulator",
+      "label": "robot",
+      "source": "user"
+    },
+    {
+      "id": "workspace",
+      "kind": "workspace",
+      "room_id": "room",
+      "label": "workspace",
+      "source": "user"
+    },
+    {
+      "id": "pot",
+      "kind": "asset_role",
+      "room_id": "room",
+      "category": "pot",
+      "required_capabilities": [
+        "rigid"
+      ],
+      "task_role": "target",
+      "label": "pot",
+      "source": "user"
+    },
+    {
+      "id": "saucer",
+      "kind": "asset_role",
+      "room_id": "room",
+      "category": "saucer",
+      "required_capabilities": [
+        "rigid"
+      ],
+      "task_role": "target",
+      "label": "saucer",
+      "source": "user"
+    },
+    {
+      "id": "can",
+      "kind": "asset_role",
+      "room_id": "room",
+      "category": "can",
+      "required_capabilities": [
+        "rigid"
+      ],
+      "task_role": "target",
+      "label": "can",
+      "source": "user"
+    },
+    {
+      "id": "source_area",
+      "kind": "asset_role",
+      "room_id": "room",
+      "category": "source_area",
+      "required_capabilities": [
+        "rigid"
+      ],
+      "task_role": "support",
+      "label": "source_area",
+      "source": "user"
+    },
+    {
+      "id": "workbench",
+      "kind": "asset_role",
+      "room_id": "room",
+      "category": "workbench",
+      "required_capabilities": [
+        "rigid"
+      ],
+      "task_role": "support",
+      "label": "workbench",
+      "source": "user"
+    }
+  ],
+  "edges": [],
+  "initial_state": [
+    {
+      "subject": "pot",
+      "predicate": "ON",
+      "object": "source_area"
+    },
+    {
+      "subject": "saucer",
+      "predicate": "ON",
+      "object": "source_area"
+    },
+    {
+      "subject": "can",
+      "predicate": "ON",
+      "object": "source_area"
+    },
+    {
+      "subject": "robot",
+      "predicate": "IN_ROOM",
+      "object": "room"
+    }
+  ],
+  "steps": [
+    {
+      "id": "pick_pot",
+      "verb": "PICK",
+      "actor": "robot",
+      "target_ids": [
+        "pot"
+      ],
+      "workspace_id": "workspace",
+      "route_portal_ids": [],
+      "preconditions": [
+        {
+          "subject": "pot",
+          "predicate": "ON",
+          "object": "source_area"
+        }
+      ],
+      "effects_remove": [
+        {
+          "subject": "pot",
+          "predicate": "ON",
+          "object": "source_area"
+        }
+      ],
+      "effects_add": [
+        {
+          "subject": "pot",
+          "predicate": "HELD_BY",
+          "object": "robot"
+        }
+      ],
+      "source": "user"
+    },
+    {
+      "id": "place_pot",
+      "verb": "PLACE",
+      "actor": "robot",
+      "target_ids": [
+        "pot"
+      ],
+      "workspace_id": "workspace",
+      "route_portal_ids": [],
+      "preconditions": [
+        {
+          "subject": "pot",
+          "predicate": "HELD_BY",
+          "object": "robot"
+        }
+      ],
+      "effects_remove": [
+        {
+          "subject": "pot",
+          "predicate": "HELD_BY",
+          "object": "robot"
+        }
+      ],
+      "effects_add": [
+        {
+          "subject": "pot",
+          "predicate": "ON",
+          "object": "saucer"
+        }
+      ],
+      "source": "user"
+    },
+    {
+      "id": "pick_saucer",
+      "verb": "PICK",
+      "actor": "robot",
+      "target_ids": [
+        "saucer"
+      ],
+      "workspace_id": "workspace",
+      "route_portal_ids": [],
+      "preconditions": [
+        {
+          "subject": "saucer",
+          "predicate": "ON",
+          "object": "source_area"
+        }
+      ],
+      "effects_remove": [
+        {
+          "subject": "saucer",
+          "predicate": "ON",
+          "object": "source_area"
+        }
+      ],
+      "effects_add": [
+        {
+          "subject": "saucer",
+          "predicate": "HELD_BY",
+          "object": "robot"
+        }
+      ],
+      "source": "user"
+    },
+    {
+      "id": "place_saucer",
+      "verb": "PLACE",
+      "actor": "robot",
+      "target_ids": [
+        "saucer"
+      ],
+      "workspace_id": "workspace",
+      "route_portal_ids": [],
+      "preconditions": [
+        {
+          "subject": "saucer",
+          "predicate": "HELD_BY",
+          "object": "robot"
+        }
+      ],
+      "effects_remove": [
+        {
+          "subject": "saucer",
+          "predicate": "HELD_BY",
+          "object": "robot"
+        }
+      ],
+      "effects_add": [
+        {
+          "subject": "saucer",
+          "predicate": "ON",
+          "object": "workbench"
+        }
+      ],
+      "source": "user"
+    },
+    {
+      "id": "pick_can",
+      "verb": "PICK",
+      "actor": "robot",
+      "target_ids": [
+        "can"
+      ],
+      "workspace_id": "workspace",
+      "route_portal_ids": [],
+      "preconditions": [
+        {
+          "subject": "can",
+          "predicate": "ON",
+          "object": "source_area"
+        }
+      ],
+      "effects_remove": [
+        {
+          "subject": "can",
+          "predicate": "ON",
+          "object": "source_area"
+        }
+      ],
+      "effects_add": [
+        {
+          "subject": "can",
+          "predicate": "HELD_BY",
+          "object": "robot"
+        }
+      ],
+      "source": "user"
+    },
+    {
+      "id": "place_can",
+      "verb": "PLACE",
+      "actor": "robot",
+      "target_ids": [
+        "can"
+      ],
+      "workspace_id": "workspace",
+      "route_portal_ids": [],
+      "preconditions": [
+        {
+          "subject": "can",
+          "predicate": "HELD_BY",
+          "object": "robot"
+        }
+      ],
+      "effects_remove": [
+        {
+          "subject": "can",
+          "predicate": "HELD_BY",
+          "object": "robot"
+        }
+      ],
+      "effects_add": [
+        {
+          "subject": "can",
+          "predicate": "ON",
+          "object": "workbench"
+        }
+      ],
+      "source": "user"
+    }
+  ],
+  "goals": [
+    {
+      "subject": "pot",
+      "predicate": "ON",
+      "object": "saucer"
+    },
+    {
+      "subject": "saucer",
+      "predicate": "ON",
+      "object": "workbench"
+    },
+    {
+      "subject": "can",
+      "predicate": "ON",
+      "object": "workbench"
+    }
+  ],
+  "requirements": [],
+  "built": {},
+  "evidence_refs": [],
+  "content_hash": "245a02d7307f35a179908e4678751efeeb9e49f0e44b9607fa791c1248ed71c7"
+}

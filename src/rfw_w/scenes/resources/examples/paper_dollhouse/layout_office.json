@@ -1,0 +1,11 @@
+{
+  "comment": "office dollhouse r08（基座 spec013_rich_office_20260924_02，相机 SE 角、近墙裁 1.25 m）。ceiling_light 掀顶后悬空移除；wall_art 跨三房间重复且其实例旋转非 z 对齐（挂墙姿态），不宜搬动，移除；rug 资产 e8820711 在 worker 渲染路径中几何拉丝（原 delivery 亦有同缺陷），移除；chair 挪到桌前；plant 移到房间中北部空地；floor_lamp 原贴南墙会被近墙矮垛挡住，沿西墙北移。",
+  "overrides": {
+    "ceiling_light": {"remove": true},
+    "wall_art": {"remove": true},
+    "chair": {"translation": [4.35, 3.05, 0.0], "yaw_deg": 180.0},
+    "rug": {"remove": true},
+    "plant": {"translation": [2.75, 3.00, 0.0]},
+    "floor_lamp": {"translation": [1.15, 1.35, 0.0]}
+  }
+}

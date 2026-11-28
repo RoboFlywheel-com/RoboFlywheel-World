@@ -1,0 +1,152 @@
+{
+  "comment": "SPEC-016 dressing, laid out by rfw_w.scenes.visualization.plan_room_dressing: the shared 1.2 x 0.7 x 0.75 m work table replaces the delivered island, the task target sits at one end, the Piper stands at the other with its tool point on the bearing to the target (0.699 m away against a measured 0.8027 m reach), and the props fill the free cells of the top. Figure-only: physics and IK are not_run.",
+  "shell_materials": {
+    "wall": {
+      "colour": [
+        0.83,
+        0.84,
+        0.8
+      ],
+      "roughness": 0.88,
+      "metallic": 0.0
+    },
+    "floor": {
+      "colour": [
+        0.33,
+        0.31,
+        0.29
+      ],
+      "roughness": 0.52,
+      "metallic": 0.0
+    }
+  },
+  "support_table": {
+    "instance": "island",
+    "size_m": [
+      1.2,
+      0.7,
+      0.75
+    ],
+    "why": "one shared work table in every scene, so the panels compare"
+  },
+  "additions": [
+    {
+      "id": "piper_arm",
+      "kind": "robot",
+      "robot": "piper",
+      "pose": "examples/paper_dollhouse/pose_piper_ready.json",
+      "on": "island",
+      "xy": [
+        4.531,
+        2.665
+      ],
+      "yaw_deg": 190.2,
+      "task_target": "bottle",
+      "why": "at the far end of the shared table, turned toward the task target (0.699 m away)"
+    },
+    {
+      "id": "prop_4_3_0012",
+      "kind": "prop",
+      "simready_leaf": "4_3_0012",
+      "on": "island",
+      "xy": [
+        4.2885,
+        2.415
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "prop_6_12_0002",
+      "kind": "prop",
+      "simready_leaf": "6_12_0002",
+      "on": "island",
+      "xy": [
+        4.4485,
+        2.415
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "prop_6_0_0028",
+      "kind": "prop",
+      "simready_leaf": "6_0_0028",
+      "on": "island",
+      "xy": [
+        4.5685,
+        2.395
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "prop_5_0_0003",
+      "kind": "prop",
+      "simready_leaf": "5_0_0003",
+      "on": "island",
+      "xy": [
+        4.7085,
+        2.435
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "prop_25_25_0020",
+      "kind": "prop",
+      "simready_leaf": "25_25_0020",
+      "on": "island",
+      "xy": [
+        3.8285,
+        2.875
+      ],
+      "yaw_deg": 0
+    }
+  ],
+  "layout_note": "the companion layout file re-seats the delivery's own surface objects",
+  "unplaced": [
+    {
+      "instance_id": "bowl",
+      "why": "no free cell on the table"
+    }
+  ],
+  "props_placed": [
+    {
+      "id": "prop_4_3_0012",
+      "super_category": "Mug",
+      "xy": [
+        4.2885,
+        2.415
+      ]
+    },
+    {
+      "id": "prop_6_12_0002",
+      "super_category": "Spice Jar",
+      "xy": [
+        4.4485,
+        2.415
+      ]
+    },
+    {
+      "id": "prop_6_0_0028",
+      "super_category": "Beverage Can",
+      "xy": [
+        4.5685,
+        2.395
+      ]
+    },
+    {
+      "id": "prop_5_0_0003",
+      "super_category": "Sports Bottle",
+      "xy": [
+        4.7085,
+        2.435
+      ]
+    },
+    {
+      "id": "prop_25_25_0020",
+      "super_category": "Plant Pot",
+      "xy": [
+        3.8285,
+        2.875
+      ]
+    }
+  ]
+}

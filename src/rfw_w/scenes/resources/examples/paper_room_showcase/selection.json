@@ -1,0 +1,165 @@
+{
+  "schema_version": "pvscene.paper-room-showcase/v1",
+  "title": "A frozen task core, two independent room seeds, three rooms",
+  "camera": "paper_room_level",
+  "depth": {
+    "vmin_m": 0.0,
+    "vmax_m": 6.0,
+    "cmap": "turbo_r"
+  },
+  "selection_rule": [
+    "One row per task. Within a row the two samples must carry the same frozen closure: same target and support entities, the same hard relation satisfied, and the same randomization.invariant_spec_hash.",
+    "The two samples in a row must have different room_seed values, and the row must fail show_variation otherwise.",
+    "Both RGBs in a row use the same cutaway figure camera: the ceiling, the outer facade and the near long wall are removed and the camera looks in level from outside (eye height 1.45 m). What is cut is recorded per panel in provenance.json with face counts; no placed instance is removed or hidden.",
+    "Every panel must come from a delivery whose own Isaac worker passed and whose render for the figure camera was captured in the authored state (simulate_seconds = 0). The figure camera's vantage must lie inside the room plan.",
+    "A delivery whose readiness is draft or whose gates are red is usable as a sample and its ledger travels with it; it is never relabelled as passing. No failed attempt is deleted, and none is swapped in or out to make a row look tidier."
+  ],
+  "rows": [
+    {
+      "row_id": "office",
+      "label": "office \u00b7 pick the cup",
+      "objective": "cup ON desk",
+      "initial_relation": "r1 hard",
+      "row_note": "Uses the paper_office_rigid_showcase candidate task, not office_pick_cup: it is the same frozen core across both seeds but a different task from the other office line, so the two cannot be read as one task's random diversity.",
+      "seed_a": {
+        "delivery": "outputs/paper_office_rigid_showcase/spec013_rich_office_20260924_02",
+        "render_dir": "outputs/_paper/spec013_room_office_a_20260924_03"
+      },
+      "seed_b": {
+        "delivery": "outputs/paper_office_rigid_showcase/spec013_rich_office_20260924_03",
+        "render_dir": "outputs/_paper/spec013_room_office_b_20260924_03"
+      },
+      "candidates": [
+        {
+          "sample_id": "rich_office_seed31",
+          "delivery": "outputs/paper_office_rigid_showcase/spec013_rich_office_20260924_01",
+          "room_seed": 31,
+          "outcome": "excluded",
+          "reason": "SHELL_OPENING_MISSING(window_04): the built shell came back one window short of the plan, so there is no usable shell or render for this room"
+        },
+        {
+          "sample_id": "rich_office_seed32",
+          "delivery": "outputs/paper_office_rigid_showcase/spec013_rich_office_20260924_02",
+          "room_seed": 32,
+          "outcome": "selected"
+        },
+        {
+          "sample_id": "rich_office_seed33",
+          "delivery": "outputs/paper_office_rigid_showcase/spec013_rich_office_20260924_03",
+          "room_seed": 33,
+          "outcome": "selected"
+        }
+      ],
+      "excluded": [
+        "rich_office_seed31"
+      ]
+    },
+    {
+      "row_id": "kitchen",
+      "label": "kitchen \u00b7 fetch the jar",
+      "objective": "jar ON island",
+      "initial_relation": "r1 hard",
+      "seed_a": {
+        "delivery": "outputs/kitchen_fetch_jar/s5_kitchen_full_20260924_02",
+        "render_dir": "outputs/_paper/spec013_room_kitchen_a_20260924_03"
+      },
+      "seed_b": {
+        "delivery": "outputs/kitchen_fetch_jar/spec013_kitchen21_noloop_20260924_01",
+        "render_dir": "outputs/_paper/spec013_room_kitchen_b_20260924_03"
+      },
+      "candidates": [
+        {
+          "sample_id": "kitchen_seed23",
+          "delivery": "outputs/kitchen_fetch_jar/s5_kitchen_full_20260924_02",
+          "room_seed": 23,
+          "outcome": "selected"
+        },
+        {
+          "sample_id": "kitchen_seed21_loop",
+          "delivery": "outputs/kitchen_fetch_jar/spec013_kitchen21_20260924_02",
+          "room_seed": 21,
+          "outcome": "excluded",
+          "reason": "the escalation ladder rolled the delivery back after geometry.in_bounds, and the rollback discarded the Isaac artifacts; recorded as a failure, not repaired in place"
+        },
+        {
+          "sample_id": "kitchen_seed24_loop",
+          "delivery": "outputs/kitchen_fetch_jar/spec013_kitchen24_20260924_01",
+          "room_seed": 24,
+          "outcome": "excluded",
+          "reason": "same rollback as seed 21"
+        },
+        {
+          "sample_id": "kitchen_seed30_loop",
+          "delivery": "outputs/kitchen_fetch_jar/spec013_kitchen30_20260924_01",
+          "room_seed": 30,
+          "outcome": "excluded",
+          "reason": "same rollback as seed 21"
+        },
+        {
+          "sample_id": "kitchen_seed21_noloop",
+          "delivery": "outputs/kitchen_fetch_jar/spec013_kitchen21_noloop_20260924_01",
+          "room_seed": 21,
+          "outcome": "selected",
+          "note": "produced with --no-loop, the pipeline's straight-through form. Chosen because the default path's rollback discards the render; the flag is recorded, and this delivery's own gates are reported as they are."
+        }
+      ],
+      "excluded": [
+        "kitchen_seed21_loop",
+        "kitchen_seed24_loop",
+        "kitchen_seed30_loop"
+      ]
+    },
+    {
+      "row_id": "bedroom",
+      "label": "bedroom \u00b7 pick the alarm clock",
+      "objective": "alarm_clock ON nightstand",
+      "initial_relation": "r1 hard",
+      "seed_a": {
+        "delivery": "outputs/bedroom_pick_alarm_clock/s5_bedroom_full_20260924_02",
+        "render_dir": "outputs/_paper/spec013_room_bedroom_a_20260924_03"
+      },
+      "seed_b": {
+        "delivery": "outputs/bedroom_pick_alarm_clock/spec013_bedroom24_20260924_01",
+        "render_dir": "outputs/_paper/spec013_room_bedroom_b_20260924_03"
+      },
+      "candidates": [
+        {
+          "sample_id": "bedroom_seed37",
+          "delivery": "outputs/bedroom_pick_alarm_clock/s5_bedroom_full_20260924_02",
+          "room_seed": 37,
+          "outcome": "selected"
+        },
+        {
+          "sample_id": "bedroom_seed21_loop",
+          "delivery": "outputs/bedroom_pick_alarm_clock/spec013_bedroom21_20260924_02",
+          "room_seed": 21,
+          "outcome": "excluded",
+          "reason": "escalation rollback discarded the Isaac artifacts"
+        },
+        {
+          "sample_id": "bedroom_seed24",
+          "delivery": "outputs/bedroom_pick_alarm_clock/spec013_bedroom24_20260924_01",
+          "room_seed": 24,
+          "outcome": "selected"
+        },
+        {
+          "sample_id": "bedroom_seed30",
+          "delivery": "outputs/bedroom_pick_alarm_clock/spec013_bedroom30_20260924_01",
+          "room_seed": 30,
+          "outcome": "excluded",
+          "reason": "not used: seed 24 reached the render first and the row needs only two samples; kept as a spare, not deleted"
+        }
+      ],
+      "excluded": [
+        "bedroom_seed21_loop",
+        "bedroom_seed30"
+      ]
+    }
+  ],
+  "known_gaps": [
+    "Every delivery in this figure fails geometry.in_bounds in its own ledger, at 0.0499-0.1414 m, and all are readiness=draft with meets_request=false. The figure states that; it does not treat the rooms as passing.",
+    "The kitchen row's second sample came from --no-loop rather than the default path, because the default path's rollback discarded the render for every new room seed tried. This is recorded per sample rather than smoothed over.",
+    "The task core's world pose moves between the two seeds of every row, because the support is placed against the room the seed built. What is frozen is the closure: target and support identity, the hard ON relation, and invariant_spec_hash. measurements.json reports the world-pose movement as a measured quantity, not as a failure.",
+    "Each RGB is a cutaway: the ceiling and the near long wall are not drawn. The task door of the office and bedroom rows is in the removed wall, so its marker sits where the doorway was rather than on a drawn leaf; the kitchen row's door is in a kept wall and is drawn."
+  ]
+}

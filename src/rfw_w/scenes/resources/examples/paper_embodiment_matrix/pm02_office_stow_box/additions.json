@@ -1,0 +1,156 @@
+{
+  "comment": "SPEC-016 dressing, laid out by rfw_w.scenes.visualization.plan_room_dressing: the shared 1.2 x 0.7 x 0.75 m work table replaces the delivered desk, the task target sits at one end, the Piper stands at the other with its tool point on the bearing to the target (0.703 m away against a measured 0.8027 m reach), and the props fill the free cells of the top. Figure-only: physics and IK are not_run.",
+  "shell_materials": {
+    "wall": {
+      "colour": [
+        0.86,
+        0.8,
+        0.7
+      ],
+      "roughness": 0.88,
+      "metallic": 0.0
+    },
+    "floor": {
+      "colour": [
+        0.4,
+        0.27,
+        0.17
+      ],
+      "roughness": 0.52,
+      "metallic": 0.0
+    }
+  },
+  "support_table": {
+    "instance": "desk",
+    "size_m": [
+      1.2,
+      0.7,
+      0.75
+    ],
+    "why": "one shared work table in every scene, so the panels compare"
+  },
+  "additions": [
+    {
+      "id": "piper_arm",
+      "kind": "robot",
+      "robot": "piper",
+      "pose": "examples/paper_dollhouse/pose_piper_ready.json",
+      "on": "desk",
+      "xy": [
+        3.263,
+        1.5463
+      ],
+      "yaw_deg": 190.2,
+      "task_target": "jewelry_box",
+      "why": "at the far end of the shared table, turned toward the task target (0.703 m away)"
+    },
+    {
+      "id": "prop_4_3_0012",
+      "kind": "prop",
+      "simready_leaf": "4_3_0012",
+      "on": "desk",
+      "xy": [
+        2.8805,
+        1.2963
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "prop_29_9_0019",
+      "kind": "prop",
+      "simready_leaf": "29_9_0019",
+      "on": "desk",
+      "xy": [
+        3.0805,
+        1.2763
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "prop_6_0_0028",
+      "kind": "prop",
+      "simready_leaf": "6_0_0028",
+      "on": "desk",
+      "xy": [
+        3.2405,
+        1.2763
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "prop_5_0_0003",
+      "kind": "prop",
+      "simready_leaf": "5_0_0003",
+      "on": "desk",
+      "xy": [
+        3.3805,
+        1.3163
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "prop_25_25_0020",
+      "kind": "prop",
+      "simready_leaf": "25_25_0020",
+      "on": "desk",
+      "xy": [
+        2.5605,
+        1.7563
+      ],
+      "yaw_deg": 0
+    }
+  ],
+  "layout_note": "the companion layout file re-seats the delivery's own surface objects",
+  "unplaced": [
+    {
+      "instance_id": "notebook",
+      "why": "no free cell on the table"
+    },
+    {
+      "instance_id": "book",
+      "why": "no free cell on the table"
+    }
+  ],
+  "props_placed": [
+    {
+      "id": "prop_4_3_0012",
+      "super_category": "Mug",
+      "xy": [
+        2.8805,
+        1.2963
+      ]
+    },
+    {
+      "id": "prop_29_9_0019",
+      "super_category": "Toy Car",
+      "xy": [
+        3.0805,
+        1.2763
+      ]
+    },
+    {
+      "id": "prop_6_0_0028",
+      "super_category": "Beverage Can",
+      "xy": [
+        3.2405,
+        1.2763
+      ]
+    },
+    {
+      "id": "prop_5_0_0003",
+      "super_category": "Sports Bottle",
+      "xy": [
+        3.3805,
+        1.3163
+      ]
+    },
+    {
+      "id": "prop_25_25_0020",
+      "super_category": "Plant Pot",
+      "xy": [
+        2.5605,
+        1.7563
+      ]
+    }
+  ]
+}

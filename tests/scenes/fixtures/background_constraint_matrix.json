@@ -1,0 +1,343 @@
+{
+  "schema_version": "pvscene.background-constraint-matrix/v1",
+  "spec": "SPEC-011-background-constraint-injection",
+  "task": "TASK 1 (tool and negatives), TASK 2 (entry and patch), TASK 3 (calibration) and TASK 4 (gap alignment, rejection pool, budget)",
+  "how_to_run": "env -u PYTHONPATH -u PYTHONHOME PYTHONPATH=src /opt/conda/envs/scenesmith/bin/python rfw_w.scenes.validation.check_background_constraints --matrix tests/fixtures/background_constraint_matrix.json --output-dir outputs/_acceptance/spec011_NEW",
+  "case_notes": [
+    "The control case is SPEC-009's probe build: bedroom full_02's own floor_plan, seed 37 and height/thickness/door/window/skirting overrides with only compose_indoors.populate_assets_enabled flipped to True. It is the room the 0.1265 m2 intrusion was measured on, so it is the对照 that makes 'the constraint changed something' a measurement.",
+    "'gap_categories' is the fixture's own declaration (ADR-009 decision 11): the categories this room's retrieval vocabulary cannot cover, which is the only set generation is allowed to produce. A declared category the retrieval vocabulary *does* cover is BACKGROUND_NOT_A_GAP, because a matrix that declared itself work to do would pass without generation doing anything.",
+    "'min_generated_categories' is the lower bound the fixture keeps on the case (ADR-009 decision 11) so the matrix cannot pass by having no gaps at all.",
+    "'expect_failures' are prefixes the case must show in TASK 1. They come from the recorded evidence (SPEC-009 probe: 0.1265 m2 protected, 0.0315 m2 corridor; upstream default abort_unsatisfied=False; nothing about this build's patch or pin was recorded), not from the tool's output.",
+    "The kitchen and office cases have no probe build yet. They are listed with the delivery that defines their room and are reported not_run with that reason rather than passed.",
+    "The injected case shares the control's room, so the two rows are the same bedroom before and after the constraint: the control is SPEC-009's probe (0.1265 m2 protected, 0.0315 m2 corridor), and the injected row is SPEC-011 TASK 2's own build of it.",
+    "TASK 4: 'gap_categories' is now carried into the build as well as declared here -- the request in reservations.json lists the same categories, the pool refuses anything outside them, and the audit refuses a case whose two declarations disagree (BACKGROUND_CONSTRAINT_INPUT_MISMATCH(...:gaps)). A declaration that only the audit can see would be a rule the build was never given.",
+    "TASK 4: the per-stage allowance is GENERATED_OBJECTS_MAX_PER_STAGE (contract constant, 24), and a case's own 'budget' key now *overrides* it rather than being the only source. The frozen number is why three cases stopped declaring BACKGROUND_BUDGET_EXCEEDED; the control's 32 still shows it, and that is the case the cap exists for."
+  ],
+  "cases": [
+    {
+      "id": "bedroom_control_37",
+      "role": "control",
+      "room_type": "bedroom",
+      "seed": 37,
+      "delivery": "outputs/bedroom_pick_alarm_clock/s005_bedroom_full_20260922_02",
+      "build": "outputs/_probe/spec009_populate_probe_20260922_01",
+      "log": "attempt2_stderr.txt",
+      "measurement": "outputs/_probe/spec011_probe_regions_20260923_01/generated_furniture_regions.json",
+      "gap_categories": [
+        "book_stack",
+        "book_column",
+        "shelf",
+        "shelf_trinkets",
+        "mirror_frame"
+      ],
+      "min_generated_categories": 2,
+      "expect_failures": [
+        "BACKGROUND_PROTECTED_OVERLAP(CellShelfFactory(699309).spawn_asset(3222513),0.1265)",
+        "BACKGROUND_KEEPOUT_OVERLAP(CellShelfFactory(699309).spawn_asset(3222513),0.0315)",
+        "BACKGROUND_PATCH_UNRECORDED(upstream_pin)",
+        "BACKGROUND_KEEPOUT_OBJECT_MISSING(protected)",
+        "BACKGROUND_SOLVER_UNGUARDED(solve_medium)",
+        "BACKGROUND_SOLVER_ABORTED(solve_medium)",
+        "BACKGROUND_BUDGET_EXCEEDED(populate_assets)",
+        "BACKGROUND_NOT_A_GAP(desk,covered-by-retrieval",
+        "BACKGROUND_POOL_UNRECORDED(populate_assets",
+        "BACKGROUND_NOT_A_GAP(ceiling_light,covered-by-retrieval"
+      ]
+    },
+    {
+      "id": "bedroom_injected_37",
+      "role": "injected",
+      "room_type": "bedroom",
+      "seed": 37,
+      "delivery": "outputs/bedroom_pick_alarm_clock/s005_bedroom_full_20260922_02",
+      "build": "outputs/_probe/spec011_injection_20260923_03/infinigen_build",
+      "log": "stderr.txt",
+      "measurement": "outputs/_probe/spec011_injection_20260923_03/generated_furniture.json",
+      "gap_categories": [
+        "book_stack",
+        "book_column",
+        "shelf",
+        "shelf_trinkets",
+        "mirror_frame"
+      ],
+      "min_generated_categories": 2,
+      "expect_failures": [
+        "BACKGROUND_SOLVER_UNGUARDED(solve_medium)",
+        "BACKGROUND_NOT_A_GAP(",
+        "BACKGROUND_POOL_UNRECORDED(populate_assets"
+      ],
+      "note": "TASK 4 changed two of this case's declarations, and both changes are consequences of the calibration rather than of the tool: (1) BACKGROUND_BUDGET_EXCEEDED(populate_assets) is gone because the allowance is now the frozen constant GENERATED_OBJECTS_MAX_PER_STAGE=24 and this room generated 13 -- the cap that must catch the un-injected control's 32 (which still shows it) is deliberately above the largest measured injected room (19, kitchen); (2) BACKGROUND_POOL_UNRECORDED is declared new: this build ran generation before the pool existed, so its objects were never judged. It stays red on requirement 4 (the room has covered categories in it) and on requirement 5 (abort off), and it is the case the pooled build (bedroom_pooled_37) is the red-to-green pair for."
+    },
+    {
+      "id": "kitchen_medium_20",
+      "role": "additional",
+      "room_type": "kitchen",
+      "seed": 23,
+      "delivery": "outputs/kitchen_fetch_jar/s005_kitchen_full_20260922_02",
+      "build": "outputs/_probe/spec011_kitchen_20260923_01/infinigen_build",
+      "measurement": "outputs/_probe/spec011_kitchen_20260923_01/generated_furniture.json",
+      "gap_categories": [
+        "book_stack",
+        "shelf",
+        "shelf_trinkets",
+        "mirror_frame"
+      ],
+      "min_generated_categories": 2,
+      "expect_failures": [
+        "BACKGROUND_SOLVER_UNGUARDED(solve_small)",
+        "BACKGROUND_POOL_UNRECORDED(populate_assets"
+      ],
+      "case_note": "The build is the opt-in probe at the first weights (60/25), abort off: 19 generated objects and 0.0000 m2 in all three regions. Its no-injection control cannot be built in this environment (the wrapper run died on the missing `extra_mesh_objects` Blender extension, which NatureShelfTrinketsFactory's rock variants require and which fires by draw, not by room type). The seed here was declared 20 while the case never ran; the room's own seed is 23 (delivery and build command agree), so the declaration is corrected rather than left as a claim.",
+      "note": "TASK 4 revised two declarations here and both are recorded rather than dropped: (1) the allowance is the frozen constant (19 generated <= 24), so BACKGROUND_BUDGET_EXCEEDED is gone -- it is the control's 32 that the cap exists to catch; (2) BACKGROUND_GAP_UNFILLED(mirror_frame) is gone because that gap now carries a named reason: this build recorded no pool, so all that can be measured is that no object of the category is in the room (not-in-the-room(...), GAP_UNFILLED_KINDS[2]) -- which is an accounting, and the failure is reserved for a gap with no reason at all. The build itself is the same 19-object, 0.0000 m2 room TASK 3 measured; nothing about it was re-run or edited."
+    },
+    {
+      "id": "office_medium_20",
+      "role": "additional",
+      "room_type": "office",
+      "seed": 20,
+      "delivery": "outputs/office_pick_cup/s005_office_full_20260922_02",
+      "build": "outputs/_probe/spec011_office_6_25_20260923_01/infinigen_build",
+      "measurement": "outputs/_probe/spec011_office_6_25_20260923_01/generated_furniture.json",
+      "gap_categories": [
+        "book_stack",
+        "book_column",
+        "shelf",
+        "shelf_trinkets",
+        "monitor"
+      ],
+      "min_generated_categories": 2,
+      "expect_failures": [
+        "BACKGROUND_PROTECTED_OVERLAP(KitchenCabinetFactory(8420935).spawn_asset(1004731),0.0245)",
+        "BACKGROUND_PROTECTED_OVERLAP(SingleCabinetFactory(582511).spawn_asset(2330016),0.0155)",
+        "BACKGROUND_NOT_A_GAP(cabinet,covered-by-retrieval",
+        "BACKGROUND_NOT_A_GAP(plant,covered-by-retrieval",
+        "BACKGROUND_SOLVER_ABORTED(solve_medium)",
+        "BACKGROUND_SOLVER_UNGUARDED(solve_small)"
+      ],
+      "case_note": "The office could not be built at the first weights (60/25): that run died on the same missing extension. It built at the sweep's protecting setting (6/2.5), 18 generated objects, and **the protected region is still intruded by 0.0400 m2** (KitchenCabinetFactory 0.0245 + SingleCabinetFactory 0.0155) -- recorded as \"the constraint was sent and it still intrudes\", which is the outcome TASK 3 says must not be smoothed over.",
+      "note": "TASK 3 recorded this room honestly as 'the constraint was sent and it still intrudes': 18 generated objects, two cabinets 0.0400 m2 inside the protected region. TASK 4 mapped the three factories it exposed (KitchenCabinetFactory and SingleCabinetFactory to `cabinet`, PlantContainerFactory to `plant` -- all three covered by retrieval, so generating them is not filling a gap), which replaces the BACKGROUND_FACTORY_UNMAPPED declaration with the BACKGROUND_NOT_A_GAP one: the same five objects, judged instead of unjudged. It keeps its two overlap declarations and gains the solve_small abort (upstream's own obj_ontop_obj/desk groups). The allowance declaration is gone for the same reason as the kitchen's."
+    },
+    {
+      "id": "office_pooled_20",
+      "role": "pooled",
+      "room_type": "office",
+      "seed": 20,
+      "delivery": "outputs/office_pick_cup/s005_office_full_20260922_02",
+      "build": "outputs/_probe/spec011_office_pooled_20260923_01/infinigen_build",
+      "log": "stderr.txt",
+      "measurement": "outputs/_probe/spec011_office_pooled_20260923_01/generated_furniture.json",
+      "gap_categories": [
+        "book_stack",
+        "book_column",
+        "shelf",
+        "shelf_trinkets",
+        "monitor"
+      ],
+      "min_generated_categories": 2,
+      "expect_failures": [
+        "BACKGROUND_SOLVER_UNGUARDED(solve_large)",
+        "BACKGROUND_SOLVER_UNGUARDED(solve_medium)",
+        "BACKGROUND_SOLVER_UNGUARDED(solve_small)",
+        "BACKGROUND_SOLVER_ABORTED(solve_large)",
+        "BACKGROUND_SOLVER_ABORTED(solve_medium)"
+      ],
+      "case_note": "TASK 4's answer to office_medium_20, same room and same weights (6/2.5) with the rejection pool on: 18 realised objects, 11 refused by name (2 of them for standing 0.0245/0.0155 m2 inside the protected region -- the un-pooled run's own two numbers -- and all 11 for not being a gap), 7 kept, and the ruler measures 0.0000 m2 in every region. It is red on requirement 5 alone, and that red is upstream's own constraint groups (lighting, desk, office_desk_chairs), not ours: turning abort_unsatisfied on in these rooms kills the build in ~20 s (TASK 3, measured). Requirement 4's two unfilled gaps (book_column, shelf) are accounted for by name: the pool judged every object and the sampler proposed neither category."
+    },
+    {
+      "id": "bedroom_pooled_37",
+      "role": "pooled",
+      "room_type": "bedroom",
+      "seed": 37,
+      "delivery": "outputs/bedroom_pick_alarm_clock/s005_bedroom_full_20260922_02",
+      "build": "outputs/_probe/spec011_bedroom_pooled_20260923_01/infinigen_build",
+      "log": "stderr.txt",
+      "measurement": "outputs/_probe/spec011_bedroom_pooled_20260923_01/generated_furniture.json",
+      "gap_categories": [
+        "book_stack",
+        "book_column",
+        "shelf",
+        "shelf_trinkets",
+        "mirror_frame"
+      ],
+      "min_generated_categories": 2,
+      "expect_failures": [
+        "BACKGROUND_SOLVER_UNGUARDED(solve_large)",
+        "BACKGROUND_SOLVER_UNGUARDED(solve_medium)",
+        "BACKGROUND_SOLVER_UNGUARDED(solve_small)",
+        "BACKGROUND_SOLVER_ABORTED(solve_large)",
+        "BACKGROUND_SOLVER_ABORTED(solve_medium)",
+        "BACKGROUND_SOLVER_ABORTED(solve_small)"
+      ],
+      "case_note": "The control room at the first weights (60/25) with the rejection pool on: 13 realised objects became 5 (the three gap categories this run proposed), 8 refused by name (a monitor for not being declared here, the rest for being covered by retrieval), 0.0000 m2 in all three regions, 198.3 s. Red on requirement 5 alone, and those unsatisfied groups are upstream's own (lighting, desk, office_desk_chairs) -- `BACKGROUND_RESERVATION_UNSATISFIED` would name ours, and it does not fire. The two unfilled gaps (book_stack, mirror_frame) are accounted for: the pool judged every realised object, and neither category was proposed."
+    },
+    {
+      "id": "kitchen_pooled_23",
+      "role": "pooled",
+      "room_type": "kitchen",
+      "seed": 23,
+      "delivery": "outputs/kitchen_fetch_jar/s005_kitchen_full_20260922_02",
+      "build": "outputs/_probe/spec011_kitchen_pooled_20260923_01/infinigen_build",
+      "log": "stderr.txt",
+      "measurement": "outputs/_probe/spec011_kitchen_pooled_20260923_01/generated_furniture.json",
+      "gap_categories": [
+        "book_stack",
+        "shelf",
+        "shelf_trinkets",
+        "mirror_frame"
+      ],
+      "min_generated_categories": 2,
+      "expect_failures": [
+        "BACKGROUND_SOLVER_UNGUARDED(solve_large)",
+        "BACKGROUND_SOLVER_UNGUARDED(solve_medium)",
+        "BACKGROUND_SOLVER_UNGUARDED(solve_small)",
+        "BACKGROUND_SOLVER_ABORTED(solve_large)",
+        "BACKGROUND_SOLVER_ABORTED(solve_medium)",
+        "BACKGROUND_SOLVER_ABORTED(solve_small)"
+      ],
+      "case_note": "The kitchen at the first weights (60/25) with the pool on: 19 realised objects became 10, 9 refused by name, 0.0000 m2 in all three regions, 112.5 s. One refusal is a book column refused as not-declared-in-this-case -- book_column is a gap-eligible category the kitchen never asked for, which is the distinction the two not-a-gap sub-reasons exist to make. Red on requirement 5 alone, and those groups are upstream's own."
+    },
+    {
+      "id": "office_delivery_gen_20",
+      "role": "delivery",
+      "room_type": "office",
+      "seed": 20,
+      "delivery": "outputs/office_pick_cup/spec011_gen_20260923_01",
+      "build": "outputs/office_pick_cup/spec011_gen_20260923_01/shell_build/17fe31157d52/infinigen_build",
+      "log": "stderr.txt",
+      "measurement": "outputs/office_pick_cup/spec011_gen_20260923_01/generated_furniture.json",
+      "gap_categories": [
+        "book_stack",
+        "book_column",
+        "shelf",
+        "shelf_trinkets",
+        "monitor"
+      ],
+      "min_generated_categories": 2,
+      "expect_failures": [
+        "BACKGROUND_SOLVER_UNGUARDED(solve_large)",
+        "BACKGROUND_SOLVER_UNGUARDED(solve_medium)",
+        "BACKGROUND_SOLVER_UNGUARDED(solve_small)",
+        "BACKGROUND_SOLVER_ABORTED(solve_large)",
+        "BACKGROUND_SOLVER_ABORTED(solve_medium)"
+      ],
+      "case_note": "TASK 5's delivery: the pipeline's own run (office_pick_cup, variant seed 20, --no-replan, Isaac on) with SPEC-011's opt-in on. 7 kept / 11 refused, 0.0000 m2 in all three regions measured on the delivery's own build, and the room is the same one the generation-off run built (the two builds' shell measurements are identical key for key). Red on requirement 5 alone, and those groups are upstream's own -- BACKGROUND_RESERVATION_UNSATISFIED never fires. The delivery's manifest carries the same ledger under `background`."
+    }
+  ],
+  "negatives": [
+    {
+      "name": "no_separation_intrusion_returns",
+      "spec_negative": 1,
+      "expect": [
+        "BACKGROUND_PROTECTED_OVERLAP(",
+        "BACKGROUND_KEEPOUT_OVERLAP(",
+        "BACKGROUND_KEEPOUT_OBJECT_MISSING("
+      ],
+      "note": "The control build's own measured intrusion (0.1265 m2 protected, 0.0315 m2 corridor) with the injection removed. The numbers are the probe's, not invented."
+    },
+    {
+      "name": "abort_switch_off",
+      "spec_negative": 2,
+      "expect": [
+        "BACKGROUND_SOLVER_UNGUARDED(solve_medium)"
+      ],
+      "note": "A run that solved everything with the switch off is still the run whose next build is silent."
+    },
+    {
+      "name": "unsatisfied_solve_continued",
+      "spec_negative": 2,
+      "expect": [
+        "BACKGROUND_SOLVER_ABORTED(solve_medium)",
+        "BACKGROUND_SOLVER_UNGUARDED(solve_medium)"
+      ],
+      "note": "The probe's own log: 3 unsatisfied groups in solve_medium ('lighting', 'desk', 'office_desk_chairs') and the build carried on."
+    },
+    {
+      "name": "covered_category_generated",
+      "spec_negative": 3,
+      "expect": [
+        "BACKGROUND_NOT_A_GAP(desk,covered-by-retrieval"
+      ],
+      "note": "A generated desk: retrieval covers desk.n.01, so generating one is not filling a gap."
+    },
+    {
+      "name": "gap_declared_but_covered",
+      "spec_negative": null,
+      "expect": [
+        "BACKGROUND_NOT_A_GAP(plant,covered-by-retrieval"
+      ],
+      "note": "The other direction of the same rule: the fixture declaring a covered category as a gap."
+    },
+    {
+      "name": "budget_exceeded",
+      "spec_negative": 4,
+      "expect": [
+        "BACKGROUND_BUDGET_EXCEEDED(populate_assets)"
+      ]
+    },
+    {
+      "name": "credentials_missing",
+      "spec_negative": 5,
+      "expect": [
+        "BACKGROUND_PATCH_UNRECORDED(patch_sha256)"
+      ]
+    },
+    {
+      "name": "rejections_unbounded",
+      "spec_negative": 6,
+      "expect": [
+        "BACKGROUND_REJECTIONS_UNBOUNDED("
+      ],
+      "note": "The same candidate attempted 3 times (ATTEMPTS_PER_CANDIDATE_MAX is 2)."
+    },
+    {
+      "name": "reservation_object_leaked",
+      "spec_negative": null,
+      "expect": [
+        "BACKGROUND_RESERVATION_OBJECT_LEAKED("
+      ],
+      "note": "ADR-009 Consequences: the reservation object is invisible geometry, so this negative belongs to requirement 9 even though it is not one of the six."
+    },
+    {
+      "name": "factory_unmapped",
+      "spec_negative": null,
+      "expect": [
+        "BACKGROUND_FACTORY_UNMAPPED("
+      ],
+      "note": "An upstream factory the table does not name cannot be judged either way, so it is reported rather than allowed."
+    },
+    {
+      "name": "gap_unfilled_unaccounted",
+      "spec_negative": null,
+      "expect": [
+        "BACKGROUND_GAP_UNFILLED("
+      ],
+      "note": "Requirement 4's second half: a declared gap with nothing generated for it and no named reason is a failure, not silence."
+    },
+    {
+      "name": "pool_not_recorded",
+      "spec_negative": null,
+      "expect": [
+        "BACKGROUND_POOL_UNRECORDED(populate_assets"
+      ],
+      "note": "Generation happened and the room has no rejection pool: the objects stood in the room unjudged, which is the probe build's own state (its 0.1265 m2 shelf is the result). ADR-009 decision 8: the pool is the fallback that must run whatever the constraints do."
+    },
+    {
+      "name": "pool_ledger_incomplete",
+      "spec_negative": null,
+      "expect": [
+        "BACKGROUND_PROTECTED_OVERLAP(",
+        "BACKGROUND_KEEPOUT_OVERLAP(",
+        "BACKGROUND_POOL_LEDGER_INCOMPLETE("
+      ],
+      "note": "The realistic shape of this bug: the ledger says the piece was refused (a rejection row names it) and the ruler measures it still standing in the protected region and in the corridor -- a deletion that did not happen. The intruder is in the ledger on purpose: an intruder the ledger never mentions is the overlap failure's own business."
+    },
+    {
+      "name": "reservation_term_unsatisfied",
+      "spec_negative": null,
+      "expect": [
+        "BACKGROUND_RESERVATION_UNSATISFIED("
+      ],
+      "note": "Upstream's unsatisfied-constraint report is keyed by the constraint's own name (evaluator/evaluate.py:262-275), so a name carrying our prefix is our term failing. TASK 3 attributed every unsatisfied group in every build to upstream's own lighting/desk/office_desk_chairs; this negative is what keeps that an attribution rather than a hope."
+    }
+  ]
+}

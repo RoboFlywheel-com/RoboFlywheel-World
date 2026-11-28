@@ -1,0 +1,10 @@
+{
+  "asset_id": "mug_0001",
+  "class_id": "mug",
+  "category": "ceramic mug",
+  "input": {"prompt": "A single matte red ceramic mug on a white background."},
+  "seed": 2025,
+  "source_up_axis": "Y",
+  "formats": ["urdf", "mjcf", "usd"],
+  "mass_policy": "anchor_on_flag"
+}

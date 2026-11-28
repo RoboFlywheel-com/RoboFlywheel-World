@@ -1,0 +1,10 @@
+{
+  "name": "paper_multisim_workspace",
+  "eye": [1.6192034061746132, 2.8697064193007664, 1.67],
+  "target": [1.04371, 2.0519, 0.78],
+  "width": 1600,
+  "height": 1000,
+  "focal_length_mm": 20.0,
+  "horizontal_aperture_mm": 20.955,
+  "comment": "Task desk and manipulable cup; production desk_workspace pose, square-pixel publication intrinsics. Full-room five-engine figure remains the overview companion."
+}

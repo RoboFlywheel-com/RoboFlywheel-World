@@ -1,0 +1,137 @@
+{
+  "comment": "SPEC-016 office dressing: the task's arm on the desk it works at, colourful manipulables around it, and a warm shell. Props are chosen by measurement, not by name: rfw_w.scenes.visualization.pick_colourful_props ranks the library's own diffuse textures by hue variety first and saturation second -- ranking on saturation alone picked a 'Rubik Cube' whose texture is a single abstract orange wash, and it rendered as a plain orange block. Each pick is then prepared through the production SimReady provider and its prepared height compared with the library's own box, because v1.3's up-axis is per-asset and 10 of 24 earlier candidates came out lying on their side. Everything here is figure-only: no gate in the source delivery judged any of it, and the arm's physics and IK are not_run.",
+  "shell_materials": {
+    "wall": {
+      "colour": [
+        0.86,
+        0.8,
+        0.7
+      ],
+      "roughness": 0.88,
+      "metallic": 0.0
+    },
+    "floor": {
+      "colour": [
+        0.4,
+        0.27,
+        0.17
+      ],
+      "roughness": 0.52,
+      "metallic": 0.0
+    }
+  },
+  "shell_materials_note": "flat albedo, not a texture: the request carries a surface per role, not an image, so this warms the box without pretending to be a material scan. No `ceiling` role -- the dollhouse shell has its ceiling removed, and declaring it failed the render with SHELL_MATERIAL_OVERRIDE_BOUND_NOTHING(ceiling), which is the gate doing its job.",
+  "additions": [
+    {
+      "id": "piper_arm",
+      "kind": "robot",
+      "robot": "piper",
+      "pose": "examples/paper_dollhouse/pose_piper_ready.json",
+      "on": "desk",
+      "xy": [
+        4.02,
+        4.16
+      ],
+      "yaw_deg": -53.0,
+      "task_target": "cup",
+      "why": "on the shared table, at its west end; the yaw puts the tool point on the bearing to the mug the task names (cup at -63.2 deg from the base, TCP at -10.2 deg in the arm's own frame), 0.493 m away against a measured 0.8027 m reach"
+    },
+    {
+      "id": "prop_mug_red",
+      "kind": "prop",
+      "simready_leaf": "4_3_0012",
+      "on": "desk",
+      "xy": [
+        4.72,
+        3.72
+      ],
+      "yaw_deg": -35
+    },
+    {
+      "id": "prop_toy_car",
+      "kind": "prop",
+      "simready_leaf": "29_9_0019",
+      "on": "desk",
+      "xy": [
+        4.47,
+        3.7
+      ],
+      "yaw_deg": 12
+    },
+    {
+      "id": "prop_can",
+      "kind": "prop",
+      "simready_leaf": "6_0_0028",
+      "on": "desk",
+      "xy": [
+        4.55,
+        4.05
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "prop_bottle",
+      "kind": "prop",
+      "simready_leaf": "5_0_0003",
+      "on": "desk",
+      "xy": [
+        4.93,
+        3.9
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "prop_jewelry_box",
+      "kind": "prop",
+      "simready_leaf": "7_7_0028",
+      "on": "side_table",
+      "xy": [
+        0.25,
+        1.9
+      ],
+      "yaw_deg": 40
+    },
+    {
+      "id": "prop_vase",
+      "kind": "prop",
+      "simready_leaf": "24_40_10014",
+      "on": "storage",
+      "xy": [
+        0.348,
+        2.849
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "prop_dinosaur",
+      "kind": "prop",
+      "simready_leaf": "29_24_0000",
+      "on": "side_table",
+      "xy": [
+        0.44,
+        2.08
+      ],
+      "yaw_deg": 200
+    },
+    {
+      "id": "prop_plant_pot",
+      "kind": "prop",
+      "simready_leaf": "25_25_0020",
+      "on": "floor",
+      "xy": [
+        2.2,
+        1.2
+      ],
+      "yaw_deg": 0
+    }
+  ],
+  "support_table": {
+    "instance": "desk",
+    "size_m": [
+      1.2,
+      0.7,
+      0.75
+    ],
+    "why": "one shared 1.20 x 0.70 x 0.75 m work table in every room, so the three rows compare"
+  }
+}

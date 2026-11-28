@@ -1,0 +1,246 @@
+{
+  "schema_version": "pvscene.scene-spec/v3",
+  "scene_id": "pm09_bedroom_fetch_cup",
+  "seed": 49,
+  "prompt": "生成一间冷色卧室：床头柜上有一个可拿取的水杯，旁边是闹钟、小台灯和一个首饰盒；房间另有床、衣柜和绿植，墙上挂画。机器人要从床头柜上取走水杯，保留床边通道。",
+  "room": {
+    "size_bounds_m": [
+      [
+        4.2,
+        5.2
+      ],
+      [
+        3.4,
+        4.2
+      ],
+      [
+        2.7,
+        3.0
+      ]
+    ],
+    "room_kind": "bedroom",
+    "size_policy": "explicit"
+  },
+  "style": {
+    "theme": "cool_bedroom",
+    "palette": [
+      "pale_blue",
+      "ash",
+      "linen",
+      "steel"
+    ],
+    "density": "dense"
+  },
+  "requested_backends": [
+    "isaac"
+  ],
+  "requested_readiness": "functional_scene_ready",
+  "entities": [
+    {
+      "id": "nightstand",
+      "category": "nightstand",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": true,
+      "role": "support",
+      "size_bounds_m": [
+        [
+          0.4,
+          0.7
+        ],
+        [
+          0.35,
+          0.6
+        ],
+        [
+          0.45,
+          0.65
+        ]
+      ],
+      "notes": "beside the bed; the task support"
+    },
+    {
+      "id": "cup",
+      "category": "cup",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": true,
+      "role": "task_target",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.24
+        ],
+        [
+          0.05,
+          0.24
+        ],
+        [
+          0.03,
+          0.26
+        ]
+      ],
+      "notes": "a ceramic drinking cup standing on the nightstand; the grasp target, clear of the edge"
+    },
+    {
+      "id": "alarm_clock",
+      "category": "alarm_clock",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.24
+        ],
+        [
+          0.05,
+          0.24
+        ],
+        [
+          0.03,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "bed",
+      "category": "bed",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          1.3,
+          1.7
+        ],
+        [
+          1.9,
+          2.1
+        ],
+        [
+          0.4,
+          0.95
+        ]
+      ],
+      "notes": "against a wall"
+    },
+    {
+      "id": "wardrobe",
+      "category": "wardrobe",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          1.0,
+          1.7
+        ],
+        [
+          0.45,
+          0.7
+        ],
+        [
+          1.6,
+          2.1
+        ]
+      ],
+      "notes": "back to a wall"
+    },
+    {
+      "id": "plant",
+      "category": "plant",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.5,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "wall_art",
+      "category": "wall_art",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          0.4,
+          0.9
+        ],
+        [
+          0.02,
+          0.06
+        ],
+        [
+          0.3,
+          0.7
+        ]
+      ],
+      "notes": "hung on a wall away from any opening, at eye level"
+    },
+    {
+      "id": "ceiling_light",
+      "category": "ceiling_light",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.12,
+          0.35
+        ]
+      ],
+      "notes": "a shade, not a pendant on a long cord"
+    }
+  ],
+  "initial_relations": [
+    {
+      "id": "r1",
+      "subject": "cup",
+      "predicate": "ON",
+      "object": "nightstand",
+      "hard": true
+    },
+    {
+      "id": "r2",
+      "subject": "alarm_clock",
+      "predicate": "ON",
+      "object": "nightstand",
+      "hard": false
+    }
+  ],
+  "task": {
+    "action": "pick_place",
+    "robot_profile": "piper_x",
+    "targets": [
+      "cup"
+    ],
+    "goal_predicates": []
+  }
+}

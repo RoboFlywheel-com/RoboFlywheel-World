@@ -1,0 +1,8 @@
+{
+  "comment": "Whole-room top view locates the task; close view shows the manipulable object and support. All walls retain full height; only the ceiling and outer facade are hidden. Bedroom bed and kitchen jar are figure-only geometry substitutions recorded in each render provenance.",
+  "rows": [
+    {"room": "office", "task": "cup ON desk", "render_dir": "outputs/_paper/dollhouse_office_16_fullwalls"},
+    {"room": "kitchen", "task": "jar ON island", "render_dir": "outputs/_paper/dollhouse_kitchen_10_fullwalls"},
+    {"room": "bedroom", "task": "alarm_clock ON nightstand", "render_dir": "outputs/_paper/dollhouse_bedroom_09_fullwalls"}
+  ]
+}

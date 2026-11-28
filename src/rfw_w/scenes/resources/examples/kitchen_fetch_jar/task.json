@@ -1,0 +1,276 @@
+{
+  "schema_version": "pvscene.scene-spec/v3",
+  "scene_id": "kitchen_fetch_jar",
+  "seed": 23,
+  "prompt": "生成一间明亮整洁的厨房：房间一侧放一个中岛台，台面上有一个可拿取的调料罐和一个碗；另配一把高脚凳、一个靠墙的餐边柜和一盆绿植，墙上挂装饰画，地面铺一块地毯。机器人需要从中岛台台面取走调料罐，保留台面的操作区和从门口到中岛的通行空间。",
+  "room": {
+    "size_bounds_m": [
+      [
+        4.5,
+        5.5
+      ],
+      [
+        3.8,
+        4.6
+      ],
+      [
+        2.7,
+        3.0
+      ]
+    ],
+    "room_kind": "kitchen",
+    "size_policy": "explicit"
+  },
+  "style": {
+    "theme": "bright_kitchen",
+    "palette": [
+      "off_white",
+      "oak",
+      "sage",
+      "steel"
+    ],
+    "density": "medium"
+  },
+  "requested_backends": [
+    "isaac"
+  ],
+  "requested_readiness": "functional_scene_ready",
+  "entities": [
+    {
+      "id": "island",
+      "category": "kitchen_island",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": true,
+      "role": "support",
+      "size_bounds_m": [
+        [
+          0.9,
+          2.2
+        ],
+        [
+          0.55,
+          1.05
+        ],
+        [
+          0.8,
+          1.0
+        ]
+      ],
+      "notes": "the work surface and the task support; front to the room"
+    },
+    {
+      "id": "jar",
+      "category": "jar",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": true,
+      "role": "task_target",
+      "size_bounds_m": [
+        [
+          0.08,
+          0.18
+        ],
+        [
+          0.06,
+          0.14
+        ],
+        [
+          0.1,
+          0.2
+        ]
+      ],
+      "notes": "the grasp target; must sit on the island, clear of its edge"
+    },
+    {
+      "id": "bowl",
+      "category": "bowl",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.1,
+          0.5
+        ],
+        [
+          0.1,
+          0.45
+        ],
+        [
+          0.04,
+          0.3
+        ]
+      ]
+    },
+    {
+      "id": "stool",
+      "category": "stool",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.26,
+          0.65
+        ],
+        [
+          0.26,
+          0.65
+        ],
+        [
+          0.3,
+          0.8
+        ]
+      ],
+      "notes": "faces the island"
+    },
+    {
+      "id": "storage",
+      "category": "cabinet",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.7,
+          1.8
+        ],
+        [
+          0.35,
+          0.8
+        ],
+        [
+          0.8,
+          1.6
+        ]
+      ],
+      "notes": "back to a wall"
+    },
+    {
+      "id": "plant",
+      "category": "plant",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.5,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "rug",
+      "category": "rug",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          1.4,
+          2.6
+        ],
+        [
+          1.0,
+          2.0
+        ],
+        [
+          0.005,
+          0.02
+        ]
+      ],
+      "notes": "thin covering on the floor, must not lift the furniture or block the doorway"
+    },
+    {
+      "id": "wall_art",
+      "category": "wall_art",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          0.4,
+          0.9
+        ],
+        [
+          0.02,
+          0.06
+        ],
+        [
+          0.3,
+          0.7
+        ]
+      ],
+      "notes": "hung on a wall away from any opening, at eye level"
+    },
+    {
+      "id": "ceiling_light",
+      "category": "ceiling_light",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.12,
+          0.35
+        ]
+      ],
+      "notes": "a shade, not a pendant with a long cord: the declared height is what keeps the shade at ceiling height instead of at head height in the walking path"
+    }
+  ],
+  "initial_relations": [
+    {
+      "id": "r1",
+      "subject": "jar",
+      "predicate": "ON",
+      "object": "island",
+      "hard": true
+    },
+    {
+      "id": "r2",
+      "subject": "bowl",
+      "predicate": "ON",
+      "object": "island",
+      "hard": false
+    },
+    {
+      "id": "r3",
+      "subject": "stool",
+      "predicate": "NEAR",
+      "object": "island",
+      "hard": false
+    }
+  ],
+  "task": {
+    "action": "pick_place",
+    "robot_profile": "franka_panda",
+    "targets": [
+      "jar"
+    ],
+    "goal_predicates": []
+  }
+}

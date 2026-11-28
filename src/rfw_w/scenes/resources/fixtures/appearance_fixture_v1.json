@@ -1,0 +1,73 @@
+{
+  "fixture_id": "pvscene.appearance-three-way/v1",
+  "version": "pvscene.appearance-fixture/v1",
+  "scope": "one camera and one lighting mode for the Blender-mapped, Blender-baked and Isaac renders",
+  "photometric_equivalence": "not_claimed",
+  "photometric_equivalence_why": "Cycles and RTX differ in BSDF, sampling and colour management; the fixture fixes the declared inputs, it does not make the images equal. Claiming equivalence is a defect, not a result.",
+  "camera": {
+    "camera_id": "overview_top",
+    "sensor_fit": "HORIZONTAL",
+    "aperture_mm": 20.955,
+    "vertical_aperture_mm": 15.2908,
+    "vertical_aperture_note": "Kept at USD's own default. Whether the renderer follows the horizontal or the vertical aperture is what the FOV probe measures; until it has run, the fixture declares both values rather than deriving one from the resolution aspect.",
+    "aperture_source": "Isaac currently writes only focalLength (render_worker.py _setup_camera), so its horizontal aperture is USD's default 20.955 mm. The unified fixture authors that value explicitly in both renderers instead of letting one side default and the other hand-code 22.044444 mm.",
+    "aperture_choice_why": "20.955 keeps the Isaac framing that all existing Isaac captures were taken at; the Blender side moves onto it. Changing the Isaac side instead would invalidate more evidence.",
+    "render_resolution": null,
+    "samples": 32,
+    "fov_check": {
+      "checked_by": "rfw_w.scenes.visualization.probe_camera_fov",
+      "status": "not_run",
+      "why": "Which fit rule RTX applies to an authored aperture (horizontal as-is, or scaled by the aperture/resolution aspect) is measured, not assumed. Until the probe runs, the equality of the two horizontal fields of view is unverified."
+    }
+  },
+  "bake_resolutions_px": [512, 1024],
+  "modes": {
+    "interior_fill": {
+      "role": "acceptance",
+      "why": "One ceiling fill, no sun. The sun is the largest uncontrolled term between the two renderers, so a mode that carries it cannot separate a material loss from a lighting difference. Ambient alone was tried first and is unusable here: the room is sealed apart from its openings, so a dome outside it lights the interior through the windows only and both renders came out near black.",
+      "exposure_calibration": "Each renderer is driven by its own units, calibrated to a comparable mean luminance so neither image is black or clipped -- the recorded pair was 28 percent clipped white on the Blender side against a mean of 41 on the Isaac side, which is not a comparison anyone can judge materials from. Equivalence is still not claimed; the calibrated values and the measured means go in the report.",
+      "blender": {
+        "world_strength": 0.05,
+        "area_enabled": true,
+        "area_energy_W": 20.0,
+        "area_size_m": 3.0,
+        "area_drop_m": 0.2,
+        "calibrated_from": "50 W measured mean 201 (28% clipped) at 512px bake, bedroom case"
+      },
+      "isaac": {
+        "dome_intensity": 100.0,
+        "sun_intensity": 0.0,
+        "ceiling_fill_intensity": 1200.0,
+        "dome_color": [0.92, 0.94, 1.0],
+        "sun_color": [1.0, 0.96, 0.88],
+        "calibrated_from": "500 measured mean 41, then 500 with the dome at 100 measured mean 27.6"
+      }
+    },
+    "room_like": {
+      "role": "diagnostic",
+      "why": "The room lighting already used for the recorded pair and Isaac replays, reproduced so those numbers can be replayed. It is never a verdict: with the sun and the fill both on, a material loss and a lighting difference cannot be told apart.",
+      "blender": {
+        "world_strength": 0.05,
+        "area_enabled": true,
+        "area_energy_W": 50.0,
+        "area_size_m": 3.0,
+        "area_drop_m": 0.2
+      },
+      "isaac": {
+        "dome_intensity": 650.0,
+        "sun_intensity": 650.0,
+        "ceiling_fill_intensity": 500.0,
+        "dome_color": [0.92, 0.94, 1.0],
+        "sun_color": [1.0, 0.96, 0.88]
+      }
+    }
+  },
+  "checklist_items": [
+    "texture_present",
+    "scale_plausible",
+    "no_seam",
+    "no_normal_inversion",
+    "glass_approximation_acceptable"
+  ],
+  "checklist_note": "Every item starts at not_run. Only a human fills these in; an assistant visual inspection is recorded as such and does not count. glass_approximation_acceptable covers ADR-008: opacity=1-transmission keeps the camera-visible reflection mix but not refraction, so it cannot be passed as lossless."
+}

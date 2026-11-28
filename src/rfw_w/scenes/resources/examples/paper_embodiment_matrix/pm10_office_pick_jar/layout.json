@@ -1,0 +1,48 @@
+{
+  "comment": "SPEC-016 dressing layout for pm10_office_pick_jar: the delivered desk becomes the shared work table, so everything that stood on its old top is re-seated on the new one (or removed when the smaller top has no free cell for it).",
+  "overrides": {
+    "jar": {
+      "translation": [
+        0.6914,
+        1.5463,
+        0.8262
+      ],
+      "on": "desk"
+    },
+    "cup": {
+      "translation": [
+        0.6905,
+        1.2963,
+        0.75
+      ],
+      "on": "desk"
+    },
+    "notebook": {
+      "remove": true
+    },
+    "pen_holder": {
+      "translation": [
+        0.8505,
+        1.2963,
+        0.75
+      ],
+      "on": "desk"
+    },
+    "toy_car": {
+      "translation": [
+        1.0105,
+        1.3163,
+        0.75
+      ],
+      "on": "desk"
+    },
+    "can": {
+      "translation": [
+        1.1705,
+        1.2963,
+        0.75
+      ],
+      "on": "desk"
+    }
+  }
+}

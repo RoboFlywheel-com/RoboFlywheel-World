@@ -1,0 +1,8 @@
+{
+  "comment": "dollhouse 三案例拼图选择：每个 render_dir 是一次 --with-collision 的新鲜输出（可见+碰撞两趟）。",
+  "rows": [
+    {"room": "office", "task": "pick the cup — cup ON desk", "render_dir": "outputs/_paper/dollhouse_office_09"},
+    {"room": "kitchen", "task": "fetch the jar — jar ON island", "render_dir": "outputs/_paper/dollhouse_kitchen_04"},
+    {"room": "bedroom", "task": "pick the alarm clock — alarm_clock ON nightstand", "render_dir": "outputs/_paper/dollhouse_bedroom_04"}
+  ]
+}

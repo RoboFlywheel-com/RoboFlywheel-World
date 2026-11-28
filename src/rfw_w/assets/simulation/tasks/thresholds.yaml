@@ -1,0 +1,137 @@
+# Isaac 三任务通过判据 —— 预注册（先冻结再跑；改动只能标 exploratory）
+#
+# 需求 §8 要求「通过／失败规则、运行时长、速度／角速度容差和穿透容差须在运行前固定；
+# 初版报告可先列连续指标，不能事后选择阈值保证成功」。所以这些数字放在一个**独立的、
+# 会被版本管理**的文件里，而不是散在任务脚本源码里 —— 这个文件的 git 历史本身就是
+# 「没有看完成绩再调阈值」的证据。
+#
+# 任何一次改动都得改 `version` 并写明原因，报告里也会记下跑的是哪一版。
+version: 3
+frozen_at: "2026-09-17"
+rationale: >
+  初版判据。drop 的三条直接沿用团队已经跑过的 drop-settle 协议，
+  这样两套结果可以互相对照；
+  push / grasp 是新写的，取的是「能看出任务确实完成了」的下限，不是「好看」的下限。
+changelog:
+  v2:
+    changed: >
+      grasp.lift_height_m 的**含义**：从「固定 0.12 m」改成「下限 0.12 m，实际下发
+      max(0.12, 抓取点→物体最远点 + 0.03)」。数值仍是 0.12。
+    why: >
+      v1 的 0.12 m 是围绕另一个主物体（汤锅 0_2_0002）写的：汤锅的可抓提手在物体
+      顶部，抬 0.12 m 就能让整只锅离台。换成羊角锤 9_0_0000 后，导出的可抓 part 是
+      手柄（priority_rank 1），抓取点在手柄中段，而锤头在手柄下方 —— 抓取点到锤头
+      的距离实测约 0.28 m。物体绕抓取点摆动到悬挂状态，最低点距抓取点 0.28 m，
+      所以**抬 0.12 m 时锤头必然还在台面上**（实测 rise = 0.0143 m），
+      `min_lift_m: 0.06` 在这个组合下**结构上不可能满足**。这是「协议与物体不匹配」，
+      不是抓取失败，把一个注定不成立的数字留在文件里比改掉它更不诚实。
+    scope: >
+      只改**下发**的抬升高度，且是单调放大（仍取 max(0.12, …)）。判据本身
+      —— min_lift_m / max_slip_m / hold_s / close_margin_m / max_penetration_m
+      —— 一个都没动，也不可能被这次改动放松。改动发生在 v2 跑之前，不是看完成绩
+      之后；报告里 lift.commanded_m 与 lift.preregistered_floor_m 两个数都会写出。
+    not_changed: >
+      夹爪指垫高度 0.025 → 0.050 m（grasp.FINGER_LEN）。这是**工具设计**，不是判据：
+      指垫高度就是抵抗物体转出夹爪的力臂，0.025 m 时可用摩擦力偶约 1.5 N·m，小于
+      锤子重力绕抓取点的 1.1 N·m 加摆动余量，锤子会转出去拖行。判据文件里没有任何
+      一项描述指垫尺寸。
+    second_change: >
+      grasp.close_margin_m 同样从「固定 0.004」改成「下限 0.004，实际下发
+      max(0.004, S·m·g·d / (mu·FINGER_LEN·jaw_stiffness))，S = 3」。
+    second_why: >
+      4 mm 的过盈给夹持力留的余量只有 1.16 倍（N = k·x = 12000 × 0.004 = 48 N，
+      可提供的摩擦力偶 0.774 × 48 × 0.05 = 1.86 N·m，而锤子重力绕抓取点的力矩是
+      0.8515 × 9.81 × 0.1877 = 1.57 N·m）。**实测**：4 mm 时夹爪夹住手柄、抬升
+      0.30 m、把锤子留在台面上（rise = 0.0000 m，抬升结束时两指回到完全闭合的
+      0.0278 m，说明中间已经没有东西）；同一套协议在 10.1 mm 时抬升 0.0975 m
+      并保持住。10.1 mm 正是上面这条规则在 S = 3 下算出来的值 —— 模型与实测对上了，
+      这也是把 S 定为 3 的理由（S 是明写的安全系数，不是拟合出来的常数）。
+    second_scope: >
+      仍然只改**下发**的过盈，且取 max(下限, …) 单调放大；min_lift_m / max_slip_m /
+      hold_s / max_penetration_m 一个都没动。报告里 jaw.interference_per_side_m 与
+      jaw.interference_derivation 把用的值、下限、所需法向力、下限对应余量全部写出。
+  v3:
+    changed: >
+      grasp 的执行机构从自建夹爪换成**真实的 Franka Emika Panda 机械臂**（7 自由度臂 +
+      原厂平行二指夹爪），新增 grasp.grasp_force_n = 70.0。
+    why: >
+      stock Franka USD 的手指驱动 maxForce 只写了 **7.2 N**，那是**预抓取力**，不是抓取力；
+      Panda 数据手册的连续夹持力是 **70 N**。7.2 N 夹不住这只 0.85 kg 的锤子。
+      grasp_force_n 就是补上这个数 —— 修正的是**资产参数**，不是判据。
+    force_ceiling_note: >
+      **夹持力上限才是瓶颈，安全系数 S 不是。** 力限幅驱动的出力是
+      min(k · 指令过盈, grasp_force_n)，所以：
+        - 把 S 从 3 降到 1.5 只会让指令过盈变小 → **出力更小 → 更容易夹不住**；
+        - 唯一能提高实际夹持力的只有抬高 grasp_force_n（真机上限）。
+      实测：over-close 9.47 mm 时指体被手柄挡住，偏置 19 mm，出力**饱和在 70 N**，
+      对应 S = 70 / 37.9 = **1.85 倍**（S=1 的需求是 37.9 N，见报告的
+      gripper.interference_derivation.normal_force_required_at_s1_n）。也就是真实
+      Panda 在这只锤子上只有 1.85 倍余量，而判据要求的是 3 倍 —— 报告里
+      gripper_force_at_close.effective_safety_factor 会把这个差距写出来。
+    not_changed: >
+      min_lift_m / max_slip_m / hold_s / close_margin_m / max_penetration_m 一律未动。
+      换臂后实测 rise 0.1476 m、slip 0.0010 m，均满足原判据。
+
+common:
+  physics_dt: 0.002          # s
+  render_dt: 0.002
+  seed: 42
+  n_orientations: 5          # ≥5 个初始姿态（需求 §8 要求多种子/多方向）
+  mu_ground: 0.686           # 与团队既有 Genesis drop 口径一致（object=0.686）
+  mu_rig: 1.0                # 工具表面；不为了好看调它（需求 §8-B）
+
+drop:
+  # 释放高度（物体最低点到台面），3 个 → 3 x 5 = 15 trials/资产
+  heights_m: [0.05, 0.15, 0.30]
+  # 论文用哪一次 trial 出图 —— **运行前**就定死。
+  # 若跑完再从 15 次里挑「最好看的那次」，主图就成了事后选择的结果；
+  # 固定索引之后它就是一把预先说明的样本（需求 §8：「主图代表样例不等于总体成功率」）。
+  figure_trial: {height_idx: 1, orient_idx: 0}
+  duration_s: 2.5
+  # 判定「稳定」：水平位移 / 转角 / 不穿地
+  trans_abs_m: 0.05
+  trans_rel: 0.1             # 取 max(trans_abs_m, trans_rel * 对角线)
+  rot_deg: 8.0
+  min_z_m: -0.01
+  # 响应帧取「稳定窗口达成」的时刻，窗口定义如下
+  settle_window_s: 0.25
+  settle_speed_mps: 0.02     # 线速度低于此值且持续 settle_window_s 视为沉降完成
+
+push:
+  # 推杆沿 +X 推；行程与速度固定（需求 §8-B 要求固定几何/高度/方向/速度/行程）
+  contact_height_frac: 0.35  # 作用高度 = 物体高度 * 该系数（低于重心，会诱导翻转）
+  stroke_m: 0.12
+  speed_mps: 0.05
+  settle_after_s: 0.5        # 松开后固定时刻取响应帧
+  # 判据：物体确实被推动了，且没有跳过 / 穿过推杆
+  min_disp_m: 0.02
+  max_penetration_m: 0.01
+  # 至少覆盖「侧推」与「非对称接触产生旋转」两种情形
+  contact_offsets_m: [0.0, 0.6]   # 0 = 正对质心，0.6 = 偏向一侧（× 物体半宽）
+  # 出图用哪一次 —— 同 drop，运行前定死，避免事后从两次里挑好看的那次
+  figure_trial: {offset_idx: 0}
+
+grasp:
+  # 平行夹爪。**夹哪个 part、开口多大，都不在这里写死**：它们来自导出侧
+  # `part_physics.json` 的 `priority_rank`（最低的那个 part 就是注释阶段认定的可抓部件），
+  # 开口尺寸再由该 part 自己的碰撞几何算出来 —— 写死一个「物体高度 × 系数」等于替
+  # 标注环节猜一个抓取点，而导出侧已经给了答案。
+  close_margin_m: 0.004      # 闭合到「part 宽度 - 该余量」，形成过盈 → 有夹持力
+  lift_height_m: 0.12        # **下限**，不是固定值：实际下发
+                             # max(lift_height_m, 抓取点→物体最远点 + 0.03)，
+                             # 见 grasp._lift_height 与文件开头的 v2 changelog
+  hold_s: 1.0
+  jaw_stiffness: 12000.0     # N/m，力限幅的位置驱动；不是无限力，接触由求解器算
+  jaw_damping: 300.0         # 注意写成 12000.0 而不是 1.2e4 —— YAML 1.1 会把
+                             # `1.2e4` 解析成**字符串**（要写成 1.2e+4 才是浮点），
+                             # 那样它一路以 str 传进驱动参数里
+  # 调参记录（exploratory，未改判据）：调试 grasp 时曾把 jaw_stiffness 临时提到
+  # 60000.0 试夹持力，但那属于「看完成绩再动阈值」，与本文件开头的预注册原则冲突，
+  # 所以已改回 12000.0。判据本身（min_lift_m / max_slip_m）从头到尾没动过。
+  # 判据：同时要求脱离台面 + 持续保持（需求 §8-C：仅「看起来夹住」不算通过）
+  min_lift_m: 0.06           # 抬升过程中物体重心上升 > 该值
+  max_slip_m: 0.02           # 保持阶段物体相对夹爪的滑移 < 该值
+  max_penetration_m: 0.01
+  # 换臂后新增：夹爪的**力上限**。stock Franka USD 写的是 7.2 N（预抓取力），
+  # 数据手册的连续夹持力是 70 N —— 见文件开头 v3 changelog。
+  grasp_force_n: 70.0

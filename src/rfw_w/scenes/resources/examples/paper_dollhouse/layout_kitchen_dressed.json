@@ -1,0 +1,45 @@
+{
+  "comment": "SPEC-016 kitchen dressing layout: layout_kitchen.json plus re-seating. The delivered island is replaced by the shared 1.20 x 0.70 x 0.75 m work table -- its top drops from 0.900 m to 0.750 m -- so the jar and the bowl are re-placed on the new top.",
+  "overrides": {
+    "ceiling_light": {
+      "remove": true
+    },
+    "rug": {
+      "remove": true
+    },
+    "wall_art": {
+      "remove": true
+    },
+    "stool": {
+      "translation": [
+        4.2,
+        2.9,
+        0.0
+      ],
+      "yaw_deg": 180.0
+    },
+    "storage": {
+      "translation": [
+        0.55,
+        2.9,
+        0.0
+      ]
+    },
+    "jar": {
+      "translation": [
+        3.7,
+        3.9,
+        0.821
+      ],
+      "on": "island"
+    },
+    "bowl": {
+      "translation": [
+        4.0,
+        3.65,
+        0.752
+      ],
+      "on": "island"
+    }
+  }
+}

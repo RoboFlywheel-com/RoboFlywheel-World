@@ -1,0 +1,13 @@
+RFW-W
+Copyright 2026 RFW-W contributors
+
+Licensed under the Apache License, Version 2.0. See LICENSE.
+
+This distribution includes code adapted from the EmbodiedGen project.
+Copyright (c) 2025 Horizon Robotics. Licensed under Apache License 2.0.
+The adapted files retain their upstream copyright and license notices.
+
+Third-party attributions, external dependency licenses, and model/data terms
+are described in THIRD_PARTY.md. External model weights, datasets, asset
+libraries, and simulator installations are not distributed with this source
+release and are not relicensed by this NOTICE.

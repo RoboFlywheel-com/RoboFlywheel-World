@@ -1,0 +1,10 @@
+{
+  "comment": "kitchen dollhouse r03（基座 s5_kitchen_full_20260924_02，相机 SE 角、近墙裁 1.25 m）。ceiling_light 掀顶后悬空移除；rug 与 office 重复且厨房铺地毯不自然，移除；wall_art 与另两房间重复，移除；stool 挪到岛台前侧作吧凳；storage 原贴南墙且遮挡西墙窗，挪到西墙窗北段。",
+  "overrides": {
+    "ceiling_light": {"remove": true},
+    "rug": {"remove": true},
+    "wall_art": {"remove": true},
+    "stool": {"translation": [4.20, 2.90, 0.0], "yaw_deg": 180.0},
+    "storage": {"translation": [0.55, 2.90, 0.0]}
+  }
+}

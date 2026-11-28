@@ -1,0 +1,13 @@
+{
+  "allow_remote_models": false,
+  "timeout_s": 3600,
+  "stages": {
+    "image": {"python": "/path/to/image-env/bin/python", "options": {"ckpt": "/path/to/flux-weights"}},
+    "background": {"python": "/path/to/background-env/bin/python", "options": {"ckpt": "/path/to/rmbg-weights"}},
+    "3d": {"python": "/path/to/trellis-env/bin/python", "options": {"ckpt": "/path/to/trellis-weights", "trellis-root": "/path/to/TRELLIS.2"}},
+    "segmentation": {"python": "/path/to/p3sam-env/bin/python", "options": {"ckpt": "/path/to/p3sam.safetensors", "sonata-ckpt": "/path/to/sonata.pth", "p3sam-root": "/path/to/P3-SAM", "offline": true}},
+    "render": {"python": "/path/to/geometry-env/bin/python", "options": {"blender": "/path/to/blender"}},
+    "annotation": {"python": "/path/to/annotation-env/bin/python", "options": {"endpoint": "https://your-model-provider.example/v1", "model": "your-multimodal-model", "api-key-env": "RFW_MODEL_API_KEY"}},
+    "physical": {"python": "/path/to/geometry-env/bin/python", "options": {"voxel-resolution": 64, "coacd-timeout": 600}}
+  }
+}

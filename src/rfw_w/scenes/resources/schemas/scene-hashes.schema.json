@@ -1,0 +1,36 @@
+{
+  "$id": "pvscene.v3/scene-hashes",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The six hashes that identify a scene version (architecture \u00a75.3).",
+  "properties": {
+    "appearance_hash": {
+      "type": "string"
+    },
+    "assets_hash": {
+      "type": "string"
+    },
+    "geometry_hash": {
+      "type": "string"
+    },
+    "physics_hash": {
+      "type": "string"
+    },
+    "spec_hash": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "appearance_hash",
+    "assets_hash",
+    "geometry_hash",
+    "physics_hash",
+    "spec_hash",
+    "version"
+  ],
+  "title": "SceneHashes",
+  "type": "object"
+}

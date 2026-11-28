@@ -1,0 +1,358 @@
+{
+  "schema_version": "pvscene.scene-spec/v3",
+  "scene_id": "pm01_office_pick_cup",
+  "seed": 41,
+  "prompt": "生成一间明亮的木色办公室：靠墙一张书桌，桌面上有一个可拿取的杯子，旁边还有笔记本、笔筒、一本书、一辆玩具车和一罐饮料；另配椅子、书架、边桌、绿植和落地灯。机器人需要从桌面拿起杯子，保留桌面操作区与从门口到座位的通行空间。",
+  "room": {
+    "size_bounds_m": [
+      [
+        4.2,
+        5.2
+      ],
+      [
+        3.2,
+        4.2
+      ],
+      [
+        2.7,
+        3.0
+      ]
+    ],
+    "room_kind": "office",
+    "size_policy": "explicit"
+  },
+  "style": {
+    "theme": "bright_wood_office",
+    "palette": [
+      "oak",
+      "off_white",
+      "teal",
+      "brass"
+    ],
+    "density": "dense"
+  },
+  "requested_backends": [
+    "isaac"
+  ],
+  "requested_readiness": "functional_scene_ready",
+  "entities": [
+    {
+      "id": "desk",
+      "category": "desk",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": true,
+      "role": "support",
+      "size_bounds_m": [
+        [
+          1.1,
+          1.6
+        ],
+        [
+          0.6,
+          0.8
+        ],
+        [
+          0.72,
+          0.78
+        ]
+      ],
+      "notes": "the work surface the task happens on; front to the room"
+    },
+    {
+      "id": "cup",
+      "category": "cup",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": true,
+      "role": "task_target",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ],
+      "notes": "the grasp target; on the work surface, clear of its edge"
+    },
+    {
+      "id": "notebook",
+      "category": "notebook",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "pen_holder",
+      "category": "pen_holder",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "book",
+      "category": "book",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "toy_car",
+      "category": "toy_car",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "can",
+      "category": "can",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "chair",
+      "category": "chair",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.4,
+          0.7
+        ],
+        [
+          0.4,
+          0.7
+        ],
+        [
+          0.7,
+          1.1
+        ]
+      ]
+    },
+    {
+      "id": "bookcase",
+      "category": "bookcase",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.6,
+          1.4
+        ],
+        [
+          0.3,
+          0.5
+        ],
+        [
+          1.2,
+          2.0
+        ]
+      ]
+    },
+    {
+      "id": "side_table",
+      "category": "side_table",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.4,
+          0.7
+        ],
+        [
+          0.4,
+          0.7
+        ],
+        [
+          0.4,
+          0.6
+        ]
+      ]
+    },
+    {
+      "id": "plant",
+      "category": "plant",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.5,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "floor_lamp",
+      "category": "floor_lamp",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.3,
+          0.5
+        ],
+        [
+          0.3,
+          0.5
+        ],
+        [
+          1.4,
+          1.8
+        ]
+      ]
+    }
+  ],
+  "initial_relations": [
+    {
+      "id": "r1",
+      "subject": "cup",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": true
+    },
+    {
+      "id": "r2",
+      "subject": "notebook",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    },
+    {
+      "id": "r3",
+      "subject": "pen_holder",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    },
+    {
+      "id": "r4",
+      "subject": "book",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    },
+    {
+      "id": "r5",
+      "subject": "toy_car",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    },
+    {
+      "id": "r6",
+      "subject": "can",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    }
+  ],
+  "task": {
+    "action": "pick_place",
+    "robot_profile": "piper_x",
+    "targets": [
+      "cup"
+    ],
+    "goal_predicates": []
+  }
+}

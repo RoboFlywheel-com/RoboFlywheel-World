@@ -1,0 +1,40 @@
+{
+  "comment": "SPEC-016 dressing layout for pm05_kitchen_stack_bowl: the delivered island becomes the shared work table, so everything that stood on its old top is re-seated on the new one (or removed when the smaller top has no free cell for it).",
+  "overrides": {
+    "bowl": {
+      "translation": [
+        2.2561,
+        1.5714,
+        0.8496
+      ],
+      "on": "island"
+    },
+    "plate": {
+      "remove": true
+    },
+    "jar": {
+      "translation": [
+        2.2537,
+        1.3414,
+        0.75
+      ],
+      "on": "island"
+    },
+    "cup": {
+      "translation": [
+        2.4337,
+        1.3214,
+        0.75
+      ],
+      "on": "island"
+    },
+    "spice_jar": {
+      "translation": [
+        2.5937,
+        1.3214,
+        0.75
+      ],
+      "on": "island"
+    }
+  }
+}

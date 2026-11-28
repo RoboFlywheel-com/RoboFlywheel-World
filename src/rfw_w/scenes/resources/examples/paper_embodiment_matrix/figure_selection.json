@@ -1,0 +1,56 @@
+{
+  "title": "Ten tasks and the scenes generated for them",
+  "subtitle": "Panels 1-7 are new SceneSpecs taken end to end through the pipeline for this figure; panels 8-10 are the three standing rooms, re-dressed the same way. Every scene carries the shared figure work table (1.20 x 0.70 x 0.75 m), its own Piper arm turned toward the task target, and library props laid out by rule (rfw_w.scenes.visualization.plan_room_dressing). Captions are derived from each spec's own task and relations. Robot physics and IK are not_run; three further bedroom scenes were still building when this was cut.",
+  "rows": [
+    {
+      "scene_id": "pm01_office_pick_cup",
+      "spec": "examples/paper_embodiment_matrix/pm01_office_pick_cup/task.json",
+      "render_dir": "outputs/_paper/scene_rgb_pm01_office_pick_cup"
+    },
+    {
+      "scene_id": "pm02_office_stow_box",
+      "spec": "examples/paper_embodiment_matrix/pm02_office_stow_box/task.json",
+      "render_dir": "outputs/_paper/scene_rgb_pm02_office_stow_box"
+    },
+    {
+      "scene_id": "pm03_office_clear_plate",
+      "spec": "examples/paper_embodiment_matrix/pm03_office_clear_plate/task.json",
+      "render_dir": "outputs/_paper/scene_rgb_pm03_office_clear_plate"
+    },
+    {
+      "scene_id": "pm04_kitchen_pick_bottle",
+      "spec": "examples/paper_embodiment_matrix/pm04_kitchen_pick_bottle/task.json",
+      "render_dir": "outputs/_paper/scene_rgb_pm04_kitchen_pick_bottle"
+    },
+    {
+      "scene_id": "pm05_kitchen_stack_bowl",
+      "spec": "examples/paper_embodiment_matrix/pm05_kitchen_stack_bowl/task.json",
+      "render_dir": "outputs/_paper/scene_rgb_pm05_kitchen_stack_bowl"
+    },
+    {
+      "scene_id": "pm06_kitchen_fetch_can",
+      "spec": "examples/paper_embodiment_matrix/pm06_kitchen_fetch_can/task.json",
+      "render_dir": "outputs/_paper/scene_rgb_pm06_kitchen_fetch_can"
+    },
+    {
+      "scene_id": "pm10_office_pick_jar",
+      "spec": "examples/paper_embodiment_matrix/pm10_office_pick_jar/task.json",
+      "render_dir": "outputs/_paper/scene_rgb_pm10_office_pick_jar"
+    },
+    {
+      "scene_id": "office_pick_cup",
+      "spec": "examples/office_pick_cup/task.json",
+      "render_dir": "outputs/_paper/office_rgb_20260926_01"
+    },
+    {
+      "scene_id": "kitchen_fetch_jar",
+      "spec": "examples/kitchen_fetch_jar/task.json",
+      "render_dir": "outputs/_paper/kitchen_rgb_20260926_01"
+    },
+    {
+      "scene_id": "bedroom_pick_alarm_clock",
+      "spec": "examples/bedroom_pick_alarm_clock/task.json",
+      "render_dir": "outputs/_paper/bedroom_rgb_20260926_01"
+    }
+  ]
+}

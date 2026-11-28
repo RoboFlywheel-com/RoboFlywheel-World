@@ -1,0 +1,75 @@
+# Drafts and paper PDFs are not part of this repository
+*.pdf
+/paper/
+
+# Editor and OS cruft
+.DS_Store
+*.swp
+.idea/
+.vscode/
+.claude/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Secrets and local environment
+.env
+.env.*
+*.local
+!.env.example
+
+# Data roots and symlinks (real data lives outside the repo)
+asset_data/
+data/
+
+# Model checkpoints and third-party source trees
+ckpt/
+ckpts/
+third_party/
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+*.bin
+
+# Large data artifacts
+*.parquet
+*.sqlite
+*.glb
+*.usd
+*.usda
+*.tar.gz
+*.tar.zst
+release_archive_work/
+
+# Demo materials are local-only; upstream carries code only
+/demo/
+
+# Pipeline outputs
+output/
+outputs/
+output_*/
+logs/
+*.log
+*.pid
+dist/
+qa/
+qa_reports/
+
+# Local runtime configurations and generated manifests
+configs/local.*
+configs/*.local.json
+configs/*.local.env
+work/
+*.egg-info/
+
+# Scene pipeline runtime caches
+.pytest_cache/
+build/
+prepared/
+*.db
+*.f32

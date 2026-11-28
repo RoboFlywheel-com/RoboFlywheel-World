@@ -1,0 +1,40 @@
+{
+  "cases": [
+    {
+      "id": "office_20",
+      "build_report": "outputs/_acceptance/spec006_infinigen_20260922_02/office_medium_20/shell_build.json",
+      "floor_material": "oak",
+      "wall_material": "off_white"
+    },
+    {
+      "id": "office_21",
+      "build_report": "outputs/_acceptance/spec006_infinigen_20260922_02/office_medium_21/shell_build.json",
+      "floor_material": "oak",
+      "wall_material": "off_white"
+    },
+    {
+      "id": "kitchen_20",
+      "build_report": "outputs/_acceptance/spec006_infinigen_20260922_02/kitchen_medium_20/shell_build.json",
+      "floor_material": "ceramic_tile",
+      "wall_material": "off_white"
+    },
+    {
+      "id": "kitchen_21",
+      "build_report": "outputs/_acceptance/spec006_infinigen_20260922_02/kitchen_medium_21/shell_build.json",
+      "floor_material": "ceramic_tile",
+      "wall_material": "off_white"
+    },
+    {
+      "id": "bedroom_20",
+      "build_report": "outputs/_acceptance/spec006_infinigen_20260922_02/bedroom_medium_20/shell_build.json",
+      "floor_material": "oak",
+      "wall_material": "linen"
+    },
+    {
+      "id": "bedroom_21",
+      "build_report": "outputs/_acceptance/spec006_infinigen_20260922_02/bedroom_medium_21/shell_build.json",
+      "floor_material": "oak",
+      "wall_material": "linen"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "comment": "SPEC-016 bedroom dressing, shared-table revision (2026-09-26): the delivered nightstand is replaced by the shared 1.20 x 0.70 x 0.75 m work table and moved into the room's open middle, where a 1.20 m top clears the bed (x >= 3.095), the wardrobe (y <= 0.602) and the doorway strip (y >= 3.373). The manipulables that were on the floor are back on a surface. Figure-only: physics and IK are not_run.",
+  "shell_materials": {
+    "wall": {
+      "colour": [
+        0.8,
+        0.78,
+        0.84
+      ],
+      "roughness": 0.9,
+      "metallic": 0.0
+    },
+    "floor": {
+      "colour": [
+        0.36,
+        0.26,
+        0.19
+      ],
+      "roughness": 0.5,
+      "metallic": 0.0
+    }
+  },
+  "additions": [
+    {
+      "id": "piper_arm",
+      "kind": "robot",
+      "robot": "piper",
+      "pose": "examples/paper_dollhouse/pose_piper_ready.json",
+      "on": "nightstand",
+      "xy": [
+        2.62,
+        2.5
+      ],
+      "yaw_deg": -123.0,
+      "task_target": "alarm_clock",
+      "why": "on the shared table, at its east end; the yaw puts the tool point on the bearing to the alarm clock (clock at -133.2 deg from the base, TCP at -10.2 deg in the arm's own frame), 0.439 m away against a measured 0.8027 m reach"
+    },
+    {
+      "id": "prop_toy_robot_b",
+      "kind": "prop",
+      "simready_leaf": "29_12_0012",
+      "on": "nightstand",
+      "xy": [
+        1.8,
+        2.48
+      ],
+      "yaw_deg": 200
+    },
+    {
+      "id": "prop_dinosaur_b",
+      "kind": "prop",
+      "simready_leaf": "29_24_0000",
+      "on": "nightstand",
+      "xy": [
+        2.05,
+        2.52
+      ],
+      "yaw_deg": 150
+    },
+    {
+      "id": "prop_mug_b",
+      "kind": "prop",
+      "simready_leaf": "4_3_0012",
+      "on": "nightstand",
+      "xy": [
+        2.05,
+        2.1
+      ],
+      "yaw_deg": -20
+    },
+    {
+      "id": "prop_jewelry_box_b",
+      "kind": "prop",
+      "simready_leaf": "7_7_0028",
+      "on": "nightstand",
+      "xy": [
+        1.75,
+        2.1
+      ],
+      "yaw_deg": 35
+    },
+    {
+      "id": "prop_plant_pot_b",
+      "kind": "prop",
+      "simready_leaf": "25_25_0020",
+      "on": "floor",
+      "xy": [
+        1.1,
+        2.6
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "prop_bottle_b",
+      "kind": "prop",
+      "simready_leaf": "5_0_0003",
+      "on": "floor",
+      "xy": [
+        0.95,
+        2.35
+      ],
+      "yaw_deg": 0
+    }
+  ],
+  "support_table": {
+    "instance": "nightstand",
+    "size_m": [
+      1.2,
+      0.7,
+      0.75
+    ],
+    "why": "one shared 1.20 x 0.70 x 0.75 m work table in every room, so the three rows compare"
+  }
+}

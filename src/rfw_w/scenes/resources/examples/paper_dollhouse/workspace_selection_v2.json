@@ -1,0 +1,12 @@
+{
+  "comment": "Whole-room top view locates the task; close view shows the manipulable object, its support, and whatever else is within 1.60 m of that support -- the seat, the bed -- so the picture reads as a place rather than as an isolated slab. All walls retain full height; only the ceiling and outer facade are hidden. The bedroom bed and the counter-room jar are figure-only geometry substitutions recorded in each render provenance.",
+  "renamed": {
+    "kitchen": "counter",
+    "why": "The room was labelled `kitchen` because its scene spec is `kitchen_fetch_jar`, but the delivered room contains an island, a stool, a cabinet and a plant, and no stove, sink or fridge -- the prompt never asked for any. A viewer told it is a kitchen looks for the appliances and finds none, which makes the label the defect rather than the render. `counter` is what is actually in frame: a counter island with a stool at it, and a jar to be fetched from the top. The scene id, the delivery and every hash are unchanged; only what the figure calls the row is."
+  },
+  "rows": [
+    {"room": "office", "task": "cup ON desk", "render_dir": "outputs/_paper/dollhouse_office_framed_20260926_01"},
+    {"room": "counter", "task": "jar ON island", "render_dir": "outputs/_paper/dollhouse_kitchen_framed_20260926_01"},
+    {"room": "bedroom", "task": "alarm_clock ON nightstand", "render_dir": "outputs/_paper/dollhouse_bedroom_framed_20260926_01"}
+  ]
+}

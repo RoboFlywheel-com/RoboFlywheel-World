@@ -1,0 +1,89 @@
+{
+  "schema_version": "pvscene.scene-spec/v3",
+  "scene_id": "synthetic_asset",
+  "seed": 11,
+  "prompt": "Synthetic fixture: place a generated block on a constructed desk. No vessel semantics, grasp or task success is certified.",
+  "room": {
+    "size_bounds_m": [
+      [
+        4,
+        5
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        2.6,
+        3.0
+      ]
+    ],
+    "room_kind": "office",
+    "size_policy": "explicit"
+  },
+  "style": {
+    "theme": "warm_wood_office",
+    "palette": [
+      "oak",
+      "off_white",
+      "muted_green",
+      "brass"
+    ],
+    "density": "medium"
+  },
+  "requested_backends": [
+    "isaac"
+  ],
+  "requested_readiness": "draft",
+  "entities": [
+    {
+      "id": "desk",
+      "category": "desk",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": true,
+      "role": "support",
+      "notes": "against a wall, front to the room"
+    },
+    {
+      "id": "block",
+      "category": "storage_box",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": true,
+      "role": "task_target",
+      "size_bounds_m": [
+        [
+          0.09,
+          0.11
+        ],
+        [
+          0.09,
+          0.11
+        ],
+        [
+          0.09,
+          0.11
+        ]
+      ],
+      "notes": "Explicitly bound synthetic block; geometric fixture only"
+    }
+  ],
+  "initial_relations": [
+    {
+      "id": "on_support",
+      "subject": "block",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": true
+    }
+  ],
+  "task": {
+    "action": "pick_place",
+    "robot_profile": "franka_panda",
+    "targets": [
+      "block"
+    ],
+    "goal_predicates": []
+  }
+}

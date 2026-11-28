@@ -1,0 +1,125 @@
+{
+  "comment": "SPEC-016 kitchen dressing, shared-table revision (2026-09-26): the humanoid is gone (its torso passed through the counter, which the support-band rule cannot see) and the delivered island is replaced by the shared 1.20 x 0.70 x 0.75 m work table, with the Piper mounted on it. Figure-only: physics and IK are not_run.",
+  "shell_materials": {
+    "wall": {
+      "colour": [
+        0.83,
+        0.84,
+        0.8
+      ],
+      "roughness": 0.88,
+      "metallic": 0.0
+    },
+    "floor": {
+      "colour": [
+        0.33,
+        0.31,
+        0.29
+      ],
+      "roughness": 0.45,
+      "metallic": 0.0
+    }
+  },
+  "additions": [
+    {
+      "id": "piper_arm",
+      "kind": "robot",
+      "robot": "piper",
+      "pose": "examples/paper_dollhouse/pose_piper_ready.json",
+      "on": "island",
+      "xy": [
+        4.4,
+        4.03
+      ],
+      "yaw_deg": -159.3,
+      "task_target": "jar",
+      "why": "on the shared table, at its east end; the yaw puts the tool point on the bearing to the jar (jar at -169.5 deg from the base, TCP at -10.2 deg in the arm's own frame), 0.712 m away against a measured 0.8027 m reach"
+    },
+    {
+      "id": "prop_mug_k",
+      "kind": "prop",
+      "simready_leaf": "4_3_0012",
+      "on": "island",
+      "xy": [
+        4.3,
+        3.62
+      ],
+      "yaw_deg": 25
+    },
+    {
+      "id": "prop_spice_jar",
+      "kind": "prop",
+      "simready_leaf": "6_12_0002",
+      "on": "island",
+      "xy": [
+        3.72,
+        3.65
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "prop_can_k",
+      "kind": "prop",
+      "simready_leaf": "6_0_0028",
+      "on": "island",
+      "xy": [
+        4.55,
+        3.62
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "prop_bottle_k",
+      "kind": "prop",
+      "simready_leaf": "5_0_0003",
+      "on": "island",
+      "xy": [
+        4.7,
+        3.8
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "prop_plant_pot_k",
+      "kind": "prop",
+      "simready_leaf": "25_25_0020",
+      "on": "island",
+      "xy": [
+        4.7,
+        4.1
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "prop_toy_car_k",
+      "kind": "prop",
+      "simready_leaf": "29_9_0019",
+      "on": "island",
+      "xy": [
+        3.75,
+        4.12
+      ],
+      "yaw_deg": 105
+    },
+    {
+      "id": "prop_vase_k",
+      "kind": "prop",
+      "simready_leaf": "24_40_10014",
+      "on": "storage",
+      "xy": [
+        0.55,
+        2.9
+      ],
+      "yaw_deg": 0
+    }
+  ],
+  "support_table": {
+    "instance": "island",
+    "size_m": [
+      1.2,
+      0.7,
+      0.75
+    ],
+    "why": "one shared 1.20 x 0.70 x 0.75 m work table in every room, so the three rows compare"
+  }
+}

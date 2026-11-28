@@ -1,0 +1,18 @@
+{
+  "robot": "g1",
+  "why": "A standing, ready-to-reach pose: knees and hips slightly flexed, both elbows bent so the hands sit in front of the torso rather than hanging at the sides. Authored, not solved: no IK ran and none is claimed.",
+  "joint_degrees": {
+    "left_hip_pitch_joint": -12,
+    "left_knee_joint": 24,
+    "left_ankle_pitch_joint": -12,
+    "right_hip_pitch_joint": -12,
+    "right_knee_joint": 24,
+    "right_ankle_pitch_joint": -12,
+    "left_shoulder_pitch_joint": -25,
+    "left_shoulder_roll_joint": 16,
+    "left_elbow_joint": 55,
+    "right_shoulder_pitch_joint": -25,
+    "right_shoulder_roll_joint": -16,
+    "right_elbow_joint": 55
+  }
+}

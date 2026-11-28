@@ -1,0 +1,223 @@
+{
+  "scene": {
+    "add_surface_rigid_asset": {
+      "version": "v1",
+      "writes": true,
+      "scope": "optional surface role",
+      "requires": "built backgrounds",
+      "effect": "first admitted SimReady candidate placed on measured support"
+    },
+    "save_rigid_checkpoint": {
+      "version": "v1",
+      "writes": false,
+      "scope": "target",
+      "requires": "verified core",
+      "effect": "immutable target checkpoint"
+    },
+    "restore_rigid_asset": {
+      "version": "v1",
+      "writes": true,
+      "scope": "target",
+      "requires": "target checkpoint and changed binding",
+      "effect": "remeasured target restoration"
+    },
+    "search_rigid_assets": {
+      "version": "v1",
+      "writes": false,
+      "scope": "target role",
+      "requires": "verified core",
+      "effect": "bounded SimReady candidates"
+    },
+    "select_rigid_asset": {
+      "version": "v1",
+      "writes": true,
+      "scope": "target role",
+      "requires": "rigid query",
+      "effect": "mixed provider target assembly"
+    },
+    "create_surface_covering": {
+      "version": "v1",
+      "writes": true,
+      "scope": "measured surface",
+      "requires": "room appearance",
+      "effect": "verified thin covering"
+    },
+    "move_surface_covering": {
+      "version": "v1",
+      "writes": true,
+      "scope": "covering instance",
+      "requires": "covering",
+      "effect": "new checked position"
+    },
+    "remove_surface_covering": {
+      "version": "v1",
+      "writes": true,
+      "scope": "covering instance",
+      "requires": "covering",
+      "effect": "remove optional covering"
+    },
+    "search_surface_materials": {
+      "version": "v1",
+      "writes": false,
+      "scope": "room surface",
+      "requires": "built backgrounds",
+      "effect": "bounded material candidates"
+    },
+    "set_room_surface_materials": {
+      "version": "v1",
+      "writes": true,
+      "scope": "room surfaces",
+      "requires": "material queries",
+      "effect": "prepared appearance binding"
+    },
+    "revise_composition": {
+      "version": "v1",
+      "writes": true,
+      "scope": "rooms",
+      "requires": "v2 intent, no built artifacts",
+      "effect": "new semantic graph"
+    },
+    "build_house": {
+      "version": "v1",
+      "writes": true,
+      "scope": "house",
+      "requires": "configured intent",
+      "effect": "measured house shell"
+    },
+    "assemble_core": {
+      "version": "v1",
+      "writes": true,
+      "scope": "task_core",
+      "requires": "measured house shell",
+      "effect": "verified core assembly"
+    },
+    "save_checkpoint": {
+      "version": "v1",
+      "writes": false,
+      "scope": "graph",
+      "requires": "verified core",
+      "effect": "immutable checkpoint"
+    },
+    "furnish_floor": {
+      "version": "v1",
+      "writes": true,
+      "scope": "floor roles",
+      "requires": "checkpoint and pending floor",
+      "effect": "measured floor background"
+    },
+    "mount_wall": {
+      "version": "v1",
+      "writes": true,
+      "scope": "wall roles",
+      "requires": "checkpoint and pending wall",
+      "effect": "measured wall background"
+    },
+    "verify_scene": {
+      "version": "v1",
+      "writes": false,
+      "scope": "scene",
+      "requires": "built backgrounds",
+      "effect": "current static verification"
+    },
+    "rollback_scope": {
+      "version": "v1",
+      "writes": true,
+      "scope": "failed optional roles",
+      "requires": "failure and checkpoint",
+      "effect": "new revision, invalidated background evidence"
+    },
+    "finish": {
+      "version": "v1",
+      "writes": false,
+      "scope": "scene",
+      "requires": "current verification and all declared roles accounted",
+      "effect": "terminal success"
+    },
+    "terminate": {
+      "version": "v1",
+      "writes": false,
+      "scope": "scene",
+      "requires": "named failure",
+      "effect": "terminal named failure"
+    }
+  },
+  "robot_layout": {
+    "install_robot": {
+      "version": "v1",
+      "writes": true,
+      "scope": "fixed robot mount",
+      "effect": "measured mount"
+    },
+    "check_target_reachability": {
+      "version": "v1",
+      "writes": false,
+      "scope": "target",
+      "effect": "real target IK"
+    },
+    "check_approach_path": {
+      "version": "v1",
+      "writes": false,
+      "scope": "approach",
+      "effect": "sampled collision evidence"
+    },
+    "revise_robot_installation": {
+      "version": "v1",
+      "writes": true,
+      "scope": "fixed robot mount",
+      "effect": "new mount, invalidate IK/path"
+    },
+    "finish": {
+      "version": "v1",
+      "writes": false,
+      "scope": "robot layout",
+      "effect": "layout checks complete"
+    },
+    "terminate": {
+      "version": "v1",
+      "writes": false,
+      "scope": "robot layout",
+      "effect": "named failure"
+    }
+  },
+  "parameter_schemas": {
+    "revise_composition": {
+      "patch_index": "integer 0 or 1"
+    },
+    "search_surface_materials": {
+      "description": "string task style, e.g. wood oak or plaster wall",
+      "surface_kind": "floor or wall_set, exactly material_query_needed"
+    },
+    "set_room_surface_materials": {
+      "floor_material_id": "material_queries.floor.candidates material_id",
+      "wall_material_id": "material_queries.wall_set.candidates material_id",
+      "meters_per_tile": "number 0.01 to 100"
+    },
+    "search_rigid_assets": {
+      "role_id": "rigid_role_id",
+      "description": "task object description"
+    },
+    "select_rigid_asset": {
+      "candidate_key": "rigid_candidates candidate_key"
+    },
+    "add_surface_rigid_asset": {
+      "surface_id": "optional_surface_ids entry",
+      "role_id": "unique optional_ identifier",
+      "category": "bowl or jar, once each",
+      "description": "task semantic description"
+    },
+    "create_surface_covering": {
+      "instance_id": "unique cover_ token",
+      "surface_id": "covering_surfaces surface_id",
+      "material_id": "covering_material_ids entry",
+      "local_position_m": "two numbers, face-local meters",
+      "size_m": "two positive numbers"
+    },
+    "move_surface_covering": {
+      "instance_id": "covering_instances entry",
+      "local_position_m": "two numbers"
+    },
+    "remove_surface_covering": {
+      "instance_id": "covering_instances entry"
+    }
+  }
+}

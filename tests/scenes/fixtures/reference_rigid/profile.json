@@ -1,0 +1,20 @@
+{
+  "task_id": "T12",
+  "objects": [
+    {
+      "role": "pot",
+      "leaf": "0_0_0000",
+      "goal_support_role": "saucer"
+    },
+    {
+      "role": "saucer",
+      "leaf": "0_0_0000",
+      "goal_support_role": null
+    },
+    {
+      "role": "can",
+      "leaf": "0_0_0000",
+      "goal_support_role": null
+    }
+  ]
+}

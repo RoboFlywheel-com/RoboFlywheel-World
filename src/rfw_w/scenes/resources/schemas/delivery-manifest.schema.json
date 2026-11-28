@@ -1,0 +1,720 @@
+{
+  "$id": "pvscene.v3/delivery-manifest",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Everything a delivery claims, in one document.",
+  "properties": {
+    "agent": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "api_key_env": {
+              "type": "string"
+            },
+            "base_url": {
+              "type": "string"
+            },
+            "credential_present": {
+              "type": "boolean"
+            },
+            "model": {
+              "type": "string"
+            },
+            "wire": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "api_key_env",
+            "base_url",
+            "credential_present",
+            "model",
+            "wire"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "assets_used": {
+      "items": {
+        "additionalProperties": {},
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "background": {
+      "additionalProperties": {},
+      "type": "object"
+    },
+    "budget": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "deadline_s": {
+              "type": "number"
+            },
+            "elapsed_s": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "deadline_s",
+            "elapsed_s"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "compilation": {
+      "additionalProperties": {},
+      "type": "object"
+    },
+    "external_calls": {
+      "additionalProperties": {},
+      "type": "object"
+    },
+    "furnishing": {
+      "additionalProperties": {},
+      "type": "object"
+    },
+    "gates": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "backend": {
+            "type": "string"
+          },
+          "backend_version": {
+            "type": "string"
+          },
+          "detail": {
+            "type": "string"
+          },
+          "gate_id": {
+            "type": "string"
+          },
+          "measured_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "method": {
+            "type": "string"
+          },
+          "state_hash": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "pass",
+              "fail",
+              "not_run",
+              "unsupported"
+            ],
+            "type": "string"
+          },
+          "threshold_profile": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "timestamp": {
+            "type": "string"
+          },
+          "tool_version": {
+            "type": "string"
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "witness_refs": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "backend",
+          "gate_id",
+          "method",
+          "state_hash",
+          "status",
+          "tool_version"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "isaac_artifact_dir": {
+      "type": "string"
+    },
+    "isaac_request_path": {
+      "type": "string"
+    },
+    "isaac_version": {
+      "type": "string"
+    },
+    "lighting": {
+      "additionalProperties": {},
+      "type": "object"
+    },
+    "loop": {
+      "anyOf": [
+        {
+          "additionalProperties": {},
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "not_run": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "periphery_named_by_relations": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "placement": {
+      "additionalProperties": {},
+      "type": "object"
+    },
+    "plan": {
+      "additionalProperties": {},
+      "type": "object"
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "randomization": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "appearance": {
+              "anyOf": [
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "ceiling_fill_intensity": {
+                      "type": "number"
+                    },
+                    "dome_intensity": {
+                      "type": "number"
+                    },
+                    "sun_intensity": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "ceiling_fill_intensity",
+                    "dome_intensity",
+                    "sun_intensity"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "enabled": {
+              "type": "boolean"
+            },
+            "entity_choices": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "asset_candidate_index": {
+                    "type": "integer"
+                  },
+                  "entity_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "asset_candidate_index",
+                  "entity_id"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "invariant_entity_ids": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "invariant_relation_ids": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "invariant_spec_hash": {
+              "type": "string"
+            },
+            "policy_version": {
+              "type": "string"
+            },
+            "rejected_attempts": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "room_seed": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "room_seed_attempts": {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            "variant_seed": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "invariant_entity_ids",
+            "invariant_relation_ids",
+            "invariant_spec_hash",
+            "variant_seed"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "requested_backends": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "resolution": {
+      "additionalProperties": false,
+      "properties": {
+        "achieved": {
+          "enum": [
+            "draft",
+            "simready_scene_ready",
+            "functional_scene_ready",
+            "robot_feasible_scene_ready",
+            "task_verified"
+          ],
+          "type": "string"
+        },
+        "blockers": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "gate_id": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "pass",
+                  "fail",
+                  "not_run",
+                  "unsupported"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "gate_id",
+              "reason",
+              "status"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "failed_gates": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "meets_request": {
+          "type": "boolean"
+        },
+        "not_run_gates": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "outcome": {
+          "anyOf": [
+            {
+              "enum": [
+                "failed",
+                "unsupported",
+                "budget_exhausted"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "requested": {
+          "enum": [
+            "draft",
+            "simready_scene_ready",
+            "functional_scene_ready",
+            "robot_feasible_scene_ready",
+            "task_verified"
+          ],
+          "type": "string"
+        },
+        "requested_backends": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "scene_version": {
+          "type": "string"
+        },
+        "schema_version": {
+          "type": "string"
+        },
+        "stale_gates": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "unsupported_gates": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "achieved",
+        "blockers",
+        "meets_request",
+        "outcome",
+        "requested",
+        "requested_backends",
+        "scene_version"
+      ],
+      "type": "object"
+    },
+    "room": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "area_m2": {
+              "type": "number"
+            },
+            "area_ratio_to_bounding_box": {
+              "type": "number"
+            },
+            "door_cut": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "fit": {
+              "anyOf": [
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "cell_x_m": {
+                      "type": "number"
+                    },
+                    "cell_y_m": {
+                      "type": "number"
+                    },
+                    "door_arc_margin_deg": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "door_bearing_deg": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "door_in_approach_arc": {
+                      "anyOf": [
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "needed_depth_m": {
+                      "type": "number"
+                    },
+                    "needed_width_m": {
+                      "type": "number"
+                    },
+                    "opening_attempts": {
+                      "type": "integer"
+                    },
+                    "protected_depth_m": {
+                      "type": "number"
+                    },
+                    "protected_width_m": {
+                      "type": "number"
+                    },
+                    "sampled_depth_m": {
+                      "type": "number"
+                    },
+                    "sampled_width_m": {
+                      "type": "number"
+                    },
+                    "shape_fallback": {
+                      "type": "string"
+                    },
+                    "shape_family": {
+                      "type": "string"
+                    },
+                    "size_margin_x_m": {
+                      "type": "number"
+                    },
+                    "size_margin_y_m": {
+                      "type": "number"
+                    },
+                    "wall_standoff_m": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "cell_x_m",
+                    "cell_y_m",
+                    "needed_depth_m",
+                    "needed_width_m",
+                    "opening_attempts",
+                    "protected_depth_m",
+                    "protected_width_m",
+                    "sampled_depth_m",
+                    "sampled_width_m",
+                    "wall_standoff_m"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "height_m": {
+              "type": "number"
+            },
+            "openings": {
+              "type": "integer"
+            },
+            "vertices": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "area_m2",
+            "area_ratio_to_bounding_box",
+            "door_cut",
+            "height_m",
+            "openings",
+            "vertices"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "scene_graph": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "content_hash": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "content_hash",
+            "path"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "scene_id": {
+      "type": "string"
+    },
+    "scene_version": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "pvscene.delivery-manifest/v2",
+      "type": "string"
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "unsupported": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "visual_critique": {
+      "anyOf": [
+        {
+          "additionalProperties": {},
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vlm": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "api_key_env": {
+              "type": "string"
+            },
+            "base_url": {
+              "type": "string"
+            },
+            "credential_present": {
+              "type": "boolean"
+            },
+            "model": {
+              "type": "string"
+            },
+            "wire": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "api_key_env",
+            "base_url",
+            "credential_present",
+            "model",
+            "wire"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zones": {
+      "additionalProperties": {},
+      "type": "object"
+    }
+  },
+  "required": [
+    "gates",
+    "prompt",
+    "requested_backends",
+    "resolution",
+    "scene_id",
+    "scene_version",
+    "seed"
+  ],
+  "title": "DeliveryManifest",
+  "type": "object",
+  "x-pvscene-untyped": [
+    "assets_used[]",
+    "background",
+    "compilation",
+    "external_calls",
+    "furnishing",
+    "lighting",
+    "loop",
+    "placement",
+    "plan",
+    "visual_critique",
+    "zones"
+  ]
+}

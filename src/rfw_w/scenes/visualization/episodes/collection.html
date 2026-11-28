@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>机器人操作素材</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#101715;color:#edf4ed;font:15px/1.7 system-ui,sans-serif}main{max-width:1500px;margin:auto;padding:48px 28px}header{border-bottom:1px solid #34413b;padding-bottom:28px}small{color:#8bd9b0;letter-spacing:.15em}h1{font-size:clamp(30px,4vw,52px);margin:12px 0}p{color:#aebdb4}.count{color:#8bd9b0}nav{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0}button,input{font:inherit;border:1px solid #41554a;border-radius:8px;background:#1b2922;color:#e5eee7;padding:10px 16px}button{cursor:pointer}button.active{background:#b7edca;color:#15251b}input{margin-left:auto;min-width:230px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:24px}article{border:1px solid #34473b;border-radius:14px;overflow:hidden;background:#18221d}video{width:100%;aspect-ratio:16/9;display:block;background:#080d0a}.copy{padding:20px}h2{font-size:19px;margin:6px 0}article p{font-size:13px;margin:8px 0}.tag{font-size:12px;color:#a7e5bd}.evidence{display:flex;gap:16px;margin-top:12px}a{color:#9bd5b0;font-size:12px}footer{margin-top:40px;color:#91a499;font-size:13px}[hidden]{display:none!important}@media(max-width:600px){main{padding:26px 16px}input{margin-left:0;width:100%}}
+</style></head><body><main><header><small>ROBOT MOTION LIBRARY · ISAAC RTX</small><h1>机器人操作素材 <span class="count">__COUNT__</span></h1><p>已通过物理、全帧回放与媒体验收的操作片段 · 1080p / 30 fps · 原速</p><p>同一操作的重复背景已去重；新增目标位置保留为执行变体。T12 两段仅代表局部操作通过。</p></header>
+<nav aria-label="素材筛选"><button class="active" data-filter="all">全部</button><button data-filter="base">原有素材</button><button data-filter="variant">目标位置变体</button><button data-filter="local">局部操作</button><input id="search" type="search" placeholder="搜索动作、场景或编号" aria-label="搜索素材"></nav><p id="summary" aria-live="polite"></p><section class="grid" id="grid"></section><footer>Isaac RTX 为统一渲染器；原始动力学来源包括 PhysX 和 MuJoCo，详见各片段物理报告。T12 后续浇水壶任务未通过。这些素材不代表硬件执行或连续跨房任务已验证。</footer></main>
+<script>
+const clips=__DATA__;let filter='all';
+const grid=document.querySelector('#grid');
+for(const c of clips){
+ const variant=/^(tea|desk|wash)_/.test(c.id)&&!['tea_service','desk_tidy','wash_station'].includes(c.id);
+ const group=c.id.startsWith('T12_')?'local':variant?'variant':'base';
+ const card=document.createElement('article');card.dataset.group=group;card.dataset.search=[c.id,c.title,c.layout].join(' ').toLowerCase();
+ const video=document.createElement('video');video.controls=true;video.preload='none';video.playsInline=true;video.poster=c.poster;video.src=c.video;
+ video.addEventListener('play',()=>document.querySelectorAll('video').forEach(v=>{if(v!==video)v.pause()}));card.append(video);
+ const copy=document.createElement('div');copy.className='copy';
+ const tag=document.createElement('span');tag.className='tag';tag.textContent=group==='local'?'局部操作通过':variant?'新执行 · 目标位置变体':'已验机器人操作';copy.append(tag);
+ const title=document.createElement('h2');title.textContent=c.title.replace(/^tea ·/,'杯子归位 ·').replace(/^desk ·/,'桌面整理 ·').replace(/^wash ·/,'洗护归位 ·');copy.append(title);
+ const desc=document.createElement('p');desc.textContent=c.layout+' / '+c.id;copy.append(desc);
+ const links=document.createElement('div');links.className='evidence';
+ for(const [label,file] of [['物理验收','physics_validation.json'],['回放一致性','stage_validation.json'],['媒体验收','media_validation.json']]){const a=document.createElement('a');a.textContent=label;a.href='media/'+c.id+'_'+file;a.target='_blank';a.rel='noopener';links.append(a)}
+ copy.append(links);card.append(copy);grid.append(card);
+}
+function update(){const query=document.querySelector('#search').value.trim().toLowerCase();let n=0;for(const c of grid.children){c.hidden=!(filter==='all'||filter===c.dataset.group)||!c.dataset.search.includes(query);if(!c.hidden)n++;else c.querySelector('video').pause()}document.querySelector('#summary').textContent=`显示 ${n} / ${clips.length} 段`}
+document.querySelectorAll('button[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;document.querySelectorAll('button[data-filter]').forEach(x=>x.classList.toggle('active',x===b));update()});document.querySelector('#search').oninput=update;update();
+</script></body></html>

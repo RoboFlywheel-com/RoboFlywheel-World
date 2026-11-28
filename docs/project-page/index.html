@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="RFW-W: rigid asset generation and task-conditioned simulation worlds.">
+  <title>RFW-W · Rigid Assets and Simulation Worlds</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="media/catalog.js"></script>
+  <script defer src="page.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#home">Skip to content</a>
+<header class="site-header">
+  <a class="wordmark" href="#home">RFW-W</a>
+  <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="navigation">Menu <span aria-hidden="true">＋</span></button>
+  <nav id="navigation" aria-label="Main navigation">
+    <a href="#home">Overview</a><a href="#paper">Paper</a><a href="#rigid-pipeline">Asset pipeline</a><a href="#scene-pipeline">Scene pipeline</a>
+  </nav>
+</header>
+<main>
+  <section class="project-hero" id="home" aria-labelledby="paper-title">
+    <video id="hero-video" class="hero-background" muted loop playsinline preload="none" poster="assets/project-demo.webp" aria-label="RFW-W project demo"></video>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-paper" id="hero-paper-info">
+      <p class="hero-kicker">RoboFlyWheel-World</p>
+      <h1 id="paper-title">RFW-W: Scaling Physical Asset Universes<br class="hero-title-break"> for Generative Embodied Simulation</h1>
+      <div class="authors" aria-label="Authors and affiliations">
+        <div class="author-list">
+          <div class="author-row"><span class="author-entry">Jiawei Weng<sup>1,*</sup></span>
+            <span class="author-entry">Rui Zhang<sup>1,2,*</sup></span>
+            <span class="author-entry">Saining Zhang<sup>2,3,*,†</sup></span>
+            <span class="author-entry">Changjian Pan<sup>2,4,*</sup></span>
+            <span class="author-entry">Yuanbo Lyu<sup>1,*</sup></span>
+            <span class="author-entry">Jiarui Guo<sup>1,2,*</sup></span></div>
+          <div class="author-row"><span class="author-entry">Yongzhi Li<sup>3</sup></span>
+            <span class="author-entry">Guolin Liu<sup>2</sup></span>
+            <span class="author-entry">Jialu Liu<sup>2</sup></span>
+            <span class="author-entry">Jiankun Wang<sup>2</sup></span>
+            <span class="author-entry">Yi Yang<sup>1</sup></span>
+            <span class="author-entry">Peishuo Li<sup>3</sup></span></div>
+          <div class="author-row"><span class="author-entry">Zhiheng Li<sup>2</sup></span>
+            <span class="author-entry">Jiaying Wan<sup>2</sup></span>
+            <span class="author-entry">Junhao Chen<sup>2</sup></span>
+            <span class="author-entry">Weiqing Xiao<sup>5</sup></span>
+            <span class="author-entry">Jingrun Du<sup>1,2</sup></span>
+            <span class="author-entry">Wenyi Li<sup>1,2</sup></span>
+            <span class="author-entry">Weiyi Lin<sup>1</sup></span></div>
+          <div class="author-row"><span class="author-entry">Zenan Meng<sup>1,‡</sup></span>
+            <span class="author-entry">Hu Wei<sup>1,‡</sup></span>
+            <span class="author-entry">Lin Qu<sup>1</sup></span>
+            <span class="author-entry">Zongzheng Zhang<sup>2</sup></span>
+            <span class="author-entry">Hao Zhao<sup>2</sup></span>
+            <span class="author-entry">Chaojian Li<sup>6,‡</sup></span></div>
+        </div>
+        <p class="author-affiliations"><span><sup>1</sup> Alibaba Group</span> <span><sup>2</sup> Tsinghua University</span> <span><sup>3</sup> Nanyang Technological University</span> <span><sup>4</sup> Peking University</span> <span><sup>5</sup> Nanjing University</span> <span><sup>6</sup> Hong Kong University of Science and Technology</span></p>
+        <p class="author-notes"><span>* Core contributors</span><span>† Project leader</span><span>‡ Corresponding authors</span></p>
+        <p class="author-contacts" aria-label="Correspondence"><a href="mailto:mengzenan.mzn@alibaba-inc.com">mengzenan.mzn@alibaba-inc.com</a> <a href="mailto:kongwang@alibaba-inc.com">kongwang@alibaba-inc.com</a> <a href="mailto:chaojian@ust.hk">chaojian@ust.hk</a></p>
+      </div>
+      <div class="hero-actions">
+        <button id="film" class="hero-film" aria-haspopup="dialog" aria-controls="viewer" hidden><span aria-hidden="true">▶</span> Watch full demo</button>
+        <div class="hero-resources">
+          <a href="#paper">Paper</a>
+          <a href="https://github.com/RoboFlywheel-com/RoboFlywheel-World" target="_blank" rel="noopener noreferrer">Code <span aria-hidden="true">↗</span></a>
+          <a href="https://modelscope.cn/datasets/RoboFlywheel/RoboFlywheel-Rigid" target="_blank" rel="noopener noreferrer">Dataset <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-controls">
+      <div class="hero-controls-row">
+        <div class="hero-playback" id="hero-playback" hidden><button id="hero-play" aria-controls="hero-video">Play demo</button><button id="hero-view" aria-controls="hero-paper-info" aria-expanded="true">Watch demo ↗</button></div>
+      </div>
+      <div class="hero-caption"><a href="#scenes">Explore task scenes <span aria-hidden="true">↓</span></a></div>
+    </div>
+  </section>
+  <section id="paper" class="section"><div class="wrap">
+    <div class="section-heading"><div><p class="eyebrow">Paper · Rigid asset study</p><h2>Building objects for physical interaction</h2></div><p>RFW-R pairs a textured surface with semantic parts, collision geometry and physical properties. A task can then retrieve a cup by what it is, place it by its measured size and simulate contact using its collision hulls.</p></div>
+    <div class="stats" aria-label="Manuscript results for rigid assets">
+      <div class="stat"><strong>524,611</strong><span>Retained rigid assets</span></div>
+      <div class="stat"><strong>1,212</strong><span>Rigid object categories</span></div>
+      <div class="stat"><strong>6</strong><span>Hand models used for grasp annotation</span></div>
+    </div>
+    <nav class="method-links" aria-label="Pipeline diagrams"><a class="text-link" href="#rigid-pipeline">01 · Rigid asset pipeline ↓</a><a class="text-link" href="#scene-pipeline">02 · Task scene pipeline ↓</a></nav>
+  </div></section>
+  <section id="method" class="section method-section"><div class="wrap">
+    <div class="section-heading"><div><p class="eyebrow">Method · RFW-R and task scenes</p><h2>From object to task scene</h2></div><p>The rigid pipeline builds an object that a simulator can load. The scene pipeline then places task-relevant objects before it constructs the room around them.</p></div>
+    <article class="method-layer" id="rigid-pipeline" aria-labelledby="rigid-heading">
+    <p class="eyebrow">01 · Asset level</p><h3 id="rigid-heading">Rigid asset construction</h3>
+    <figure class="paper-pipeline"><a href="assets/rigid-construction.webp"><img loading="lazy" width="2250" height="891" src="assets/rigid-construction.webp" alt="Rigid asset stages L0 to L5, from category-guided mesh generation to physical evaluation"></a></figure>
+    <ol class="method-stages">
+      <li><h4>Generate and inspect</h4><p>Reconstruct a textured mesh and inspect it from several views. Reject incomplete objects or correct their category.</p></li>
+      <li><h4>Build the physical model</h4><p>Label functional parts, build convex hulls and combine part properties into mass, center of mass and inertia.</p></li>
+      <li><h4>Export for simulation</h4><p>Package the visual mesh, collision geometry and physical properties for import into multiple simulators.</p></li>
+    </ol>
+    <div id="assets" class="pipeline-showcase">
+    <div class="section-heading"><div><p class="eyebrow">Rigid asset collection</p><h4>Explore RFW-W assets</h4></div><p>Rigid objects packaged for import into multiple simulators, with textured surfaces for rendering and convex geometry for contact.</p></div>
+    <div id="asset-content" hidden>
+      <div id="stats" class="stats" aria-label="Curated preview counts"></div>
+      <div id="inspection">
+        <div id="mesh-viewport">
+        <model-viewer id="object-view" alt="Interactive rigid object" camera-controls touch-action="pan-y"
+          camera-orbit="45deg 58deg auto" shadow-intensity="0.45" interaction-prompt="none">
+          <img id="object-poster" slot="poster" alt="">
+        </model-viewer>
+        <model-viewer id="hull-view" aria-hidden="true" shadow-intensity="0.45" interaction-prompt="none"
+          min-camera-orbit="auto auto 0.001m" max-camera-orbit="auto auto 100m" min-field-of-view="1deg" max-field-of-view="150deg" hidden></model-viewer>
+        <div id="split-tools" hidden>
+          <span class="mesh-label">Appearance</span><span class="mesh-label">Collision hulls</span>
+          <div id="mesh-split" tabindex="0" role="slider" aria-label="Appearance share" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><span aria-hidden="true">↔</span></div>
+        </div>
+        </div>
+        <div class="inspection-tools"><h3 id="object-name"></h3><div class="chip-row" id="view-modes" role="group" aria-label="3D representation">
+          <button class="chip" data-mode="visual">Appearance</button><button class="chip" data-mode="collision">Collision hulls</button><button class="chip" data-mode="compare">Compare</button>
+        </div></div>
+        <dl id="object-facts" class="object-facts" aria-label="Asset specifications"></dl>
+        <p id="viewer-status" role="status" class="note" hidden>3D is unavailable. Showing the preview image.</p>
+      </div>
+      <div class="browser-toolbar"><div id="filters" class="chip-row" role="group" aria-label="Filter asset families"></div>
+        <label class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search assets…" aria-label="Search assets" autocomplete="off"></label>
+      </div>
+      <div class="browser-meta"><p id="count" role="status"></p></div>
+      <div id="asset-grid" class="asset-grid"></div>
+      <div id="empty" class="empty-results" hidden><h3>No matching assets</h3><button id="reset" class="button secondary">Reset filters</button></div>
+      <div class="browse-bottom"><p>3D previews are normalized for visibility. Dimensions refer to the packaged mesh.</p><button class="button secondary" id="more-assets" hidden>Show more assets ↓</button></div>
+    </div><p class="offline note">The local review media bundle is not attached.</p>
+    </div>
+    </article>
+    <article class="method-layer" id="scene-pipeline" aria-labelledby="scene-heading">
+    <p class="eyebrow">02 · Scene level</p><h3 id="scene-heading">Task-conditioned scene construction</h3>
+    <figure class="paper-pipeline"><a href="assets/task-scene-construction.webp"><img loading="lazy" width="2600" height="1556" src="assets/task-scene-construction.webp" alt="Scene pipeline: retrieve rigid, articulated and deformable assets, assemble the task core, build the room, validate and export"></a></figure>
+    <ol class="method-stages">
+      <li><h4>Retrieve and place objects</h4><p>Use the task specification to retrieve compatible objects from rigid, articulated and deformable collections. Place the targets and their supports, then freeze their relative poses.</p></li>
+      <li><h4>Build the room</h4><p>Fit walls and openings around the task objects, then add surrounding furniture, materials and lighting.</p></li>
+      <li><h4>Check and export</h4><p>Check geometry, task constraints and visual consistency. Repair the layout around the fixed objects and export the scene for Isaac Sim.</p></li>
+    </ol>
+    <div id="scenes" class="pipeline-showcase">
+    <div class="section-heading"><div><p class="eyebrow">Objects in action</p><h4>Task-conditioned scenes</h4></div><p>Recorded operations in a coffee corner, a study, a garden balcony and a laundry room.</p></div>
+    <div id="scene-content" class="interaction-layout" hidden>
+      <div><div class="video-shell"><video id="scene-video" controls playsinline preload="none" aria-label="Selected scene recording"></video></div><div class="action-caption"><h3 id="scene-title"></h3><span class="small-label" id="scene-scope"></span></div></div>
+      <div id="scene-list" class="action-picker" role="group" aria-label="Choose a scene recording"></div>
+    </div><p class="offline note">The local scene recordings are not attached.</p>
+    </div>
+    </article>
+  </div></section>
+</main>
+<footer class="wrap site-footer"><a class="wordmark" href="#home">RFW-W</a><p>RoboFlyWheel · Rigid assets and task-conditioned simulation worlds</p><a class="text-link" href="#home">Back to top ↑</a></footer>
+<dialog id="viewer" aria-labelledby="dialog-title">
+  <div class="dialog-top"><div><p class="eyebrow" id="dialog-label"></p><h2 id="dialog-title"></h2></div><button class="close-button" id="close" aria-label="Close preview">×</button></div>
+  <div id="dialog-body"></div>
+</dialog>
+</body></html>

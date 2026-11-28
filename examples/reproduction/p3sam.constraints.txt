@@ -1,0 +1,18 @@
+# Linux x86_64 / Python 3.10; Torch and torchvision from the official cu118 index.
+# torch-scatter must be the pt25/cu118 build, supplied as a separate wheel.
+torch==2.5.1+cu118
+torchvision==0.20.1+cu118
+torch-scatter==2.1.2+pt25cu118
+spconv-cu118==2.3.8
+cumm-cu118==0.7.11
+numpy==1.26.4
+scipy==1.15.3
+trimesh==5.2.0
+scikit-learn==1.7.2
+fpsample==0.3.3
+numba==0.68.1
+timm==1.0.30
+addict==2.4.0
+safetensors==0.8.0
+omegaconf==2.4.0
+einops==0.8.2

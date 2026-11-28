@@ -1,0 +1,307 @@
+{
+  "schema_version": "pvscene.scene-spec/v3",
+  "scene_id": "pm04_kitchen_pick_bottle",
+  "seed": 44,
+  "prompt": "生成一间明亮的厨房：中央一个岛台，台面上有一个可拿取的瓶子，旁边有碗、调料罐、杯子和一罐饮料；另配高脚凳、餐边柜、绿植和一个收纳篮。机器人需要从台面取走瓶子。",
+  "room": {
+    "size_bounds_m": [
+      [
+        5.0,
+        6.0
+      ],
+      [
+        4.0,
+        4.8
+      ],
+      [
+        2.7,
+        3.0
+      ]
+    ],
+    "room_kind": "kitchen",
+    "size_policy": "explicit"
+  },
+  "style": {
+    "theme": "bright_kitchen",
+    "palette": [
+      "off_white",
+      "oak",
+      "sage",
+      "steel"
+    ],
+    "density": "dense"
+  },
+  "requested_backends": [
+    "isaac"
+  ],
+  "requested_readiness": "functional_scene_ready",
+  "entities": [
+    {
+      "id": "island",
+      "category": "kitchen_island",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": true,
+      "role": "support",
+      "size_bounds_m": [
+        [
+          1.2,
+          2.0
+        ],
+        [
+          0.6,
+          0.9
+        ],
+        [
+          0.85,
+          0.95
+        ]
+      ],
+      "notes": "the work surface the task happens on; front to the room"
+    },
+    {
+      "id": "bottle",
+      "category": "bottle",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": true,
+      "role": "task_target",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ],
+      "notes": "the grasp target; on the work surface, clear of its edge"
+    },
+    {
+      "id": "bowl",
+      "category": "bowl",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "spice_jar",
+      "category": "spice_jar",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "cup",
+      "category": "cup",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "can",
+      "category": "can",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "stool",
+      "category": "stool",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.3,
+          0.6
+        ],
+        [
+          0.3,
+          0.6
+        ],
+        [
+          0.4,
+          0.8
+        ]
+      ]
+    },
+    {
+      "id": "storage",
+      "category": "cabinet",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.7,
+          1.8
+        ],
+        [
+          0.35,
+          0.8
+        ],
+        [
+          0.8,
+          1.6
+        ]
+      ]
+    },
+    {
+      "id": "plant",
+      "category": "plant",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.5,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "basket",
+      "category": "basket",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.25,
+          0.6
+        ],
+        [
+          0.25,
+          0.6
+        ],
+        [
+          0.2,
+          0.5
+        ]
+      ]
+    }
+  ],
+  "initial_relations": [
+    {
+      "id": "r1",
+      "subject": "bottle",
+      "predicate": "ON",
+      "object": "island",
+      "hard": true
+    },
+    {
+      "id": "r2",
+      "subject": "bowl",
+      "predicate": "ON",
+      "object": "island",
+      "hard": false
+    },
+    {
+      "id": "r3",
+      "subject": "spice_jar",
+      "predicate": "ON",
+      "object": "island",
+      "hard": false
+    },
+    {
+      "id": "r4",
+      "subject": "cup",
+      "predicate": "ON",
+      "object": "island",
+      "hard": false
+    },
+    {
+      "id": "r5",
+      "subject": "can",
+      "predicate": "ON",
+      "object": "island",
+      "hard": false
+    }
+  ],
+  "task": {
+    "action": "pick_place",
+    "robot_profile": "piper_x",
+    "targets": [
+      "bottle"
+    ],
+    "goal_predicates": []
+  }
+}

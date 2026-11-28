@@ -1,0 +1,32 @@
+{
+  "comment": "SPEC-016 bedroom dressing layout: layout_bedroom.json plus the shared-table move. The nightstand's geometry becomes the shared work table and its pose moves to the room's open middle; the alarm clock moves with it onto the 0.750 m top. The bed is a figure-only substitution that nothing may rest on, so `book` is removed rather than moved.",
+  "overrides": {
+    "ceiling_light": {
+      "remove": true
+    },
+    "wall_art": {
+      "remove": true
+    },
+    "rug": {
+      "remove": true
+    },
+    "nightstand": {
+      "translation": [
+        2.2,
+        2.3,
+        0.0
+      ]
+    },
+    "alarm_clock": {
+      "translation": [
+        2.32,
+        2.18,
+        0.825
+      ],
+      "on": "nightstand"
+    },
+    "book": {
+      "remove": true
+    }
+  }
+}

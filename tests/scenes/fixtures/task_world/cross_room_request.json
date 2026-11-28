@@ -1,0 +1,11 @@
+{
+  "graph_id": "kitchen_to_study_cup",
+  "seed": 7,
+  "prompt": "一台移动操作机器人从厨房台面拿起杯子，经过厨房与书房之间的门，把杯子放在书房书桌上。",
+  "robot": {
+    "id": "robot",
+    "name": "mobile_manipulator",
+    "mobility": "mobile_manipulator",
+    "required_clearance_m": 0.75
+  }
+}

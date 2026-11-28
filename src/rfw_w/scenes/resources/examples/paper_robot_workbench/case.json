@@ -1,0 +1,457 @@
+{
+  "schema_version": "pvscene.paper-case/v1",
+  "case_id": "paper_dual_piper_workbench",
+  "selection_mode": "curated",
+  "targets": [
+    "cup",
+    "bowl",
+    "plate",
+    "soap",
+    "microwave",
+    "sponge",
+    "plush"
+  ],
+  "supports": [
+    "workbench",
+    "mount_left",
+    "mount_right"
+  ],
+  "relations": [
+    {
+      "subject": "cup",
+      "predicate": "ON",
+      "object": "workbench"
+    },
+    {
+      "subject": "bowl",
+      "predicate": "ON",
+      "object": "workbench"
+    },
+    {
+      "subject": "plate",
+      "predicate": "ON",
+      "object": "workbench"
+    },
+    {
+      "subject": "soap",
+      "predicate": "ON",
+      "object": "workbench"
+    },
+    {
+      "subject": "microwave",
+      "predicate": "ON",
+      "object": "workbench"
+    },
+    {
+      "subject": "sponge",
+      "predicate": "ON",
+      "object": "workbench"
+    },
+    {
+      "subject": "plush",
+      "predicate": "ON",
+      "object": "workbench"
+    },
+    {
+      "subject": "piper_left",
+      "predicate": "ON",
+      "object": "mount_left"
+    },
+    {
+      "subject": "mount_left",
+      "predicate": "ON",
+      "object": "workbench"
+    },
+    {
+      "subject": "piper_right",
+      "predicate": "ON",
+      "object": "mount_right"
+    },
+    {
+      "subject": "mount_right",
+      "predicate": "ON",
+      "object": "workbench"
+    }
+  ],
+  "robot": {
+    "id": "piper_left",
+    "instances": [
+      {
+        "id": "piper_left",
+        "support": "mount_left"
+      },
+      {
+        "id": "piper_right",
+        "support": "mount_right"
+      }
+    ],
+    "mount": "fixed_table_edge",
+    "model": "piper_x",
+    "pose_policy": "source URDF FK; static visual layout only; IK not_run"
+  },
+  "room": {
+    "kind": "office",
+    "seed": 11,
+    "size_bounds_m": [
+      [
+        5.5,
+        5.5
+      ],
+      [
+        5,
+        5
+      ],
+      [
+        2.8,
+        2.8
+      ]
+    ]
+  },
+  "cameras": {
+    "isometric": {
+      "azimuth_deg": 305,
+      "elevation_deg": 35
+    },
+    "projection": "orthographic for isolated assets; perspective for Isaac view"
+  },
+  "assets": [
+    {
+      "id": "cup",
+      "asset_id": "4_3_0000",
+      "provider": "simready",
+      "source_physics_type": "rigid",
+      "source_kind": "simready_obj",
+      "role": "target",
+      "normalisation": "y_up_to_z_up",
+      "reason": "Blue ceramic mug selected from actual candidate render; tableware grasp group."
+    },
+    {
+      "id": "microwave",
+      "asset_id": "Kitchen_Microwave__seed_0001",
+      "provider": "articraft",
+      "source_physics_type": "articulated",
+      "source_kind": "v2_wrapper",
+      "wrapper_name": "articulated",
+      "role": "target",
+      "reason": "Door and knobs provide visible articulated structure.",
+      "static_joint_degrees": {
+        "door_hinge": 25,
+        "power_knob_dial": 0,
+        "timer_knob_dial": 0
+      }
+    },
+    {
+      "id": "workbench",
+      "asset_id": "paper_workbench_v1",
+      "provider": "constructed",
+      "source_physics_type": "rigid",
+      "source_kind": "workbench",
+      "role": "support",
+      "dimensions_m": [
+        1.8,
+        0.9,
+        0.78
+      ],
+      "reason": "Explicitly constructed support, sized before room fitting; not a retrieved asset."
+    },
+    {
+      "id": "storage",
+      "asset_id": "d15420918c690dbe0c1e62db3e69a94db6ad109a",
+      "provider": "hssd",
+      "source_physics_type": "rigid",
+      "source_kind": "prepared_obj",
+      "role": "periphery",
+      "normalisation": "none",
+      "reason": "Curated existing storage asset."
+    },
+    {
+      "id": "chair",
+      "asset_id": "65cd781989f935391fc07009226cb99f7198b486",
+      "provider": "hssd",
+      "source_physics_type": "rigid",
+      "source_kind": "prepared_obj",
+      "role": "periphery",
+      "normalisation": "none",
+      "reason": "Curated existing chair."
+    },
+    {
+      "id": "plant",
+      "asset_id": "1943726018bc88e96a8fa16fd6f8d88523d75abc",
+      "provider": "hssd",
+      "source_physics_type": "rigid",
+      "source_kind": "prepared_obj",
+      "role": "periphery",
+      "normalisation": "none",
+      "reason": "Curated greenery for visual context."
+    },
+    {
+      "id": "bowl",
+      "asset_id": "3_2_0001",
+      "provider": "simready",
+      "source_physics_type": "rigid",
+      "source_kind": "simready_obj",
+      "role": "target",
+      "normalisation": "y_up_to_z_up",
+      "reason": "Manually selected from current-library source thumbnails; tableware or cleaning station."
+    },
+    {
+      "id": "plate",
+      "asset_id": "3_0_0000",
+      "provider": "simready",
+      "source_physics_type": "rigid",
+      "source_kind": "simready_obj",
+      "role": "target",
+      "normalisation": "y_up_to_z_up",
+      "reason": "Manually selected from current-library source thumbnails; tableware or cleaning station."
+    },
+    {
+      "id": "soap",
+      "asset_id": "5_25_0001",
+      "provider": "simready",
+      "source_physics_type": "rigid",
+      "source_kind": "simready_obj",
+      "role": "target",
+      "normalisation": "y_up_to_z_up",
+      "reason": "Manually selected from current-library source thumbnails; tableware or cleaning station."
+    },
+    {
+      "id": "sponge",
+      "asset_id": "stage3_100k_qwen2_v1_solid_000107",
+      "provider": "softsim",
+      "source_physics_type": "deformable",
+      "source_kind": "softsim_catalog",
+      "role": "target",
+      "normalisation": "y_up_to_z_up",
+      "reason": "Selected from real source previews for recognisable soft geometry; catalog physics provenance, static presentation only."
+    },
+    {
+      "id": "plush",
+      "asset_id": "stage3_100k_qwen2_v1_solid_000232",
+      "provider": "softsim",
+      "source_physics_type": "deformable",
+      "source_kind": "softsim_catalog",
+      "role": "target",
+      "normalisation": "y_up_to_z_up",
+      "reason": "Selected from real source previews for recognisable soft geometry; catalog physics provenance, static presentation only."
+    },
+    {
+      "id": "piper_left",
+      "asset_id": "piper_x",
+      "provider": "agilex_urdf",
+      "source_physics_type": "articulated",
+      "source_kind": "piper_urdf",
+      "role": "robot",
+      "origin_policy": "urdf_base",
+      "static_joint_degrees": {
+        "joint1": 0,
+        "joint2": 40,
+        "joint3": -80,
+        "joint4": 60,
+        "joint5": 0,
+        "joint6": 0
+      },
+      "reason": "Source Piper X with gripper; static table-edge mounted arm."
+    },
+    {
+      "id": "mount_left",
+      "asset_id": "paper_edge_mount_v1",
+      "provider": "constructed",
+      "source_physics_type": "rigid",
+      "source_kind": "mount_plate",
+      "role": "support",
+      "dimensions_m": [
+        0.2,
+        0.18,
+        0.02
+      ],
+      "reason": "Explicit table-edge top mounting plate; fastening strength not simulated."
+    },
+    {
+      "id": "piper_right",
+      "asset_id": "piper_x",
+      "provider": "agilex_urdf",
+      "source_physics_type": "articulated",
+      "source_kind": "piper_urdf",
+      "role": "robot",
+      "origin_policy": "urdf_base",
+      "static_joint_degrees": {
+        "joint1": 0,
+        "joint2": 40,
+        "joint3": -80,
+        "joint4": 60,
+        "joint5": 0,
+        "joint6": 0
+      },
+      "reason": "Source Piper X with gripper; static table-edge mounted arm."
+    },
+    {
+      "id": "mount_right",
+      "asset_id": "paper_edge_mount_v1",
+      "provider": "constructed",
+      "source_physics_type": "rigid",
+      "source_kind": "mount_plate",
+      "role": "support",
+      "dimensions_m": [
+        0.2,
+        0.18,
+        0.02
+      ],
+      "reason": "Explicit table-edge top mounting plate; fastening strength not simulated."
+    }
+  ],
+  "render_representation": "static source geometry; no physics rollout",
+  "external_calls": 0,
+  "retrieval_calls": 0,
+  "layout": {
+    "core_positions_m": {
+      "workbench": [
+        0,
+        0,
+        0
+      ],
+      "mount_left": [
+        -0.6,
+        -0.36,
+        0.78
+      ],
+      "mount_right": [
+        0.6,
+        -0.36,
+        0.78
+      ],
+      "piper_left": [
+        -0.6,
+        -0.36,
+        0.8
+      ],
+      "piper_right": [
+        0.6,
+        -0.36,
+        0.8
+      ],
+      "microwave": [
+        -0.48,
+        0.13,
+        0.78
+      ],
+      "cup": [
+        -0.1,
+        -0.28,
+        0.78
+      ],
+      "plate": [
+        0.1,
+        0.06,
+        0.78
+      ],
+      "bowl": [
+        0.43,
+        -0.1,
+        0.78
+      ],
+      "sponge": [
+        0.72,
+        -0.1,
+        0.78
+      ],
+      "soap": [
+        0.65,
+        0.15,
+        0.78
+      ],
+      "plush": [
+        0.37,
+        0.25,
+        0.78
+      ]
+    },
+    "protected_polygon_xy": [
+      [
+        -1.15,
+        -0.6
+      ],
+      [
+        1.15,
+        -0.6
+      ],
+      [
+        1.15,
+        0.7
+      ],
+      [
+        -1.15,
+        0.7
+      ]
+    ],
+    "chair_relative_to_core_m": [
+      0.68,
+      -0.89,
+      0
+    ],
+    "chair_yaw_deg": 180,
+    "core_yaw_deg": {
+      "piper_left": 90,
+      "piper_right": 90
+    },
+    "operating_face": {
+      "asset": "microwave",
+      "source_normal": [
+        0,
+        -1,
+        0
+      ],
+      "toward": "piper_left",
+      "max_deviation_deg": 30,
+      "door_front_keep_clear_local_xy": [
+        [
+          -0.79,
+          -0.27
+        ],
+        [
+          -0.19,
+          -0.27
+        ],
+        [
+          -0.19,
+          -0.205
+        ],
+        [
+          -0.79,
+          -0.205
+        ]
+      ]
+    },
+    "groups": [
+      {
+        "name": "left_arm_appliance",
+        "members": [
+          "microwave",
+          "cup"
+        ],
+        "intent": "Door faces the left arm; cup in front."
+      },
+      {
+        "name": "right_arm_tableware",
+        "members": [
+          "plate",
+          "bowl"
+        ],
+        "intent": "Tableware in the right arm forward workspace."
+      },
+      {
+        "name": "right_arm_soft_and_cleaning",
+        "members": [
+          "sponge",
+          "soap",
+          "plush"
+        ],
+        "intent": "Compact object group in front of right arm."
+      }
+    ]
+  },
+  "primary_deformable": "plush",
+  "selection_evidence": [
+    "spec012_candidates_20260923_01",
+    "spec012_candidates_20260923_02"
+  ]
+}

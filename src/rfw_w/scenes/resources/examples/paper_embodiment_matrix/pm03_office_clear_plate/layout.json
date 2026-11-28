@@ -1,0 +1,43 @@
+{
+  "comment": "SPEC-016 dressing layout for pm03_office_clear_plate: the delivered desk becomes the shared work table, so everything that stood on its old top is re-seated on the new one (or removed when the smaller top has no free cell for it).",
+  "overrides": {
+    "plate": {
+      "translation": [
+        2.5834,
+        3.2462,
+        0.8271
+      ],
+      "on": "desk"
+    },
+    "cup": {
+      "translation": [
+        2.6031,
+        3.0162,
+        0.75
+      ],
+      "on": "desk"
+    },
+    "bowl": {
+      "remove": true
+    },
+    "book": {
+      "remove": true
+    },
+    "toy_car": {
+      "translation": [
+        2.8031,
+        3.0162,
+        0.75
+      ],
+      "on": "desk"
+    },
+    "table_clock": {
+      "translation": [
+        3.0231,
+        2.9962,
+        0.75
+      ],
+      "on": "desk"
+    }
+  }
+}

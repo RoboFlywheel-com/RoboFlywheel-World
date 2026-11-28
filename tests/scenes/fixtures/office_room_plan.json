@@ -1,0 +1,190 @@
+{
+  "schema_version": "pvscene.room-plan/v1",
+  "plan_id": "office_pick_cup:11:core",
+  "source": "core",
+  "units": "m",
+  "up_axis": "Z",
+  "rooms": [
+    {
+      "room_id": "room_0",
+      "kind": "office",
+      "polygon_xy": [
+        [
+          0.0,
+          0.746
+        ],
+        [
+          0.864,
+          0.746
+        ],
+        [
+          0.864,
+          0.0
+        ],
+        [
+          4.4524,
+          0.0
+        ],
+        [
+          4.4524,
+          3.5598
+        ],
+        [
+          0.0,
+          3.5598
+        ]
+      ],
+      "floor_z_m": 0.0,
+      "ceiling_height_m": 2.9697,
+      "floor_material": "oak",
+      "wall_material": "off_white"
+    }
+  ],
+  "openings": [
+    {
+      "opening_id": "door_main",
+      "kind": "door",
+      "room_id": "room_0",
+      "wall_segment_xy": [
+        [
+          2.464154,
+          3.5598
+        ],
+        [
+          1.564154,
+          3.5598
+        ]
+      ],
+      "width_m": 0.9,
+      "height_m": 2.05,
+      "sill_z_m": 0.0
+    },
+    {
+      "opening_id": "window_01",
+      "kind": "window",
+      "room_id": "room_0",
+      "wall_segment_xy": [
+        [
+          1.219931,
+          0.0
+        ],
+        [
+          2.502931,
+          0.0
+        ]
+      ],
+      "width_m": 1.283,
+      "height_m": 1.2,
+      "sill_z_m": 0.885
+    },
+    {
+      "opening_id": "window_02",
+      "kind": "window",
+      "room_id": "room_0",
+      "wall_segment_xy": [
+        [
+          4.4524,
+          1.598254
+        ],
+        [
+          4.4524,
+          2.524254
+        ]
+      ],
+      "width_m": 0.926,
+      "height_m": 1.2,
+      "sill_z_m": 1.022
+    },
+    {
+      "opening_id": "window_03",
+      "kind": "window",
+      "room_id": "room_0",
+      "wall_segment_xy": [
+        [
+          0.0,
+          2.625931
+        ],
+        [
+          0.0,
+          1.239931
+        ]
+      ],
+      "width_m": 1.386,
+      "height_m": 1.2,
+      "sill_z_m": 0.807
+    }
+  ],
+  "core": {
+    "core_hash": "979875297fcd621734151a7b8daf9507c735d5c8bb7b148e2a85940fa6b9c4a1",
+    "translation_xy": [
+      3.37525,
+      2.5173
+    ],
+    "rotation_yaw_rad": 0.0,
+    "protected_polygon_xy": [
+      [
+        -0.96371,
+        -0.68871
+      ],
+      [
+        -0.9225,
+        -0.94215
+      ],
+      [
+        -0.728349,
+        -1.02257
+      ],
+      [
+        -0.52,
+        -1.05
+      ],
+      [
+        0.08,
+        -1.05
+      ],
+      [
+        0.288349,
+        -1.02257
+      ],
+      [
+        0.4825,
+        -0.94215
+      ],
+      [
+        0.649221,
+        -0.814221
+      ],
+      [
+        0.77715,
+        -0.6475
+      ],
+      [
+        0.77715,
+        -0.0475
+      ],
+      [
+        0.675,
+        0.7425
+      ],
+      [
+        -0.675,
+        0.7425
+      ],
+      [
+        -0.96371,
+        -0.08871
+      ]
+    ],
+    "support_top_z_m": 0.75,
+    "target_offset_xy": [
+      -0.22,
+      0.055
+    ]
+  },
+  "provenance": {
+    "spec_hash": "4b219d11f8653c384669341d3608dc1454ee5525572424f9a869c4beebba0c50",
+    "seed": 11,
+    "shell_options_digest": "7d3f68fa773df08c7e554db01aa79ee038a70e103e741405ac5f834bdbda8af7"
+  },
+  "hash": "92352ed69f5ed14fce6e28570209d97fce9df512dc85d407864f25ff9bede41d"
+}

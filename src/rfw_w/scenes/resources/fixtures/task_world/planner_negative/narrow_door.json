@@ -1,0 +1,362 @@
+{
+  "expected_error": "PORTAL_CLEARANCE_INCOMPATIBLE",
+  "response": {
+    "request_hash": "9f7a4e83bbf7968cf2dd5cded776ff3d2bd2fe42682a7fd061118cfe4ffffbf3",
+    "graph": {
+      "schema_version": "pvscene.task-world-graph/v1",
+      "graph_id": "kitchen_to_study_cup",
+      "revision": 0,
+      "parent_hash": null,
+      "units": "m",
+      "up_axis": "Z",
+      "nodes": [
+        {
+          "id": "house",
+          "kind": "house",
+          "label": "家庭",
+          "source": "inferred"
+        },
+        {
+          "id": "kitchen",
+          "kind": "room",
+          "label": "厨房",
+          "room_kind": "kitchen",
+          "source": "user"
+        },
+        {
+          "id": "study",
+          "kind": "room",
+          "label": "书房",
+          "room_kind": "study",
+          "source": "user"
+        },
+        {
+          "id": "door",
+          "kind": "portal",
+          "label": "内门",
+          "room_ids": [
+            "kitchen",
+            "study"
+          ],
+          "initial_state": "open",
+          "requested_clearance_m": 0.6,
+          "source": "user"
+        },
+        {
+          "id": "kitchen_work",
+          "kind": "workspace",
+          "label": "厨房取物区",
+          "room_id": "kitchen",
+          "source": "inferred"
+        },
+        {
+          "id": "study_work",
+          "kind": "workspace",
+          "label": "书房放置区",
+          "room_id": "study",
+          "source": "inferred"
+        },
+        {
+          "id": "robot",
+          "kind": "robot",
+          "label": "移动操作机器人",
+          "mobility": "mobile_manipulator",
+          "source": "user"
+        },
+        {
+          "id": "cup",
+          "kind": "asset_role",
+          "label": "杯子",
+          "category": "cup",
+          "task_role": "target",
+          "room_id": "kitchen",
+          "required_capabilities": [
+            "rigid",
+            "graspable"
+          ],
+          "source": "user"
+        },
+        {
+          "id": "counter",
+          "kind": "asset_role",
+          "label": "厨房台面",
+          "category": "counter",
+          "task_role": "source_support",
+          "room_id": "kitchen",
+          "required_capabilities": [
+            "support_surface"
+          ],
+          "source": "user"
+        },
+        {
+          "id": "desk",
+          "kind": "asset_role",
+          "label": "书房书桌",
+          "category": "desk",
+          "task_role": "destination_support",
+          "room_id": "study",
+          "required_capabilities": [
+            "support_surface"
+          ],
+          "source": "user"
+        }
+      ],
+      "edges": [
+        {
+          "id": "e_house_kitchen",
+          "kind": "contains",
+          "source_id": "house",
+          "target_id": "kitchen"
+        },
+        {
+          "id": "e_house_study",
+          "kind": "contains",
+          "source_id": "house",
+          "target_id": "study"
+        },
+        {
+          "id": "e_door_kitchen",
+          "kind": "connects",
+          "source_id": "door",
+          "target_id": "kitchen"
+        },
+        {
+          "id": "e_door_study",
+          "kind": "connects",
+          "source_id": "door",
+          "target_id": "study"
+        },
+        {
+          "id": "e_kitchen_cup",
+          "kind": "contains",
+          "source_id": "kitchen",
+          "target_id": "cup"
+        },
+        {
+          "id": "e_kitchen_counter",
+          "kind": "contains",
+          "source_id": "kitchen",
+          "target_id": "counter"
+        },
+        {
+          "id": "e_study_desk",
+          "kind": "contains",
+          "source_id": "study",
+          "target_id": "desk"
+        },
+        {
+          "id": "e_kitchen_work",
+          "kind": "contains",
+          "source_id": "kitchen",
+          "target_id": "kitchen_work"
+        },
+        {
+          "id": "e_study_work",
+          "kind": "contains",
+          "source_id": "study",
+          "target_id": "study_work"
+        },
+        {
+          "id": "e_cup_support",
+          "kind": "supports",
+          "source_id": "counter",
+          "target_id": "cup"
+        }
+      ],
+      "initial_state": [
+        {
+          "subject": "cup",
+          "predicate": "ON",
+          "object": "counter"
+        },
+        {
+          "subject": "robot",
+          "predicate": "IN_ROOM",
+          "object": "kitchen"
+        }
+      ],
+      "steps": [
+        {
+          "id": "pick_cup",
+          "verb": "PICK",
+          "actor": "robot",
+          "target_ids": [
+            "cup"
+          ],
+          "workspace_id": "kitchen_work",
+          "route_portal_ids": [],
+          "preconditions": [
+            {
+              "subject": "cup",
+              "predicate": "ON",
+              "object": "counter"
+            },
+            {
+              "subject": "robot",
+              "predicate": "IN_ROOM",
+              "object": "kitchen"
+            }
+          ],
+          "effects_remove": [
+            {
+              "subject": "cup",
+              "predicate": "ON",
+              "object": "counter"
+            }
+          ],
+          "effects_add": [
+            {
+              "subject": "cup",
+              "predicate": "HELD_BY",
+              "object": "robot"
+            }
+          ]
+        },
+        {
+          "id": "cross_door",
+          "verb": "NAVIGATE",
+          "actor": "robot",
+          "target_ids": [],
+          "workspace_id": "study_work",
+          "route_portal_ids": [
+            "door"
+          ],
+          "preconditions": [
+            {
+              "subject": "cup",
+              "predicate": "HELD_BY",
+              "object": "robot"
+            },
+            {
+              "subject": "robot",
+              "predicate": "IN_ROOM",
+              "object": "kitchen"
+            }
+          ],
+          "effects_remove": [
+            {
+              "subject": "robot",
+              "predicate": "IN_ROOM",
+              "object": "kitchen"
+            }
+          ],
+          "effects_add": [
+            {
+              "subject": "robot",
+              "predicate": "IN_ROOM",
+              "object": "study"
+            }
+          ]
+        },
+        {
+          "id": "place_cup",
+          "verb": "PLACE",
+          "actor": "robot",
+          "target_ids": [
+            "cup"
+          ],
+          "workspace_id": "study_work",
+          "route_portal_ids": [],
+          "preconditions": [
+            {
+              "subject": "cup",
+              "predicate": "HELD_BY",
+              "object": "robot"
+            },
+            {
+              "subject": "robot",
+              "predicate": "IN_ROOM",
+              "object": "study"
+            }
+          ],
+          "effects_remove": [
+            {
+              "subject": "cup",
+              "predicate": "HELD_BY",
+              "object": "robot"
+            }
+          ],
+          "effects_add": [
+            {
+              "subject": "cup",
+              "predicate": "ON",
+              "object": "desk"
+            }
+          ]
+        }
+      ],
+      "goals": [
+        {
+          "subject": "cup",
+          "predicate": "ON",
+          "object": "desk"
+        }
+      ],
+      "requirements": [
+        {
+          "id": "door_clearance",
+          "kind": "portal_clearance",
+          "subject_ids": [
+            "door",
+            "robot"
+          ],
+          "status": "not_run"
+        },
+        {
+          "id": "source_reach",
+          "kind": "workspace_reach",
+          "subject_ids": [
+            "kitchen_work",
+            "robot",
+            "cup"
+          ],
+          "status": "not_run"
+        },
+        {
+          "id": "target_reach",
+          "kind": "workspace_reach",
+          "subject_ids": [
+            "study_work",
+            "robot",
+            "desk"
+          ],
+          "status": "not_run"
+        },
+        {
+          "id": "grasp_check",
+          "kind": "asset_grasp",
+          "subject_ids": [
+            "cup",
+            "robot"
+          ],
+          "status": "not_run"
+        },
+        {
+          "id": "route_check",
+          "kind": "robot_route",
+          "subject_ids": [
+            "kitchen",
+            "door",
+            "study",
+            "robot"
+          ],
+          "status": "not_run"
+        },
+        {
+          "id": "rollout_check",
+          "kind": "task_rollout",
+          "subject_ids": [
+            "robot",
+            "cup",
+            "desk"
+          ],
+          "status": "not_run"
+        }
+      ],
+      "built": {},
+      "evidence_refs": []
+    },
+    "assumptions": [],
+    "gaps": []
+  }
+}

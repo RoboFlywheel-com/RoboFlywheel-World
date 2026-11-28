@@ -1,0 +1,17 @@
+{
+  "robot": "piper",
+  "why": "A folded working pose for a small surface: the tool point sits 0.150 m above the arm's own base plane and 0.283 m out, so an arm on a nightstand reaches the clock beside it instead of overshooting past the edge. Swept over joint2/3/5 through the URDF's FK for a TCP in that band -- authored, not solved. No IK ran and none is claimed.",
+  "tcp_radius_m": 0.283,
+  "tcp_height_m": 0.150,
+  "tcp_bearing_deg": -38.1,
+  "joint_degrees": {
+    "joint1": 0,
+    "joint2": 70,
+    "joint3": -20,
+    "joint4": 0,
+    "joint5": 80,
+    "joint6": 0,
+    "joint7": 0.035,
+    "joint8": -0.035
+  }
+}

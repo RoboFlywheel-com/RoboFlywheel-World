@@ -1,0 +1,40 @@
+{
+  "comment": "SPEC-016 dressing layout for pm06_kitchen_fetch_can: the delivered island becomes the shared work table, so everything that stood on its old top is re-seated on the new one (or removed when the smaller top has no free cell for it).",
+  "overrides": {
+    "spice_jar": {
+      "translation": [
+        3.4922,
+        2.6721,
+        0.8257
+      ],
+      "on": "island"
+    },
+    "bowl": {
+      "remove": true
+    },
+    "bottle": {
+      "translation": [
+        3.4933,
+        2.4221,
+        0.75
+      ],
+      "on": "island"
+    },
+    "cup": {
+      "translation": [
+        3.6533,
+        2.4221,
+        0.75
+      ],
+      "on": "island"
+    },
+    "jar": {
+      "translation": [
+        3.8333,
+        2.4421,
+        0.75
+      ],
+      "on": "island"
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "schema_version": "pvscene.capabilities/v1",
+  "allow_approximate": false,
+  "backends": {
+    "isaac": {
+      "rigid": {
+        "level": "supported",
+        "tested_scope": "single rigid body released onto a fixed support, 5 s simulated clock at 120 Hz, RGB and metric depth captured before and after; positive and missing-support negative cases both reproduced",
+        "evidence_ref": "outputs/_smoke/runtime_supported_verified/report.json"
+      },
+      "ON": {
+        "level": "untested",
+        "tested_scope": "not yet exercised; the first office run is what will measure ON(cup, desk)"
+      },
+      "INSIDE": {
+        "level": "untested",
+        "tested_scope": "not yet exercised; only a measured rigid receptacle may be certified"
+      },
+      "AGAINST_WALL": {
+        "level": "untested",
+        "tested_scope": "not yet exercised"
+      },
+      "FACING": {
+        "level": "untested",
+        "tested_scope": "not yet exercised; HSSD front annotations are empty for most furniture, so this may become unsupported rather than untested"
+      },
+      "NEAR": {
+        "level": "untested",
+        "tested_scope": "not yet exercised"
+      },
+      "articulated": {
+        "level": "unsupported",
+        "tested_scope": "no verified articulated asset is present locally; articulated is schema-level only in this release"
+      },
+      "OPENABLE": {
+        "level": "unsupported",
+        "tested_scope": "requires an articulated asset and a joint sweep; neither is available in this release"
+      },
+      "CLOSABLE": {
+        "level": "unsupported",
+        "tested_scope": "requires an articulated asset and a joint sweep; neither is available in this release"
+      },
+      "deformable": {
+        "level": "unsupported",
+        "tested_scope": "no verified deformable asset is present locally"
+      },
+      "CAPPING": {
+        "level": "untested",
+        "tested_scope": "not yet exercised; a contact task requiring a purpose-built profile"
+      },
+      "SLOTTING": {
+        "level": "untested",
+        "tested_scope": "not yet exercised; a contact task requiring a purpose-built profile"
+      },
+      "HOOKING": {
+        "level": "untested",
+        "tested_scope": "not yet exercised"
+      },
+      "PEGGING": {
+        "level": "untested",
+        "tested_scope": "not yet exercised"
+      },
+      "SOFT_INSIDE": {
+        "level": "unsupported",
+        "tested_scope": "deformable simulation is not wired in this release"
+      },
+      "DRAPED_ON": {
+        "level": "unsupported",
+        "tested_scope": "deformable simulation is not wired in this release"
+      }
+    },
+    "mujoco": {
+      "rigid": {
+        "level": "untested",
+        "tested_scope": "no MuJoCo package has been exported and reloaded in this release; dual-backend export is an M2 deliverable"
+      },
+      "ON": {
+        "level": "untested",
+        "tested_scope": "no MuJoCo package has been exported and reloaded in this release"
+      },
+      "INSIDE": {
+        "level": "untested",
+        "tested_scope": "no MuJoCo package has been exported and reloaded in this release"
+      },
+      "articulated": {
+        "level": "unsupported",
+        "tested_scope": "no verified articulated asset is present locally"
+      },
+      "deformable": {
+        "level": "unsupported",
+        "tested_scope": "no verified deformable asset is present locally"
+      }
+    }
+  }
+}

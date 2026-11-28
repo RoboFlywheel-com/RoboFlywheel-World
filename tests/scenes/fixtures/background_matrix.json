@@ -1,0 +1,161 @@
+{
+  "schema_version": "pvscene.background-matrix/v1",
+  "spec": "SPEC-009-infinigen-background-generation",
+  "task": "TASK 2's remaining half (the kept generated objects become delivery instances) and TASK 3 (three room types x two seeds, each with Isaac settle and an independent verification)",
+  "how_to_run": "env -u PYTHONPATH -u PYTHONHOME -u PVSCENE_VLM_MODEL PYTHONPATH=src /opt/conda/envs/scenesmith/bin/python rfw_w.scenes.validation.check_generated_background --matrix tests/fixtures/background_matrix.json --output-dir outputs/_acceptance/spec009_NEW",
+  "case_notes": [
+    "Every case is a pair: a generated delivery (the opt-in, with `--background-generation --background-gaps`) and a baseline delivery of the *same room* built by the default path. That pair is what makes 'the core did not move' a measurement rather than a claim -- the digest compared here covers which asset each core entity is and where it stands, so a generated object that displaced a support would change it even if the room solve never noticed.",
+    "'gaps' is the fixture's declaration of the categories this room's retrieval vocabulary cannot cover; it must equal the declaration the build itself was handed (`reservations.json`), which the audit compares rather than trusts (BACKGROUND_GAP_DECLARATION_MISMATCH).",
+    "'min_generated_categories' is ADR-009 decision 11's lower bound: on a scene that declares gaps, at least two of them must be filled by something the build really kept, so the matrix cannot pass by having no gaps at all.",
+    "'expect_failures' are prefixes the case must show. They are empty for a scene whose delivery is clean, and for a scene that carries a known, recorded boundary they name it -- so a red nobody declared is an `unexpected_red` and fails the row.",
+    "The command in each case is the exact run that produced (or will produce) its delivery; the two commands of a pair differ only in the --background-* flags and the output directory.",
+    "Isaac settle and the independent verification are per case: `criteria.isaac` reads the delivery's own recorded gates, and `criteria.independent_verification` runs rfw_w.scenes.validation.verify_delivery as a second reader of the delivery.",
+    "The seed-11 baselines run with `--skip-isaac`: they exist so the core hash and the core asset digest can be compared against the same room built by the default path, and the worker adds nothing to that comparison. The generated cases all run the worker -- SPEC-009's matrix asks for Isaac settle and an independent verification per scene.",
+    "A `blocked` case names a cause outside the background branch and the evidence for it; the tool looks for that evidence in the delivery itself, so a block is a claim a reader can check. Blocked cases are listed in `cases_blocked` and keep their measured criteria and reds in the report -- they are neither passes nor silence."
+  ],
+  "cases": [
+    {
+      "id": "office_20",
+      "role": "generated",
+      "room_type": "office",
+      "seed": 20,
+      "delivery": "outputs/office_pick_cup/spec009_office20_20260923_01",
+      "baseline": "outputs/office_pick_cup/spec011_nogen_20260923_01",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/office_pick_cup/task.json --output-dir outputs/office_pick_cup/spec009_office20_20260923_01 --shell-provider infinigen --variant-seed 20 --no-replan --active-gpu 5 --background-generation --background-gaps book_stack,book_column,shelf,shelf_trinkets,monitor",
+      "baseline_command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/office_pick_cup/task.json --output-dir outputs/office_pick_cup/spec011_nogen_20260923_01 --shell-provider infinigen --variant-seed 20 --no-replan --active-gpu 4",
+      "gaps": [
+        "book_stack",
+        "book_column",
+        "shelf",
+        "shelf_trinkets",
+        "monitor"
+      ],
+      "min_generated_categories": 2,
+      "expect_failures": [],
+      "case_note": "the pair SPEC-011 TASK 5 already built (same room, same seed, same code), now with the assembly step on: the kept objects are prepared assets and instances of this delivery, judged by the same gates as the retrieved periphery."
+    },
+    {
+      "id": "office_11",
+      "role": "generated",
+      "room_type": "office",
+      "seed": 11,
+      "delivery": "outputs/office_pick_cup/spec009_office11_20260923_01",
+      "baseline": "outputs/office_pick_cup/spec009_office11_nogen_20260923_01",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/office_pick_cup/task.json --output-dir outputs/office_pick_cup/spec009_office11_20260923_01 --shell-provider infinigen --variant-seed 11 --no-replan --active-gpu 5 --background-generation --background-gaps book_stack,book_column,shelf,shelf_trinkets,monitor",
+      "baseline_command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/office_pick_cup/task.json --output-dir outputs/office_pick_cup/spec009_office11_nogen_20260923_01 --shell-provider infinigen --variant-seed 11 --no-replan --active-gpu 5 --skip-isaac",
+      "gaps": [
+        "book_stack",
+        "book_column",
+        "shelf",
+        "shelf_trinkets",
+        "monitor"
+      ],
+      "min_generated_categories": 2,
+      "expect_failures": [],
+      "not_run_reason": "the delivery does not exist yet: the six generated scenes and the three fresh baselines of the second seeds are run in TASK 3's step 1",
+      "blocked_by": "the room itself cannot be settled: its retrieval furniture cuts the floor in two between the entrance and the task surface (`function.space_conditions`), and the same room built by the default path fails the same gate",
+      "blocked_evidence": "function.space_conditions:fail",
+      "case_note": "Generation delivered 7 instances here and refused 4 at assembly; the block is the room."
+    },
+    {
+      "id": "bedroom_37",
+      "role": "generated",
+      "room_type": "bedroom",
+      "seed": 37,
+      "delivery": "outputs/bedroom_pick_alarm_clock/spec009_bedroom37_20260923_01",
+      "baseline": "outputs/bedroom_pick_alarm_clock/s005_bedroom_full_20260922_02",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/bedroom_pick_alarm_clock/task.json --output-dir outputs/bedroom_pick_alarm_clock/spec009_bedroom37_20260923_01 --shell-provider infinigen --variant-seed 37 --no-replan --active-gpu 5 --background-generation --background-gaps book_stack,book_column,shelf,shelf_trinkets,mirror_frame",
+      "baseline_command": "recorded in SPEC-009 TASK 1's baseline evidence (outputs/_acceptance/spec009_baseline_20260922_02)",
+      "gaps": [
+        "book_stack",
+        "book_column",
+        "shelf",
+        "shelf_trinkets",
+        "mirror_frame"
+      ],
+      "min_generated_categories": 2,
+      "expect_failures": [],
+      "not_run_reason": "the delivery does not exist yet: the six generated scenes are run in TASK 3's step 1",
+      "case_note": "the bedroom is the room the 0.1265 m2 intrusion was measured on (SPEC-009's probe), so a clean row here is the strongest single-scene statement the matrix can make."
+    },
+    {
+      "id": "bedroom_11",
+      "role": "generated",
+      "room_type": "bedroom",
+      "seed": 11,
+      "delivery": "outputs/bedroom_pick_alarm_clock/spec009_bedroom11_20260923_01",
+      "baseline": "outputs/bedroom_pick_alarm_clock/spec009_bedroom11_nogen_20260923_01",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/bedroom_pick_alarm_clock/task.json --output-dir outputs/bedroom_pick_alarm_clock/spec009_bedroom11_20260923_01 --shell-provider infinigen --variant-seed 11 --no-replan --active-gpu 5 --background-generation --background-gaps book_stack,book_column,shelf,shelf_trinkets,mirror_frame",
+      "baseline_command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/bedroom_pick_alarm_clock/task.json --output-dir outputs/bedroom_pick_alarm_clock/spec009_bedroom11_nogen_20260923_01 --shell-provider infinigen --variant-seed 11 --no-replan --active-gpu 5 --skip-isaac",
+      "gaps": [
+        "book_stack",
+        "book_column",
+        "shelf",
+        "shelf_trinkets",
+        "mirror_frame"
+      ],
+      "min_generated_categories": 2,
+      "expect_failures": [],
+      "not_run_reason": "the delivery does not exist yet: the six generated scenes and the three fresh baselines of the second seeds are run in TASK 3's step 1",
+      "blocked_by": "the build dies on a missing Blender addon (`extra_mesh_objects`) when generation is on -- upstream needs it for a factory the populated stage realises -- while the same room builds with generation off (measured: 6 blockers, no shell failure)",
+      "blocked_evidence": "shell.matches_plan:fail",
+      "case_note": "The first scene in the matrix where the *generated* path cannot run at all; named rather than passed, and the contrast (generation off builds this room) is in the baseline."
+    },
+    {
+      "id": "kitchen_23",
+      "role": "generated",
+      "room_type": "kitchen",
+      "seed": 23,
+      "delivery": "outputs/kitchen_fetch_jar/spec009_kitchen23_20260923_01",
+      "baseline": "outputs/kitchen_fetch_jar/s005_kitchen_full_20260922_02",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/kitchen_fetch_jar/task.json --output-dir outputs/kitchen_fetch_jar/spec009_kitchen23_20260923_01 --shell-provider infinigen --variant-seed 23 --no-replan --active-gpu 5 --background-generation --background-gaps book_stack,shelf,shelf_trinkets,mirror_frame",
+      "baseline_command": "recorded in SPEC-009 TASK 1's baseline evidence (outputs/_acceptance/spec009_baseline_20260922_02)",
+      "gaps": [
+        "book_stack",
+        "shelf",
+        "shelf_trinkets",
+        "mirror_frame"
+      ],
+      "min_generated_categories": 2,
+      "expect_failures": [],
+      "not_run_reason": "the delivery does not exist yet: the six generated scenes are run in TASK 3's step 1",
+      "case_note": "the kitchen's declared gaps are four rather than five: `book_column` is not in this room's vocabulary set, and a declaration the build was not given would be BACKGROUND_GAP_DECLARATION_MISMATCH."
+    },
+    {
+      "id": "kitchen_11",
+      "role": "generated",
+      "room_type": "kitchen",
+      "seed": 11,
+      "delivery": "outputs/kitchen_fetch_jar/spec009_kitchen11_20260923_02",
+      "baseline": "outputs/kitchen_fetch_jar/spec009_kitchen11_nogen_20260923_01",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/kitchen_fetch_jar/task.json --output-dir outputs/kitchen_fetch_jar/spec009_kitchen11_20260923_02 --shell-provider infinigen --variant-seed 11 --no-replan --active-gpu 5 --background-generation --background-gaps book_stack,shelf,shelf_trinkets,mirror_frame",
+      "baseline_command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/kitchen_fetch_jar/task.json --output-dir outputs/kitchen_fetch_jar/spec009_kitchen11_nogen_20260923_01 --shell-provider infinigen --variant-seed 11 --no-replan --active-gpu 5 --skip-isaac",
+      "gaps": [
+        "book_stack",
+        "shelf",
+        "shelf_trinkets",
+        "mirror_frame"
+      ],
+      "min_generated_categories": 2,
+      "expect_failures": [],
+      "not_run_reason": "the delivery does not exist yet: the six generated scenes and the three fresh baselines of the second seeds are run in TASK 3's step 1",
+      "blocked_by": "the room itself cannot be settled: its retrieval furniture cuts the floor in two between the entrance and the task surface (`function.space_conditions`), and the same room built by the default path fails the same gate",
+      "blocked_evidence": "function.space_conditions:fail",
+      "case_note": "The first run of this scene kept a mirror frame 0.0400 m inside the wall solid (`geometry.in_bounds` red on the final version, a red the loop's pose repairs cannot fix). The delivery here is the re-run with the assembly refusing it: `inside-wall(0.0400m)`."
+    }
+  ],
+  "negatives": [
+    "protected_intrusion",
+    "keepout_intrusion",
+    "core_forced_generated",
+    "duplicate_owner",
+    "required_entity_dropped",
+    "tiny_budget",
+    "stage_left_unreported",
+    "generated_category_not_a_gap",
+    "gap_declared_but_unfilled",
+    "assembly_row_without_instance",
+    "instance_without_assembly_row",
+    "generated_asset_not_on_disk"
+  ]
+}

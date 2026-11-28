@@ -1,0 +1,14 @@
+{
+  "request_hash": "9f7a4e83bbf7968cf2dd5cded776ff3d2bd2fe42682a7fd061118cfe4ffffbf3",
+  "slots": {
+    "source_room": {"id": "kitchen", "label": "厨房", "room_kind": "kitchen", "source": "user"},
+    "destination_room": {"id": "study", "label": "书房", "room_kind": "study", "source": "user"},
+    "portal": {"id": "door", "label": "厨房与书房之间的门", "initial_state": "open", "source": "user"},
+    "target": {"id": "cup", "label": "杯子", "category": "cup", "source": "user"},
+    "source_support": {"id": "counter", "label": "厨房台面", "category": "counter", "source": "user"},
+    "destination_support": {"id": "desk", "label": "书房书桌", "category": "desk", "source": "user"}
+  },
+  "assumptions": [],
+  "ambiguities": [],
+  "gaps": []
+}

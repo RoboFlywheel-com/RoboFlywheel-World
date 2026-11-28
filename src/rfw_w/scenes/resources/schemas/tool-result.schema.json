@@ -1,0 +1,123 @@
+{
+  "$id": "pvscene.v3/tool-result",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "What a tool service returns.",
+  "properties": {
+    "base_scene_version": {
+      "type": "string"
+    },
+    "elapsed_ms": {
+      "type": "number"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "failure_code": {
+      "anyOf": [
+        {
+          "enum": [
+            "ASSET_IO_FAILURE",
+            "ASSET_UNAVAILABLE",
+            "PAIR_INCOMPATIBLE",
+            "ASSET_UNCERTIFIED",
+            "GEOMETRY_PENETRATION",
+            "GEOMETRY_OUT_OF_BOUNDS",
+            "SUPPORT_NOT_FOUND",
+            "NO_PLACEMENT_CAPACITY",
+            "FUNCTION_PREDICATE_FAILED",
+            "CLEARANCE_VIOLATION",
+            "PHYSICS_OBJECT_DROPPED",
+            "PHYSICS_UNSTABLE",
+            "PHYSICS_CLOCK_STALLED",
+            "PHYSICS_NONFINITE_STATE",
+            "RENDER_FAILED",
+            "RENDER_STALE",
+            "VISUAL_CRITIQUE_INVALID",
+            "VISUAL_GATE_FAILED",
+            "HARD_GOAL_DROPPED",
+            "PATCH_INVALID",
+            "NO_PROGRESS",
+            "BUDGET_EXHAUSTED",
+            "CANDIDATES_EXHAUSTED",
+            "MODEL_CALL_FAILED",
+            "PLAN_PROPOSAL_INVALID",
+            "EXPORT_MISMATCH",
+            "BACKEND_UNSUPPORTED",
+            "SCHEMA_INVALID",
+            "PRECONDITION_UNMET"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "invalidated_evidence": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "metrics": {
+      "additionalProperties": {},
+      "type": "object"
+    },
+    "proposed_delta": {
+      "anyOf": [
+        {
+          "additionalProperties": {},
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "read_only": {
+      "type": "boolean"
+    },
+    "request_id": {
+      "type": "string"
+    },
+    "retryable": {
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "passed",
+        "failed",
+        "unsupported",
+        "timeout"
+      ],
+      "type": "string"
+    },
+    "tool_version": {
+      "type": "string"
+    },
+    "touched_ids": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "base_scene_version",
+    "elapsed_ms",
+    "read_only",
+    "request_id",
+    "status",
+    "tool_version"
+  ],
+  "title": "ToolResult",
+  "type": "object",
+  "x-pvscene-untyped": [
+    "metrics",
+    "proposed_delta"
+  ]
+}

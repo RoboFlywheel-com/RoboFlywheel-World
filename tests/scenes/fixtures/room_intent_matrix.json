@@ -1,0 +1,448 @@
+{
+  "schema_version": "pvscene.room-intent-matrix/v1",
+  "cases": [
+    {
+      "id": "office_small_20",
+      "kind": "office",
+      "scale": "small",
+      "seed": 20,
+      "bounds": [
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/office_pick_cup/task.json"
+    },
+    {
+      "id": "office_small_21",
+      "kind": "office",
+      "scale": "small",
+      "seed": 21,
+      "bounds": [
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/office_pick_cup/task.json"
+    },
+    {
+      "id": "office_medium_20",
+      "kind": "office",
+      "scale": "medium",
+      "seed": 20,
+      "bounds": [
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/office_pick_cup/task.json"
+    },
+    {
+      "id": "office_medium_21",
+      "kind": "office",
+      "scale": "medium",
+      "seed": 21,
+      "bounds": [
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/office_pick_cup/task.json"
+    },
+    {
+      "id": "office_large_20",
+      "kind": "office",
+      "scale": "large",
+      "seed": 20,
+      "bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/office_pick_cup/task.json"
+    },
+    {
+      "id": "office_large_21",
+      "kind": "office",
+      "scale": "large",
+      "seed": 21,
+      "bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/office_pick_cup/task.json"
+    },
+    {
+      "id": "kitchen_small_20",
+      "kind": "kitchen",
+      "scale": "small",
+      "seed": 20,
+      "bounds": [
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/kitchen_fetch_jar/task.json"
+    },
+    {
+      "id": "kitchen_small_21",
+      "kind": "kitchen",
+      "scale": "small",
+      "seed": 21,
+      "bounds": [
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/kitchen_fetch_jar/task.json"
+    },
+    {
+      "id": "kitchen_medium_20",
+      "kind": "kitchen",
+      "scale": "medium",
+      "seed": 20,
+      "bounds": [
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/kitchen_fetch_jar/task.json"
+    },
+    {
+      "id": "kitchen_medium_21",
+      "kind": "kitchen",
+      "scale": "medium",
+      "seed": 21,
+      "bounds": [
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/kitchen_fetch_jar/task.json"
+    },
+    {
+      "id": "kitchen_large_20",
+      "kind": "kitchen",
+      "scale": "large",
+      "seed": 20,
+      "bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/kitchen_fetch_jar/task.json"
+    },
+    {
+      "id": "kitchen_large_21",
+      "kind": "kitchen",
+      "scale": "large",
+      "seed": 21,
+      "bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/kitchen_fetch_jar/task.json"
+    },
+    {
+      "id": "bedroom_small_20",
+      "kind": "bedroom",
+      "scale": "small",
+      "seed": 20,
+      "bounds": [
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/bedroom_pick_alarm_clock/task.json"
+    },
+    {
+      "id": "bedroom_small_21",
+      "kind": "bedroom",
+      "scale": "small",
+      "seed": 21,
+      "bounds": [
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/bedroom_pick_alarm_clock/task.json"
+    },
+    {
+      "id": "bedroom_medium_20",
+      "kind": "bedroom",
+      "scale": "medium",
+      "seed": 20,
+      "bounds": [
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/bedroom_pick_alarm_clock/task.json"
+    },
+    {
+      "id": "bedroom_medium_21",
+      "kind": "bedroom",
+      "scale": "medium",
+      "seed": 21,
+      "bounds": [
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/bedroom_pick_alarm_clock/task.json"
+    },
+    {
+      "id": "bedroom_large_20",
+      "kind": "bedroom",
+      "scale": "large",
+      "seed": 20,
+      "bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/bedroom_pick_alarm_clock/task.json"
+    },
+    {
+      "id": "bedroom_large_21",
+      "kind": "bedroom",
+      "scale": "large",
+      "seed": 21,
+      "bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "spec": "experiments/bedroom_pick_alarm_clock/task.json"
+    }
+  ],
+  "prompt_cases": [
+    {
+      "id": "prompt_office",
+      "kind": "office",
+      "scale": "large",
+      "seed": 20,
+      "bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "prompt": "Generate a large an office with a mug on a desk. A Franka Panda must be able to approach and pick up the object. Keep the support fixed, the target dynamic, and the passage clear. Warm wood style. Single room, no articulated or soft objects."
+    },
+    {
+      "id": "prompt_kitchen",
+      "kind": "kitchen",
+      "scale": "large",
+      "seed": 20,
+      "bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "prompt": "Generate a large a kitchen with a jar on a kitchen island. A Franka Panda must be able to approach and pick up the object. Keep the support fixed, the target dynamic, and the passage clear. Warm wood style. Single room, no articulated or soft objects."
+    },
+    {
+      "id": "prompt_bedroom",
+      "kind": "bedroom",
+      "scale": "large",
+      "seed": 20,
+      "bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "prompt": "Generate a large a bedroom with an alarm clock on a nightstand. A Franka Panda must be able to approach and pick up the object. Keep the support fixed, the target dynamic, and the passage clear. Warm wood style. Single room, no articulated or soft objects."
+    }
+  ]
+}

@@ -1,0 +1,356 @@
+{
+  "schema_version": "pvscene.scene-spec/v3",
+  "scene_id": "pm10_office_reset_penholder",
+  "seed": 50,
+  "prompt": "生成一间深木色办公室：书桌上有一个可拿取的笔筒，旁边是马克杯、书、玩具车和一个水瓶；房间另有椅子、书架和储物柜，墙上挂画。机器人要把笔筒放回原位，保留桌面作业区。",
+  "room": {
+    "size_bounds_m": [
+      [
+        4.4,
+        5.6
+      ],
+      [
+        3.4,
+        4.4
+      ],
+      [
+        2.7,
+        3.0
+      ]
+    ],
+    "room_kind": "office",
+    "size_policy": "explicit"
+  },
+  "style": {
+    "theme": "dark_wood_office",
+    "palette": [
+      "walnut",
+      "charcoal",
+      "ochre",
+      "brass"
+    ],
+    "density": "dense"
+  },
+  "requested_backends": [
+    "isaac"
+  ],
+  "requested_readiness": "functional_scene_ready",
+  "entities": [
+    {
+      "id": "desk",
+      "category": "desk",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": true,
+      "role": "support",
+      "size_bounds_m": [
+        [
+          1.0,
+          1.6
+        ],
+        [
+          0.6,
+          0.9
+        ],
+        [
+          0.7,
+          0.8
+        ]
+      ],
+      "notes": "against a wall, front to the room; the task support"
+    },
+    {
+      "id": "pen_holder",
+      "category": "spice_jar",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": true,
+      "role": "task_target",
+      "size_bounds_m": [
+        [
+          0.06,
+          0.14
+        ],
+        [
+          0.06,
+          0.14
+        ],
+        [
+          0.08,
+          0.2
+        ]
+      ],
+      "notes": "the grasp target; must sit on its support, clear of the edge"
+    },
+    {
+      "id": "cup",
+      "category": "cup",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.24
+        ],
+        [
+          0.05,
+          0.24
+        ],
+        [
+          0.03,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "book",
+      "category": "book",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.12,
+          0.3
+        ],
+        [
+          0.1,
+          0.26
+        ],
+        [
+          0.01,
+          0.07
+        ]
+      ]
+    },
+    {
+      "id": "toy_car",
+      "category": "toy_car",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.24
+        ],
+        [
+          0.05,
+          0.24
+        ],
+        [
+          0.03,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "bottle",
+      "category": "bottle",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.06,
+          0.2
+        ],
+        [
+          0.06,
+          0.2
+        ],
+        [
+          0.12,
+          0.32
+        ]
+      ]
+    },
+    {
+      "id": "chair",
+      "category": "chair",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.4,
+          0.7
+        ],
+        [
+          0.4,
+          0.7
+        ],
+        [
+          0.7,
+          1.1
+        ]
+      ],
+      "notes": "faces the desk"
+    },
+    {
+      "id": "shelf",
+      "category": "bookcase",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.6,
+          1.2
+        ],
+        [
+          0.25,
+          0.5
+        ],
+        [
+          1.2,
+          2.0
+        ]
+      ],
+      "notes": "back to a wall"
+    },
+    {
+      "id": "storage",
+      "category": "cabinet",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.7,
+          1.8
+        ],
+        [
+          0.35,
+          0.8
+        ],
+        [
+          0.8,
+          1.6
+        ]
+      ],
+      "notes": "back to a wall"
+    },
+    {
+      "id": "plant",
+      "category": "plant",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.5,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "wall_art",
+      "category": "wall_art",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          0.4,
+          0.9
+        ],
+        [
+          0.02,
+          0.06
+        ],
+        [
+          0.3,
+          0.7
+        ]
+      ],
+      "notes": "hung on a wall away from any opening, at eye level"
+    },
+    {
+      "id": "ceiling_light",
+      "category": "ceiling_light",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.12,
+          0.35
+        ]
+      ],
+      "notes": "a shade, not a pendant on a long cord"
+    }
+  ],
+  "initial_relations": [
+    {
+      "id": "r1",
+      "subject": "pen_holder",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": true
+    },
+    {
+      "id": "r2",
+      "subject": "cup",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    },
+    {
+      "id": "r3",
+      "subject": "book",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    },
+    {
+      "id": "r4",
+      "subject": "toy_car",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    },
+    {
+      "id": "r5",
+      "subject": "bottle",
+      "predicate": "ON",
+      "object": "desk",
+      "hard": false
+    }
+  ],
+  "task": {
+    "action": "pick_place",
+    "robot_profile": "piper_x",
+    "targets": [
+      "pen_holder"
+    ],
+    "goal_predicates": []
+  }
+}

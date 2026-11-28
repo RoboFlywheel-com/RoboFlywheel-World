@@ -1,0 +1,93 @@
+{
+  "name": "paper_multisim_uniform_v1",
+  "why": "Before this file only MuJoCo and SAPIEN declared any lighting; Genesis, PyBullet and Isaac took an engine or USD-stage default. Measured on the 20260925_03 assets, that left the SAME bare desk surface at 71.18 (MuJoCo) to 200.49 (Isaac) mean luma -- a 2.8x spread with no declared cause. All five backends now read this file.",
+  "ambient": [
+    0.22,
+    0.22,
+    0.24
+  ],
+  "directional": {
+    "direction": [
+      -0.55,
+      0.35,
+      -0.76
+    ],
+    "colour": [
+      0.9,
+      0.88,
+      0.82
+    ],
+    "why": "carried over from the SAPIEN rig, which was the only tuned one. Points down and away from the camera bearing so the task objects cast readable, non-occluding shadows."
+  },
+  "point_lights": [
+    {
+      "position": [
+        2.4528,
+        1.84315,
+        2.55
+      ],
+      "colour": [
+        3.2,
+        3.15,
+        3.0
+      ],
+      "why": "the room's own ceiling_light instance sits at [2.453, 1.843, 2.636]; the light is placed 8.6 cm below it so a raytracer's shadow rays are not blocked by the fixture mesh itself"
+    },
+    {
+      "position": [
+        1.1,
+        0.9,
+        2.55
+      ],
+      "colour": [
+        1.7,
+        1.75,
+        1.9
+      ],
+      "why": "fill on the far side of the room, cooler, so the desk's shadow side does not go to black under a path tracer"
+    }
+  ],
+  "gain": {
+    "genesis": 0.236,
+    "isaac": 0.133,
+    "mujoco": 1.05,
+    "pybullet": 1.6,
+    "sapien": 0.201,
+    "why": "per-engine multiplier on light intensity, calibrated by re-rendering until the exposure and clipping gates both pass. This is an ENGINE-SIDE change followed by a fresh render -- never a post-multiply on the PNG, which would break SPEC-014 R3's byte-for-byte copy. No engine's response is linear: against the 0.80 white shell, measured 2026-09-25, MuJoCo and PyBullet run close to linear in this range (66.5 and 44.3 luma per unit gain) while SAPIEN goes as gain^0.46 and Isaac as gain^0.73 once the tonemap is in play, so the gains were measured rather than solved. They are bounded from above by clipping, not by the exposure target: the white shell's clipping-free ceiling on the desk patch is 76.5 for MuJoCo and 72.8 for PyBullet, which is what sets the shared target at 70. These five replaced the 0.62-grey set (0.38/0.192/1.40/2.00/0.55) when the shell went white.",
+    "isaac_note": "Isaac's gain scales SPEC-008's whole dome/sun/ceiling_fill profile by one factor, preserving its internal balance; the rig's ambient, direction and point lights have no slot in that schema and are recorded as named gaps in the Isaac report. A per-channel scale was tried on 2026-09-25 and dropped: raising the dome 2.6x to fix a black wall moved the frame mean by nothing (86.89 before and after). The wall was Infinigen's own dark paint in the delivery's USD shell, not a light, and is answered by the worker's shell_material_override instead."
+  },
+  "exposure": {
+    "target_mean_luminance": 70.0,
+    "tolerance": 8.0,
+    "calibration_patch": {
+      "x_m": [
+        1.25,
+        1.85
+      ],
+      "y_m": [
+        2.1,
+        2.6
+      ],
+      "z_m": 0.75,
+      "why": "bare desk top. The desk spans x[0.589,1.939] y[1.997,2.739] with its surface at z=0.75; the task objects occupy x[0.649,1.093] y[2.001,2.679], so this 0.60 x 0.50 m rectangle is clear of all three of them and of the chair. Declared in world metres, not pixels, so moving the camera cannot silently move the surface the exposure is measured on."
+    },
+    "why": "70 is not a preference, it is the ceiling the weakest backend can reach without blowing the white walls out, re-measured on 2026-09-25 after the shell albedo went from 0.62 grey to 0.80 white at the owner's request. Swept against the frozen v2 camera: MuJoCo reaches desk 76.47 at gain 1.15 with 0.0005 of the frame clipped and PyBullet 72.76 at gain 1.65 with 0.0141, and both run into the 2% clipping limit immediately above that -- MuJoCo was at 0.2545 and PyBullet at 0.2791 when the old gains were replayed unchanged against the white shell. Genesis, SAPIEN and Isaac can all be brought down to meet them. This is the direct, measured cost of the white wall: against the 0.62 grey the same sweep supported 85. A brighter target was tried much earlier (140, on grey) and had to be abandoned -- it passed the patch gate in every backend while putting 62.7% of MuJoCo's frame and 66.7% of PyBullet's at >=250 luma, which is the incident that put the clipping gate beside this one."
+  },
+  "noise": {
+    "max_high_frequency_residual": 7.5,
+    "why": "mean |4-neighbour Laplacian| of Rec.709 luma on the calibration patch. The gate exists to catch a path tracer left at too few samples per pixel, which no geometry or camera gate notices. It cannot be set at zero: the patch carries the desk's wood_grain map_Kd, and TinyRenderer dithers, so a correctly-rendered frame has real high-frequency content. The threshold is derived from measurement, and has been re-derived every time the camera, the shell or the exposure moved -- dither and grain scale with brightness, which is why PyBullet once climbed from 3.879 at luma 48 to 12.020 at luma 140. At the published settings (0.80 white shell, fitted v2 camera, shared target 70) the five measure: isaac 1.321 / genesis 3.162 / mujoco 3.251 / sapien 5.229 (512 spp) / pybullet 5.531. The defect this was built to catch measured 50.893 -- SAPIEN shipped at 8 spp with the denoiser off. 7.5 is 1.36x the worst legitimate value and 6.8x below the defect, so it passes every converged render and still fails that frame. It was 16.0 against the 0.62 grey shell at target 85; a brighter frame is a noisier one, so a threshold kept from that round would have been slack here."
+  },
+  "shell_albedo": {
+    "rgb": [
+      0.8,
+      0.8,
+      0.8
+    ],
+    "why": "The room shell meshes (walls, floor, ceiling, window and door reveals) carry NO material at all -- no mtllib, no usemtl -- so every backend fell through to its own near-white default, each a different near-white. 0.80 is ordinary white interior wall paint: real white latex measures 0.75-0.85 reflectance, not 1.0, and 1.0 is a value no wall in a photograph has. Requested white by the owner on 2026-09-25, replacing the 0.62 neutral grey calibrated the day before. The grey was not an aesthetic choice and giving it up costs something measurable: a white wall saturates long before a brown desk reaches mid-grey, so the desk exposure the five engines can share without clipping the walls drops with the albedo. At 0.62 that shared ceiling was 85; the target below was re-measured at 0.80 rather than assumed to survive. Declaring the same value in all five backends is the part that matters -- it makes the shell one more thing the five columns agree on instead of one more thing they each guess at. This is a figure-only appearance decision: it does not edit the bundle's meshes and does not enter any delivery.",
+    "applies_to": "any visual face that resolves to no MTL entry"
+  },
+  "clipping": {
+    "max_clipped_fraction": 0.02,
+    "why": "fraction of the whole frame at Rec.709 luma >= 250. The exposure gate alone is one-sided, and it was measured letting a real defect straight through: driving MuJoCo's desk patch to the 140 target put 62.7% of its frame at >=250, and PyBullet's 66.7%, while the patch itself read perfectly in band. The room's shell meshes carry no MTL and render near-white, and a white wall saturates long before a brown desk reaches mid-grey -- how much earlier is a property of each engine's shading, which is exactly what a single mid-tone sample cannot see. 2% allows a specular highlight or a bright window and nothing more."
+  }
+}

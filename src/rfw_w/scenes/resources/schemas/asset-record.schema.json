@@ -1,0 +1,645 @@
+{
+  "$id": "pvscene.v3/asset-record",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The full record for one retrievable asset.",
+  "properties": {
+    "bounds_max_m": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "z": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "z"
+      ],
+      "type": "object"
+    },
+    "bounds_min_m": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "z": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "z"
+      ],
+      "type": "object"
+    },
+    "canonical_frame": {
+      "type": "string"
+    },
+    "capabilities": {
+      "additionalProperties": {
+        "enum": [
+          "supported",
+          "unsupported",
+          "untested"
+        ],
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "collision_parts": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "approximate": {
+            "type": "boolean"
+          },
+          "face_count": {
+            "type": "integer"
+          },
+          "part_id": {
+            "type": "string"
+          },
+          "provenance": {
+            "additionalProperties": false,
+            "properties": {
+              "confidence": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "method": {
+                "type": "string"
+              },
+              "source_uri": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "status": {
+                "enum": [
+                  "measured",
+                  "annotated",
+                  "constructed",
+                  "estimated",
+                  "unknown"
+                ],
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "method",
+              "status",
+              "version"
+            ],
+            "type": "object"
+          },
+          "source": {
+            "type": "string"
+          },
+          "vertex_count": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "approximate",
+          "face_count",
+          "part_id",
+          "provenance",
+          "source",
+          "vertex_count"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "dimensions_m": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "z": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "z"
+      ],
+      "type": "object"
+    },
+    "grasp_regions": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "handles": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "key": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "type": "string"
+        },
+        "library_version": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset_id",
+        "library_version",
+        "provider"
+      ],
+      "type": "object"
+    },
+    "license": {
+      "type": "string"
+    },
+    "materials": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "normalisation": {
+      "additionalProperties": false,
+      "properties": {
+        "applied_scale": {
+          "type": "number"
+        },
+        "applied_translation": {
+          "additionalProperties": false,
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "z"
+          ],
+          "type": "object"
+        },
+        "method": {
+          "type": "string"
+        },
+        "source_frame": {
+          "type": "string"
+        },
+        "target_frame": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "applied_scale",
+        "applied_translation",
+        "method",
+        "source_frame",
+        "target_frame",
+        "version"
+      ],
+      "type": "object"
+    },
+    "physics_type": {
+      "enum": [
+        "rigid",
+        "articulated",
+        "deformable"
+      ],
+      "type": "string"
+    },
+    "prepared_version": {
+      "type": "string"
+    },
+    "receptacles": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "capacity_m3": {
+            "type": "number"
+          },
+          "cavity_id": {
+            "type": "string"
+          },
+          "opening_frame": {
+            "additionalProperties": false,
+            "properties": {
+              "child_frame": {
+                "type": "string"
+              },
+              "parent_frame": {
+                "type": "string"
+              },
+              "rotation": {
+                "additionalProperties": false,
+                "properties": {
+                  "w": {
+                    "type": "number"
+                  },
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "w",
+                  "x",
+                  "y",
+                  "z"
+                ],
+                "type": "object"
+              },
+              "translation": {
+                "additionalProperties": false,
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "child_frame",
+              "parent_frame",
+              "rotation",
+              "translation"
+            ],
+            "type": "object"
+          },
+          "opening_width_m": {
+            "type": "number"
+          },
+          "provenance": {
+            "additionalProperties": false,
+            "properties": {
+              "confidence": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "method": {
+                "type": "string"
+              },
+              "source_uri": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "status": {
+                "enum": [
+                  "measured",
+                  "annotated",
+                  "constructed",
+                  "estimated",
+                  "unknown"
+                ],
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "method",
+              "status",
+              "version"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "capacity_m3",
+          "cavity_id",
+          "opening_frame",
+          "opening_width_m",
+          "provenance"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "rigid_physics": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "center_of_mass_m": {
+              "additionalProperties": false,
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                },
+                "z": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "x",
+                "y",
+                "z"
+              ],
+              "type": "object"
+            },
+            "dynamic_friction": {
+              "type": "number"
+            },
+            "inertia_kg_m2": {
+              "items": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            "mass_kg": {
+              "type": "number"
+            },
+            "provenance": {
+              "additionalProperties": false,
+              "properties": {
+                "confidence": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "method": {
+                  "type": "string"
+                },
+                "source_uri": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "status": {
+                  "enum": [
+                    "measured",
+                    "annotated",
+                    "constructed",
+                    "estimated",
+                    "unknown"
+                  ],
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "method",
+                "status",
+                "version"
+              ],
+              "type": "object"
+            },
+            "restitution": {
+              "type": "number"
+            },
+            "static_friction": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "center_of_mass_m",
+            "dynamic_friction",
+            "inertia_kg_m2",
+            "mass_kg",
+            "provenance",
+            "restitution",
+            "static_friction"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema_version": {
+      "const": "pvscene.asset-record/v3",
+      "type": "string"
+    },
+    "semantic": {
+      "type": "string"
+    },
+    "source_hash": {
+      "type": "string"
+    },
+    "super_category": {
+      "type": "string"
+    },
+    "support_polygons": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "plane_z_m": {
+            "type": "number"
+          },
+          "polygon_id": {
+            "type": "string"
+          },
+          "provenance": {
+            "additionalProperties": false,
+            "properties": {
+              "confidence": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "method": {
+                "type": "string"
+              },
+              "source_uri": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "status": {
+                "enum": [
+                  "measured",
+                  "annotated",
+                  "constructed",
+                  "estimated",
+                  "unknown"
+                ],
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "method",
+              "status",
+              "version"
+            ],
+            "type": "object"
+          },
+          "vertices_xy": {
+            "items": {
+              "items": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "plane_z_m",
+          "polygon_id",
+          "provenance",
+          "vertices_xy"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "visual_uri": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "bounds_max_m",
+    "bounds_min_m",
+    "canonical_frame",
+    "collision_parts",
+    "dimensions_m",
+    "key",
+    "license",
+    "materials",
+    "normalisation",
+    "physics_type",
+    "semantic",
+    "source_hash",
+    "super_category",
+    "visual_uri"
+  ],
+  "title": "AssetRecordV3",
+  "type": "object"
+}

@@ -1,0 +1,475 @@
+{
+  "schema_version": "pvscene.lighting-matrix/v1",
+  "spec": "SPEC-008-infinigen-lighting",
+  "task": "TASK 3: three room types x small/large x three lighting profiles, rendered from the parent delivery of each room and measured on the task target",
+  "how_to_run": "env -u PYTHONPATH -u PYTHONHOME PYTHONPATH=src /opt/conda/envs/scenesmith/bin/python rfw_w.scenes.validation.check_lighting --matrix tests/fixtures/lighting_matrix.json --output-dir outputs/_acceptance/spec008_NEW --active-gpu <gpu>",
+  "case_notes": [
+    "Every case renders from a delivery that already exists (its group's parent), by patching the parent's own recorded worker request: the room, the cameras, the retrieval and the target are byte-for-byte the ones the delivery was rendered with, and the lights are the only thing that differs. That is what makes 18 groups affordable and what makes two cases a comparison rather than two builds.",
+    "The parent deliveries are produced by the run command in each case, with `--room-bounds` for the small and large rooms (the bounds are `tests/fixtures/room_intent_matrix.json`'s own per-scale bounds, so the sizes are the ones SPEC-006 already checks the plan against).",
+    "`mixed` is calibrated; `daylight` and `warm_artificial` are not, and their deliveries say `not_run` in the `lighting` block. The matrix reports the calibration beside each row so a pass on an uncalibrated profile is not read as a calibrated one.",
+    "The selftest of the measurement is per case: a black frame is driven through the same check and must fail (`TARGET_UNDEREXPOSED`), because a reading that cannot fail measures nothing.",
+    "The parent runs pass `--lighting-profile mixed` explicitly even though it is the default: a recorded command that relies on a default stops describing what it did the day the default moves, and the default is exactly what this TASK changes.",
+    "The parent deliveries are the second attempt: the first (`*_20260923_01`, kept beside them as evidence) built and rendered the offices and then died while writing the manifest -- `lighting_block(*lighting_plan_for(...))` passed the room positionally to a keyword-only parameter. Fixed by one shared `lighting_block_for()` plus a test that pins the call shape; the partial directories hold no manifest and are not deliveries.",
+    "The parent runs take no `--variant-seed`: with it, domain randomization samples the appearance, which is a *multiplier* on the calibrated profile (SPEC-008 TASK 3's fix) -- a parent rendered that way would make its `mixed` row a different experiment from the two profiles the matrix re-renders from the same room. The room seed is then the spec's own seed (office 11, kitchen 23, bedroom 37), recorded per case.",
+    "The office parents are the *fourth* attempt and the third seed: at seed 11 the small office's retrieval placement puts 5 of 12 pieces outside the walls and `function.space_conditions` fails, so the run never reaches the backend and there are no captures to measure (the directory is kept as that measurement). Seed 20 is the office room the SPEC-009/011 matrices already exercise, and its small and large builds both reach Isaac.",
+    "The office parents pass `--variant-seed 20`: without it the *room* seed is the spec's own seed (11), which is the room SPEC-009's matrix found broken (its retrieval furniture cuts the floor in two), so the run stops before the backend. The variant seed also samples the appearance, which is a multiplier on the profile -- irrelevant here because the matrix re-renders every case, including `mixed`, from the parent's recorded request with the profile's own numbers.",
+    "Only the profile the fixture names as `calibrated_profile` is held to the thresholds: `mixed`, which is what the default path renders with. `daylight` and `warm_artificial` carry `calibration: not_run`; their cases are rendered and measured so a reader can see what they do, reported beside that word, neither counted as passes nor as failures of the calibrated profile."
+  ],
+  "cases": [
+    {
+      "id": "office_small_mixed",
+      "room_type": "office",
+      "scale": "small",
+      "seed": 20,
+      "profile": "mixed",
+      "spec": "experiments/office_pick_cup/task.json",
+      "room_bounds": [
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/office_pick_cup/spec008_small_20260923_05",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/office_pick_cup/task.json --output-dir outputs/office_pick_cup/spec008_small_20260923_05 --shell-provider infinigen --variant-seed 20 --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[4, 5], [3, 4], [2.7, 3]]'",
+      "case_note": "the calibrated profile (2700/4500/3600, measured 2026-09-22): this is what the default path renders with, so this case is the matrix's reference row."
+    },
+    {
+      "id": "office_small_daylight",
+      "room_type": "office",
+      "scale": "small",
+      "seed": 20,
+      "profile": "daylight",
+      "spec": "experiments/office_pick_cup/task.json",
+      "room_bounds": [
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/office_pick_cup/spec008_small_20260923_05",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/office_pick_cup/task.json --output-dir outputs/office_pick_cup/spec008_small_20260923_05 --shell-provider infinigen --variant-seed 20 --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[4, 5], [3, 4], [2.7, 3]]'",
+      "case_note": "no calibration behind it (`CALIBRATION: not_run`): the case exists to show the profile axis is real, and its delivery block says `not_run` rather than passing itself off as measured."
+    },
+    {
+      "id": "office_small_warm_artificial",
+      "room_type": "office",
+      "scale": "small",
+      "seed": 20,
+      "profile": "warm_artificial",
+      "spec": "experiments/office_pick_cup/task.json",
+      "room_bounds": [
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/office_pick_cup/spec008_small_20260923_05",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/office_pick_cup/task.json --output-dir outputs/office_pick_cup/spec008_small_20260923_05 --shell-provider infinigen --variant-seed 20 --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[4, 5], [3, 4], [2.7, 3]]'",
+      "case_note": "no sun, so the room is lit by the fill and the environment alone -- the case that decides whether a room with no daylight path is still inside the thresholds."
+    },
+    {
+      "id": "office_large_mixed",
+      "room_type": "office",
+      "scale": "large",
+      "seed": 20,
+      "profile": "mixed",
+      "spec": "experiments/office_pick_cup/task.json",
+      "room_bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/office_pick_cup/spec008_large_20260923_05",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/office_pick_cup/task.json --output-dir outputs/office_pick_cup/spec008_large_20260923_05 --shell-provider infinigen --variant-seed 20 --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[8, 10], [6, 8], [2.7, 3]]'",
+      "case_note": "the calibrated profile (2700/4500/3600, measured 2026-09-22): this is what the default path renders with, so this case is the matrix's reference row."
+    },
+    {
+      "id": "office_large_daylight",
+      "room_type": "office",
+      "scale": "large",
+      "seed": 20,
+      "profile": "daylight",
+      "spec": "experiments/office_pick_cup/task.json",
+      "room_bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/office_pick_cup/spec008_large_20260923_05",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/office_pick_cup/task.json --output-dir outputs/office_pick_cup/spec008_large_20260923_05 --shell-provider infinigen --variant-seed 20 --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[8, 10], [6, 8], [2.7, 3]]'",
+      "case_note": "no calibration behind it (`CALIBRATION: not_run`): the case exists to show the profile axis is real, and its delivery block says `not_run` rather than passing itself off as measured."
+    },
+    {
+      "id": "office_large_warm_artificial",
+      "room_type": "office",
+      "scale": "large",
+      "seed": 20,
+      "profile": "warm_artificial",
+      "spec": "experiments/office_pick_cup/task.json",
+      "room_bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/office_pick_cup/spec008_large_20260923_05",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/office_pick_cup/task.json --output-dir outputs/office_pick_cup/spec008_large_20260923_05 --shell-provider infinigen --variant-seed 20 --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[8, 10], [6, 8], [2.7, 3]]'",
+      "case_note": "no sun, so the room is lit by the fill and the environment alone -- the case that decides whether a room with no daylight path is still inside the thresholds."
+    },
+    {
+      "id": "kitchen_small_mixed",
+      "room_type": "kitchen",
+      "scale": "small",
+      "seed": 23,
+      "profile": "mixed",
+      "spec": "experiments/kitchen_fetch_jar/task.json",
+      "room_bounds": [
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/kitchen_fetch_jar/spec008_small_20260923_03",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/kitchen_fetch_jar/task.json --output-dir outputs/kitchen_fetch_jar/spec008_small_20260923_03 --shell-provider infinigen --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[4, 5], [3, 4], [2.7, 3]]'",
+      "case_note": "the calibrated profile (2700/4500/3600, measured 2026-09-22): this is what the default path renders with, so this case is the matrix's reference row."
+    },
+    {
+      "id": "kitchen_small_daylight",
+      "room_type": "kitchen",
+      "scale": "small",
+      "seed": 23,
+      "profile": "daylight",
+      "spec": "experiments/kitchen_fetch_jar/task.json",
+      "room_bounds": [
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/kitchen_fetch_jar/spec008_small_20260923_03",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/kitchen_fetch_jar/task.json --output-dir outputs/kitchen_fetch_jar/spec008_small_20260923_03 --shell-provider infinigen --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[4, 5], [3, 4], [2.7, 3]]'",
+      "case_note": "no calibration behind it (`CALIBRATION: not_run`): the case exists to show the profile axis is real, and its delivery block says `not_run` rather than passing itself off as measured."
+    },
+    {
+      "id": "kitchen_small_warm_artificial",
+      "room_type": "kitchen",
+      "scale": "small",
+      "seed": 23,
+      "profile": "warm_artificial",
+      "spec": "experiments/kitchen_fetch_jar/task.json",
+      "room_bounds": [
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/kitchen_fetch_jar/spec008_small_20260923_03",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/kitchen_fetch_jar/task.json --output-dir outputs/kitchen_fetch_jar/spec008_small_20260923_03 --shell-provider infinigen --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[4, 5], [3, 4], [2.7, 3]]'",
+      "case_note": "no sun, so the room is lit by the fill and the environment alone -- the case that decides whether a room with no daylight path is still inside the thresholds."
+    },
+    {
+      "id": "kitchen_large_mixed",
+      "room_type": "kitchen",
+      "scale": "large",
+      "seed": 23,
+      "profile": "mixed",
+      "spec": "experiments/kitchen_fetch_jar/task.json",
+      "room_bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/kitchen_fetch_jar/spec008_large_20260923_03",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/kitchen_fetch_jar/task.json --output-dir outputs/kitchen_fetch_jar/spec008_large_20260923_03 --shell-provider infinigen --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[8, 10], [6, 8], [2.7, 3]]'",
+      "case_note": "the calibrated profile (2700/4500/3600, measured 2026-09-22): this is what the default path renders with, so this case is the matrix's reference row."
+    },
+    {
+      "id": "kitchen_large_daylight",
+      "room_type": "kitchen",
+      "scale": "large",
+      "seed": 23,
+      "profile": "daylight",
+      "spec": "experiments/kitchen_fetch_jar/task.json",
+      "room_bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/kitchen_fetch_jar/spec008_large_20260923_03",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/kitchen_fetch_jar/task.json --output-dir outputs/kitchen_fetch_jar/spec008_large_20260923_03 --shell-provider infinigen --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[8, 10], [6, 8], [2.7, 3]]'",
+      "case_note": "no calibration behind it (`CALIBRATION: not_run`): the case exists to show the profile axis is real, and its delivery block says `not_run` rather than passing itself off as measured."
+    },
+    {
+      "id": "kitchen_large_warm_artificial",
+      "room_type": "kitchen",
+      "scale": "large",
+      "seed": 23,
+      "profile": "warm_artificial",
+      "spec": "experiments/kitchen_fetch_jar/task.json",
+      "room_bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/kitchen_fetch_jar/spec008_large_20260923_03",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/kitchen_fetch_jar/task.json --output-dir outputs/kitchen_fetch_jar/spec008_large_20260923_03 --shell-provider infinigen --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[8, 10], [6, 8], [2.7, 3]]'",
+      "case_note": "no sun, so the room is lit by the fill and the environment alone -- the case that decides whether a room with no daylight path is still inside the thresholds."
+    },
+    {
+      "id": "bedroom_small_mixed",
+      "room_type": "bedroom",
+      "scale": "small",
+      "seed": 37,
+      "profile": "mixed",
+      "spec": "experiments/bedroom_pick_alarm_clock/task.json",
+      "room_bounds": [
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/bedroom_pick_alarm_clock/spec008_small_20260923_03",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/bedroom_pick_alarm_clock/task.json --output-dir outputs/bedroom_pick_alarm_clock/spec008_small_20260923_03 --shell-provider infinigen --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[4, 5], [3, 4], [2.7, 3]]'",
+      "case_note": "the calibrated profile (2700/4500/3600, measured 2026-09-22): this is what the default path renders with, so this case is the matrix's reference row."
+    },
+    {
+      "id": "bedroom_small_daylight",
+      "room_type": "bedroom",
+      "scale": "small",
+      "seed": 37,
+      "profile": "daylight",
+      "spec": "experiments/bedroom_pick_alarm_clock/task.json",
+      "room_bounds": [
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/bedroom_pick_alarm_clock/spec008_small_20260923_03",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/bedroom_pick_alarm_clock/task.json --output-dir outputs/bedroom_pick_alarm_clock/spec008_small_20260923_03 --shell-provider infinigen --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[4, 5], [3, 4], [2.7, 3]]'",
+      "case_note": "no calibration behind it (`CALIBRATION: not_run`): the case exists to show the profile axis is real, and its delivery block says `not_run` rather than passing itself off as measured."
+    },
+    {
+      "id": "bedroom_small_warm_artificial",
+      "room_type": "bedroom",
+      "scale": "small",
+      "seed": 37,
+      "profile": "warm_artificial",
+      "spec": "experiments/bedroom_pick_alarm_clock/task.json",
+      "room_bounds": [
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/bedroom_pick_alarm_clock/spec008_small_20260923_03",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/bedroom_pick_alarm_clock/task.json --output-dir outputs/bedroom_pick_alarm_clock/spec008_small_20260923_03 --shell-provider infinigen --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[4, 5], [3, 4], [2.7, 3]]'",
+      "case_note": "no sun, so the room is lit by the fill and the environment alone -- the case that decides whether a room with no daylight path is still inside the thresholds."
+    },
+    {
+      "id": "bedroom_large_mixed",
+      "room_type": "bedroom",
+      "scale": "large",
+      "seed": 37,
+      "profile": "mixed",
+      "spec": "experiments/bedroom_pick_alarm_clock/task.json",
+      "room_bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/bedroom_pick_alarm_clock/spec008_large_20260923_03",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/bedroom_pick_alarm_clock/task.json --output-dir outputs/bedroom_pick_alarm_clock/spec008_large_20260923_03 --shell-provider infinigen --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[8, 10], [6, 8], [2.7, 3]]'",
+      "case_note": "the calibrated profile (2700/4500/3600, measured 2026-09-22): this is what the default path renders with, so this case is the matrix's reference row."
+    },
+    {
+      "id": "bedroom_large_daylight",
+      "room_type": "bedroom",
+      "scale": "large",
+      "seed": 37,
+      "profile": "daylight",
+      "spec": "experiments/bedroom_pick_alarm_clock/task.json",
+      "room_bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/bedroom_pick_alarm_clock/spec008_large_20260923_03",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/bedroom_pick_alarm_clock/task.json --output-dir outputs/bedroom_pick_alarm_clock/spec008_large_20260923_03 --shell-provider infinigen --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[8, 10], [6, 8], [2.7, 3]]'",
+      "case_note": "no calibration behind it (`CALIBRATION: not_run`): the case exists to show the profile axis is real, and its delivery block says `not_run` rather than passing itself off as measured."
+    },
+    {
+      "id": "bedroom_large_warm_artificial",
+      "room_type": "bedroom",
+      "scale": "large",
+      "seed": 37,
+      "profile": "warm_artificial",
+      "spec": "experiments/bedroom_pick_alarm_clock/task.json",
+      "room_bounds": [
+        [
+          8,
+          10
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2.7,
+          3
+        ]
+      ],
+      "delivery": "outputs/bedroom_pick_alarm_clock/spec008_large_20260923_03",
+      "command": "python rfw_w.scenes.commands.generate --env-file .env.local --spec experiments/bedroom_pick_alarm_clock/task.json --output-dir outputs/bedroom_pick_alarm_clock/spec008_large_20260923_03 --shell-provider infinigen --no-replan --active-gpu <gpu> --lighting-profile mixed --room-bounds '[[8, 10], [6, 8], [2.7, 3]]'",
+      "case_note": "no sun, so the room is lit by the fill and the environment alone -- the case that decides whether a room with no daylight path is still inside the thresholds."
+    }
+  ],
+  "negatives": [
+    "black_frame_under_thresholds",
+    "target_not_visible"
+  ],
+  "calibrated_profile": "mixed"
+}

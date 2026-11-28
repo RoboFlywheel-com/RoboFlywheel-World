@@ -1,0 +1,307 @@
+{
+  "schema_version": "pvscene.scene-spec/v3",
+  "scene_id": "pm07_bedroom_pick_clock",
+  "seed": 47,
+  "prompt": "生成一间安静的卧室：床边一张床头柜，柜面上有一个可拿取的闹钟，旁边有杯子、一本书、首饰盒和一盏台灯；另配床、衣柜、绿植和一把椅子。机器人需要从床头柜拿起闹钟。",
+  "room": {
+    "size_bounds_m": [
+      [
+        4.2,
+        5.2
+      ],
+      [
+        3.2,
+        4.2
+      ],
+      [
+        2.7,
+        3.0
+      ]
+    ],
+    "room_kind": "bedroom",
+    "size_policy": "explicit"
+  },
+  "style": {
+    "theme": "quiet_bedroom",
+    "palette": [
+      "walnut",
+      "linen",
+      "sage",
+      "brass"
+    ],
+    "density": "dense"
+  },
+  "requested_backends": [
+    "isaac"
+  ],
+  "requested_readiness": "functional_scene_ready",
+  "entities": [
+    {
+      "id": "nightstand",
+      "category": "nightstand",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": true,
+      "role": "support",
+      "size_bounds_m": [
+        [
+          0.45,
+          0.75
+        ],
+        [
+          0.35,
+          0.55
+        ],
+        [
+          0.5,
+          0.7
+        ]
+      ],
+      "notes": "the work surface the task happens on; front to the room"
+    },
+    {
+      "id": "alarm_clock",
+      "category": "alarm_clock",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": true,
+      "role": "task_target",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ],
+      "notes": "the grasp target; on the work surface, clear of its edge"
+    },
+    {
+      "id": "cup",
+      "category": "cup",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "book",
+      "category": "book",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "jewelry_box",
+      "category": "jewelry_box",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "table_lamp",
+      "category": "table_lamp",
+      "physics_type": "rigid",
+      "mobility": "dynamic",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.02,
+          0.26
+        ]
+      ]
+    },
+    {
+      "id": "bed",
+      "category": "bed",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          1.2,
+          1.6
+        ],
+        [
+          1.9,
+          2.1
+        ],
+        [
+          0.4,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "wardrobe",
+      "category": "wardrobe",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          1.0,
+          1.6
+        ],
+        [
+          0.4,
+          0.6
+        ],
+        [
+          1.6,
+          2.0
+        ]
+      ]
+    },
+    {
+      "id": "plant",
+      "category": "plant",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "decoration",
+      "size_bounds_m": [
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.25,
+          0.55
+        ],
+        [
+          0.5,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "chair",
+      "category": "chair",
+      "physics_type": "rigid",
+      "mobility": "fixed",
+      "hard_required": false,
+      "role": "context",
+      "size_bounds_m": [
+        [
+          0.4,
+          0.7
+        ],
+        [
+          0.4,
+          0.7
+        ],
+        [
+          0.7,
+          1.1
+        ]
+      ]
+    }
+  ],
+  "initial_relations": [
+    {
+      "id": "r1",
+      "subject": "alarm_clock",
+      "predicate": "ON",
+      "object": "nightstand",
+      "hard": true
+    },
+    {
+      "id": "r2",
+      "subject": "cup",
+      "predicate": "ON",
+      "object": "nightstand",
+      "hard": false
+    },
+    {
+      "id": "r3",
+      "subject": "book",
+      "predicate": "ON",
+      "object": "nightstand",
+      "hard": false
+    },
+    {
+      "id": "r4",
+      "subject": "jewelry_box",
+      "predicate": "ON",
+      "object": "nightstand",
+      "hard": false
+    },
+    {
+      "id": "r5",
+      "subject": "table_lamp",
+      "predicate": "ON",
+      "object": "nightstand",
+      "hard": false
+    }
+  ],
+  "task": {
+    "action": "pick_place",
+    "robot_profile": "piper_x",
+    "targets": [
+      "alarm_clock"
+    ],
+    "goal_predicates": []
+  }
+}

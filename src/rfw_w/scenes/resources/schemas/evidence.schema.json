@@ -1,0 +1,87 @@
+{
+  "$id": "pvscene.v3/evidence",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "A measured gate outcome, bound to the exact scene state it was measured on.",
+  "properties": {
+    "backend": {
+      "type": "string"
+    },
+    "backend_version": {
+      "type": "string"
+    },
+    "detail": {
+      "type": "string"
+    },
+    "gate_id": {
+      "type": "string"
+    },
+    "measured_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "method": {
+      "type": "string"
+    },
+    "state_hash": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "pass",
+        "fail",
+        "not_run",
+        "unsupported"
+      ],
+      "type": "string"
+    },
+    "threshold_profile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "tool_version": {
+      "type": "string"
+    },
+    "unit": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "witness_refs": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "backend",
+    "gate_id",
+    "method",
+    "state_hash",
+    "status",
+    "tool_version"
+  ],
+  "title": "Evidence",
+  "type": "object"
+}

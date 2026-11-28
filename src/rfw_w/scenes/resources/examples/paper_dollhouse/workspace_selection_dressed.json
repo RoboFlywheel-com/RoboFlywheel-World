@@ -1,0 +1,24 @@
+{
+  "comment": "SPEC-016 dressed rooms, shared-table revision: the same three rooms, each with the task's own Piper arm and 5-7 extra manipulables on ONE shared figure table (1.20 x 0.70 x 0.75 m) substituted for whatever the delivery placed there -- the office desk (0.750 m), the kitchen island (0.900 m) and the bedroom nightstand (0.575 m) were three heights and three footprints, so the rows did not compare. Figure-only: the table, the arm, the props and the shell colours are additions; physics and IK are not_run.",
+  "renamed": {
+    "kitchen": "counter",
+    "why": "Carried over from workspace_selection_v2.json: the delivered room has an island, a stool, a cabinet and a plant, and no stove, sink or fridge -- the prompt never asked for any. `counter` is what is actually in frame. The scene id, the delivery and every hash are unchanged; only what the figure calls the row is."
+  },
+  "rows": [
+    {
+      "room": "office",
+      "task": "cup ON desk, Piper on the shared table",
+      "render_dir": "outputs/_paper/office_rgb_20260926_01"
+    },
+    {
+      "room": "counter",
+      "task": "jar ON island, Piper on the shared table",
+      "render_dir": "outputs/_paper/kitchen_rgb_20260926_01"
+    },
+    {
+      "room": "bedroom",
+      "task": "alarm_clock ON nightstand, Piper on the shared table",
+      "render_dir": "outputs/_paper/bedroom_rgb_20260926_01"
+    }
+  ]
+}
